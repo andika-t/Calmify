@@ -1,0 +1,13 @@
+.text-color-1 {
+    -fx-fill: #F2EFE7;
+}
+.text-color-2 {
+    -fx-fill: #948979;
+}
+.text-color-3 {
+    -fx-fill: #253439;
+}
+
+.text-shadow {
+    -fx-effect: dropshadow(gaussian,rgba(0, 0, 0, 0.2),20,0.5,0,10);
+}

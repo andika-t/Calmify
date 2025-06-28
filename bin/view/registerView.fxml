@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" styleClass="background-color-light1" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.registerController">
+   <children>
+      <BorderPane fx:id="panel" layoutX="540.0" layoutY="260.0" prefHeight="720.0" prefWidth="1280.0" styleClass="transparent" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <left>
+            <VBox fx:id="authBox" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="450.0" spacing="20.0" styleClass="auth-box" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="85.0" left="100.0" top="85.0" />
+               </BorderPane.margin>
+               <children>
+                  <HBox alignment="CENTER" prefHeight="60.0" spacing="12.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Create">
+                           <font>
+                              <Font name="Arial Bold" size="36.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="text-color-1" />
+                              <String fx:value="text-shadow" />
+                           </styleClass>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Account">
+                           <font>
+                              <Font name="Arial Bold" size="36.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="text-color-2" />
+                              <String fx:value="text-shadow" />
+                           </styleClass>
+                        </Text>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="300.0" spacing="15.0">
+                     <children>
+                        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="300.0" spacing="10.0">
+                           <children>
+                              <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="145.0" styleClass="textfield-background">
+                                 <children>
+                                    <TextField fx:id="tfFirstName" layoutY="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="145.0" promptText="first name" styleClass="transparent" />
+                                 </children>
+                              </Pane>
+                              <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="145.0" styleClass="textfield-background">
+                                 <children>
+                                    <TextField fx:id="tfLastName" layoutY="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="145.0" promptText="last name" styleClass="transparent" />
+                                 </children>
+                              </Pane>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="23.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="300.0" styleClass="textfield-background">
+                           <children>
+                              <ImageView fitHeight="150.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/assets/user-icon.png" />
+                                 </image>
+                              </ImageView>
+                              <TextField fx:id="tfUsername" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="270.0" promptText="username" styleClass="transparent" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="51.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="300.0" styleClass="textfield-background">
+                           <children>
+                              <ImageView fitHeight="150.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/assets/mail-logo.png" />
+                                 </image>
+                              </ImageView>
+                              <TextField fx:id="tfEmail" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="270.0" promptText="email address" styleClass="transparent" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="300.0" styleClass="textfield-background">
+                           <children>
+                              <ImageView fitHeight="150.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/assets/lock-logo.png" />
+                                 </image>
+                              </ImageView>
+                              <PasswordField fx:id="tfPassword" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="270.0" promptText="password" styleClass="transparent" />
+                           </children>
+                        </HBox>
+                        <Button id="buttonAuth" fx:id="buttonCreateAcc" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleButtonCreateAcc" prefHeight="36.0" prefWidth="200.0" styleClass="button-style" text="Create Account" />
+                        <Label fx:id="lperingatan" styleClass="text-shadow" textFill="RED">
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin></Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="25.0" />
+                     </VBox.margin>
+                  </VBox>
+                  <Button fx:id="buttonHaveAcc" mnemonicParsing="false" onAction="#handleButtonHaveAcc" styleClass="transparent" text="I already have account" textAlignment="CENTER" textFill="#f2efe7">
+                     <font>
+                        <Font name="System Italic" size="12.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+         </left>
+         <center>
+            <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="580.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-color-3" text="We Say Hello!">
+                     <font>
+                        <Font name="Arial Bold" size="80.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-color-2" text="every journey begins with a single step. Sign up to explore your calm" wrappingWidth="323.345703125">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
+               </children>
+               <BorderPane.margin>
+                  <Insets bottom="100.0" />
+               </BorderPane.margin>
+            </VBox>
+         </center>
+      </BorderPane>
+   </children>
+   <stylesheets>
+      <URL value="@../resources/css/background.css" />
+      <URL value="@../resources/css/authStyle.css" />
+      <URL value="@../resources/css/text.css" />
+   </stylesheets>
+</AnchorPane>
