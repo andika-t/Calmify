@@ -21,6 +21,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.UserXML;
 import util.AnimasiTransisi;
+import util.SceneSwitcher;
 import util.AnimasiHover;
 
 public class loginController implements Initializable{
@@ -70,12 +71,7 @@ public class loginController implements Initializable{
     private void handleButtonDontHaveAcc(ActionEvent event) throws IOException {
         AnimasiTransisi.slideOutLeft(panel,() ->{
             try {
-            loader = new FXMLLoader(getClass().getResource("/view/registerView.fxml"));
-            root = loader.load();
-            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+            SceneSwitcher.switchScene("/view/registerView.fxml");
             } catch (Exception e) {
             e.printStackTrace();
             }

@@ -6,13 +6,10 @@ import java.util.ResourceBundle;
 import javafx.animation.FadeTransition;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import javafx.util.Duration;
+import util.SceneSwitcher;
 
 public class introController implements Initializable {
 
@@ -20,6 +17,7 @@ public class introController implements Initializable {
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        
         PauseTransition delay = new PauseTransition(Duration.millis(800));
         delay.setOnFinished(e -> fadeOutScene());
         delay.play();
@@ -31,10 +29,7 @@ public class introController implements Initializable {
         fade.setToValue(0.0);
         fade.setOnFinished(e -> {
             try {
-                Parent loginRoot = FXMLLoader.load(getClass().getResource("/view/loginView.fxml"));
-                Scene scene = new Scene(loginRoot);
-                Stage stage = (Stage) intro.getScene().getWindow();
-                stage.setScene(scene);
+                SceneSwitcher.switchScene("/view/loginView.fxml");
             } catch (Exception ex) {
                 ex.printStackTrace();
             }

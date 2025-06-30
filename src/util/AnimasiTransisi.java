@@ -9,14 +9,14 @@ public class AnimasiTransisi {
 
     public static void slideOutLeft(Node node, Runnable after) {
         TranslateTransition tt = new TranslateTransition(Duration.millis(300), node);
-        tt.setToX(-625);
+        tt.setToX(-900);
         tt.setOnFinished(e -> after.run());
         tt.play();
     }
 
     public static void slideOutRight(Node node, Runnable after) {
         TranslateTransition tt = new TranslateTransition(Duration.millis(300), node);
-        tt.setToX(625);
+        tt.setToX(900);
         tt.setOnFinished(e -> after.run());
         tt.play();
     }

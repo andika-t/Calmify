@@ -6,20 +6,16 @@ import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 import model.User;
 import model.UserXML;
 import util.AnimasiTransisi;
+import util.SceneSwitcher;
 import util.AnimasiHover;
 
 public class registerController implements Initializable {
@@ -34,11 +30,6 @@ public class registerController implements Initializable {
     private Label lperingatan;
 
     @FXML private BorderPane panel;
-
-    private FXMLLoader loader;
-    private Scene scene;
-    private Stage stage;
-    private Parent root;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -73,12 +64,7 @@ public class registerController implements Initializable {
 
         try {
             if (daftarBerhasil) {
-                loader = new FXMLLoader(getClass().getResource("/view/loginView.fxml"));
-                root = loader.load();
-                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
+                SceneSwitcher.switchScene("/view/homeView.fxml");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -89,16 +75,10 @@ public class registerController implements Initializable {
     private void handleButtonHaveAcc(ActionEvent event) throws IOException {
         AnimasiTransisi.slideOutRight(panel, () -> {
             try {
-                loader = new FXMLLoader(getClass().getResource("/view/loginView.fxml"));
-                root = loader.load();
-                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
+                SceneSwitcher.switchScene("/view/loginView.fxml");
             } catch (Exception e) {
                 e.printStackTrace();
             }
         });
-
     }
 }
