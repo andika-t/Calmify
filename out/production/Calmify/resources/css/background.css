@@ -1,0 +1,22 @@
+.background-color-light1 {
+    -fx-background-color: #F2EFE7;
+}
+.background-color-light2 {
+    -fx-background-color: #DFD0B8;
+}
+.background-dark1 {
+    -fx-background-color: #393E46;
+}
+.background-dark2 {
+    -fx-background-color: #253439;
+}
+.transparent {
+    -fx-background-color: transparent;
+}
+
+.background-radius10 {
+    -fx-background-radius: 10px;
+}
+.background-radius15 {
+    -fx-background-radius: 15px;
+}

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" styleClass="background-color-light1" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.loginController">
+   <children>
+      <StackPane prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <BorderPane fx:id="panel" prefHeight="200.0" prefWidth="200.0" styleClass="transparent">
+               <right>
+                  <VBox fx:id="authBox" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="450.0" spacing="25.0" styleClass="auth-box" BorderPane.alignment="CENTER">
+                     <BorderPane.margin>
+                        <Insets bottom="85.0" right="100.0" top="85.0" />
+                     </BorderPane.margin>
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="60.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="LOG">
+                                 <font>
+                                    <Font name="Arial Bold" size="48.0" />
+                                 </font>
+                                 <styleClass>
+                                    <String fx:value="text-color-1" />
+                                    <String fx:value="text-shadow" />
+                                 </styleClass>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="IN">
+                                 <font>
+                                    <Font name="Arial Bold" size="48.0" />
+                                 </font>
+                                 <styleClass>
+                                    <String fx:value="text-color-2" />
+                                    <String fx:value="text-shadow" />
+                                 </styleClass>
+                              </Text>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" spacing="20.0">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="300.0" styleClass="textfield-background">
+                                 <children>
+                                    <ImageView fitHeight="150.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../resources/assets/user-icon.png" />
+                                       </image>
+                                    </ImageView>
+                                    <TextField fx:id="tfUsername" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="270.0" promptText="username" styleClass="transparent" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="300.0" styleClass="textfield-background">
+                                 <children>
+                                    <ImageView fitHeight="150.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../resources/assets/lock-logo.png" />
+                                       </image>
+                                    </ImageView>
+                                    <PasswordField fx:id="tfPassword" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="270.0" promptText="password" styleClass="transparent" />
+                                 </children>
+                              </HBox>
+                              <Button id="buttonAuth" fx:id="buttonLogin" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleButtonLogin" prefHeight="36.0" prefWidth="200.0" styleClass="button-style" text="LOGIN" />
+                              <Label fx:id="lperingatan" styleClass="text-shadow" textFill="RED" />
+                           </children>
+                           <VBox.margin>
+                              <Insets top="25.0" />
+                           </VBox.margin>
+                        </VBox>
+                        <Button fx:id="buttonDontHaveAcc" mnemonicParsing="false" onAction="#handleButtonDontHaveAcc" styleClass="transparent" text="Dont have account? Create here" textAlignment="CENTER" textFill="#f2efe7">
+                           <font>
+                              <Font name="System Italic" size="12.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
+               </right>
+               <center>
+                  <ImageView fx:id="imgCalmify" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                     <image>
+                        <Image url="@../resources/assets/CALMIFY%20LOGO.png" />
+                     </image>
+                  </ImageView>
+               </center>
+            </BorderPane>
+         </children>
+      </StackPane>
+   </children>
+   <stylesheets>
+      <URL value="@../resources/css/background.css" />
+      <URL value="@../resources/css/authStyle.css" />
+      <URL value="@../resources/css/text.css" />
+   </stylesheets>
+</AnchorPane>
