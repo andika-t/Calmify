@@ -64,7 +64,7 @@ public class registerController implements Initializable {
 
         try {
             if (daftarBerhasil) {
-                SceneSwitcher.switchScene("/view/homeView.fxml");
+                SceneSwitcher.switchScene("/view/loginView.fxml");
             }
         } catch (Exception e) {
             e.printStackTrace();
