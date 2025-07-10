@@ -19,7 +19,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         mainStage = stage;
-        Parent root = FXMLLoader.load(getClass().getResource("/view/intro.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/intro/view/introView.fxml"));
         Scene scene = new Scene(root);
 
         stage.setScene(scene);
@@ -27,7 +27,6 @@ public class Main extends Application {
                 new KeyCodeCombination(KeyCode.ESCAPE));
         
         stage.setTitle("CALMIFY");
-        stage.setFullScreen(true);
         stage.show();
     }
 
