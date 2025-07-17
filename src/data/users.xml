@@ -1,1 +1,5 @@
-<?xml version="1.0" ?><user-data><users><user><firstName>Andika</firstName><lastName>Tahang</lastName><username>andika</username><email>123</email><password>123</password><userType>Pengguna Biasa</userType></user><user><firstName>12</firstName><lastName>45</lastName><username>1</username><email>1</email><password>1</password><userType>Pengguna Biasa</userType></user><user><firstName>2</firstName><lastName>2</lastName><username>22</username><email>2</email><password>2</password><userType>Pengguna Biasa</userType></user><user><firstName>2</firstName><lastName>2</lastName><username>2</username><email>2</email><password>2</password><userType>Psikolog</userType></user><user><firstName>3</firstName><lastName>3</lastName><username>3</username><email>3</email><password>3</password><userType>Psikolog</userType></user></users></user-data>
+<?xml version="1.0" ?>
+<user-data>
+    <users>
+    </users>
+</user-data>

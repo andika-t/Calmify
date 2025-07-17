@@ -64,7 +64,7 @@ public class UserHomeController {
     private void handlePantauStres(ActionEvent event) {
         try {
             pindahScene = new SceneSwitcher();
-            Pane scene = pindahScene.getPane("/pantauStres/view/AssessmentView");
+            Pane scene = pindahScene.getPane("/pantauStres/view/UserView");
             mainPane.setCenter(scene);
         } catch (Exception e) {
             e.printStackTrace();

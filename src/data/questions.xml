@@ -1,1 +1,13 @@
-<?xml version="1.0" ?><questions><question><id>1</id><pertanyaan>Apakah Anda merasa sulit untuk tenang?</pertanyaan><skor>3</skor></question><question><id>2</id><pertanyaan>awdada</pertanyaan><skor>2</skor></question></questions>
+<?xml version="1.0" ?>
+<questions>
+    <question>
+        <id>1</id>
+        <pertanyaan>Apakah Anda merasa sulit untuk tenang?</pertanyaan>
+        <skor>3</skor>
+    </question>
+    <question>
+        <id>2</id>
+        <pertanyaan>awdada</pertanyaan>
+        <skor>2</skor>
+    </question>
+</questions>

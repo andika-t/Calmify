@@ -29,7 +29,7 @@ public class UserViewController {
 
     @FXML
     public void initialize() {
-        contentService = new ContentService(new XmlContentImplement("src/contents.xml"));
+        contentService = new ContentService(new XmlContentImplement("src/data/contents.xml"));
         loadAndDisplayContents();
     }
     private void loadAndDisplayContents() {
