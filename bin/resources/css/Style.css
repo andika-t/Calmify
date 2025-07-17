@@ -1,0 +1,186 @@
+/*==========================================================================
+ * * MAIN APPLICATION STYLESHEET
+ * *========================================================================*/
+
+/* --- Backgrounds --- */
+.main-background {
+    -fx-background-color: #ffffff;
+}
+
+.main-background-gradient {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #ffffff 0%, #B8B8B8 100%);
+}
+
+.main-background-img {
+    -fx-background-image: url("../assets/background.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+}
+
+.transparent-background {
+    -fx-background-color: transparent;
+}
+
+/* --- Layout Panels --- */
+#panel-kiri1 {
+    -fx-background-color: linear-gradient(from 15% 15% to 100% 100%, #9ACBD0 0%, #006A71 100%);
+}
+
+#panel-kiri2 {
+    -fx-background-color: #ffffff;
+    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.1), 15, 0.1, 3, 0);
+}
+
+#panel-kanan {
+    -fx-background-color: #ffffff;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 15, 0.1, -3, 0);
+}
+
+/* --- Typography & Text/Fill Colors --- */
+/* Base font style for common text elements */
+.font-base {
+    -fx-font-family: "System", "Helvetica Neue", "Helvetica", "Arial", "sans-serif";
+    -fx-font-size: 12px;
+}
+
+.text-size-extra-large {
+    -fx-font-size: 50px;
+    -fx-font-weight: bold;
+}
+
+.text-size-large {
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+}
+
+.text-size-normal {
+    -fx-font-size: 12px;
+}
+
+/* Text Fill Colors */
+.text-fill-white { -fx-text-fill: #ffffff; }
+.text-fill-darkblue { -fx-text-fill: #393E46; }
+.text-fill-darkgreen { -fx-text-fill: #006A71; }
+
+/* Shape Fill Colors */
+.fill-darkblue { -fx-fill: #393E46; }
+.fill-darkgreen { -fx-fill: #006A71; }
+
+/* --- Background Effects --- */
+.background-shadow {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 20, 0.1, 0, 1);
+}
+
+.background-radius-large {
+    -fx-background-radius: 30px;
+}
+
+
+/* --- Button Styles --- */
+Button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 7px;
+    -fx-border-radius: 7px;
+    -fx-cursor: hand;
+    -fx-alignment: center;
+}
+
+Button:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 15, 0, 0, 5);
+    -fx-translate-y: -1px;
+    -fx-alignment: center;
+}
+
+Button:pressed {
+    -fx-effect: none;
+    -fx-translate-y: 0;
+}
+
+.button-add-style {}
+.button-add-style:hover {-fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #43a481 , #589879 );}
+
+.button-delete-style {}
+.button-delete-style:hover {-fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #ff5252, #ff1744);}
+
+.button-update-style {}
+.button-update-style:hover {-fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #ffca28, #ffc107);}
+
+.button-edit-style {}
+.button-edit-style:hover {-fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #5CACEE, #4682B4);}
+
+.button-white-style {}
+.button-white-style:hover {-fx-background-color: #ffffff;}
+
+.button-authenticator {
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #4e535a, #222831);
+    -fx-text-fill: #ffffff;
+}
+.button-authenticator:hover {
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #393E46, #222831);
+    -fx-text-fill: #ffffff;
+}
+
+.button-transparent-style {
+    -fx-border-color: #222831;
+    -fx-text-fill: #222831;
+}
+.button-transparent-style:hover {
+    -fx-background-color: #222831;
+    -fx-text-fill: #ffffff;
+}
+.button-transparent-style:pressed {
+    -fx-background-color: #393E46;
+    -fx-text-fill: #ffffff;
+}
+
+
+
+/* Icon Buttons (often transparent) */
+.icon-button {
+    -fx-background-color: transparent;
+    -fx-background-size: cover;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-opacity: 0.9;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0.1, 3, 2);
+}
+
+.icon-button:hover {
+    -fx-opacity: 1.0;
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0.1, 3, 2);
+}
+
+/* Specific Icon Button Images */
+#btn-home     { -fx-background-image: url("../assets/home-icon.png"); }
+#btn-settings { -fx-background-image: url("../assets/setting-icon.png"); }
+#btn-bell     { -fx-background-image: url("../assets/bell-icon.png"); }
+#btn-chat     { -fx-background-image: url("../assets/chat-icon.png"); }
+
+
+/* --- Form Components --- */
+.textfield-style {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 10px;
+    -fx-padding: 10px;
+    -fx-font-size: 12px;
+}
+
+#profile-container {
+    -fx-background-color: #006A71;
+    -fx-background-opacity: 0.8;
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0.2, 0, 3);
+}
+#button-right-container {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0.2, 0, 3);
+}
+#score-container {
+    -fx-background-color: #f4f4f4;
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0.2, 0, 3);
+}

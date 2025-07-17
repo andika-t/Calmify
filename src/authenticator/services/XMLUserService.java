@@ -1,89 +1,94 @@
 package authenticator.services;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.StaxDriver;
 
 import authenticator.model.User;
+import authenticator.model.UserDataXML;
 
-public class XMLUserService implements UserService {
-    private static final String XML_FILE = "src/authenticator/data/users.xml";
-    private List<User> users;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
-    public XMLUserService() {
-        loadDataUser();
+public class XMLUserService {
+
+    private static final String DATABASE_FILE = "src/data/users.xml";
+    private static final XStream xstream = new XStream(new StaxDriver());
+
+    static {
+        xstream.alias("user-data", UserDataXML.class);
+        xstream.alias("user", User.class);
+        xstream.allowTypes(new Class[] { UserDataXML.class, User.class });
     }
 
-    private void loadDataUser() {
-        File xmlFile = new File(XML_FILE);
-        File parent = xmlFile.getParentFile();
-
-        if (!xmlFile.exists() || xmlFile.length() == 0) {
-            users = new ArrayList<>();
-            saveDataUser();
-            return;
-        }
-
-        try (FileReader reader = new FileReader(XML_FILE)) {
-            XStream xstream = new XStream(new StaxDriver());
-            xstream.alias("User", User.class);
-            xstream.allowTypesByWildcard(new String[] {"authenticator.model.*"});
-
-            Object obj = xstream.fromXML(reader);
-            if (obj instanceof List) {
-                users = (List<User>) obj;
-                System.out.println("Berhasil load " + users.size() + " user data");
-            } else {
-                users = new ArrayList<>();
+    private static UserDataXML loadData() {
+        File file = new File(DATABASE_FILE);
+        if (file.exists()) {
+            try (FileInputStream fis = new FileInputStream(file)) {
+                return (UserDataXML) xstream.fromXML(fis);
+            } catch (Exception e) {
+                System.err.println("Error memuat database: " + e.getMessage());
+                return new UserDataXML();
             }
-        } catch (Exception e) {
-            System.out.println("Gagal load data: " + e.getMessage());
-            users = new ArrayList<>();
         }
+        return new UserDataXML();
     }
 
-    private void saveDataUser() {
-        try (FileWriter writer = new FileWriter(XML_FILE)) {
-            XStream xstream = new XStream(new StaxDriver());
-            xstream.alias("User", User.class);
-            xstream.toXML(users, writer);
-            System.out.println("Berhasil simpan data");
-        } catch (Exception e) {
-            System.out.println("Gagal simpan data");
+    private static boolean saveDatabase(UserDataXML data) {
+        try (FileOutputStream fos = new FileOutputStream(DATABASE_FILE)) {
+            xstream.toXML(data, fos);
+            return true;
+        } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
-    @Override
-    public void createUser(User user) {
-        users.add(user);
-        saveDataUser();
+    public static Optional<User> findUserByUsername(String username) {
+        UserDataXML data = loadData();
+        return data.getUsers().stream()
+                .filter(user -> user.getUsername().equalsIgnoreCase(username))
+                .findFirst();
     }
 
-    @Override
-    public void updateUser(User user) {
-        deleteUser(user.getUsername());
-        users.add(user);
-        saveDataUser();
+    public static boolean addUser(User newUser) {
+        if (newUser == null || newUser.getUsername() == null || newUser.getUsername().isEmpty()) {
+            return false;
+        }
+        UserDataXML data = loadData();
+        boolean usernameExists = data.getUsers().stream()
+                .anyMatch(user -> user.getUsername().equalsIgnoreCase(newUser.getUsername()));
+        if (usernameExists) {
+            return false; // Mengindikasikan username sudah ada
+        }
+        data.addUser(newUser);
+        return saveDatabase(data);
     }
 
-    @Override
-    public void deleteUser(String username) {
-        users.removeIf(u -> u.getUsername().equals(username));
-    }
+    public static boolean updateUser(User updatedUser) {
+        if (updatedUser == null || updatedUser.getUsername() == null || updatedUser.getUsername().isEmpty()) {
+            return false;
+        }
+        UserDataXML data = loadData();
+        List<User> users = new ArrayList<>(data.getUsers());
 
-    @Override
-    public User findByUsername(String username) {
-        return users.stream().filter(u -> u.getUsername().equals(username)).findFirst().orElse(null);
-    }
+        boolean found = false;
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getUsername().equalsIgnoreCase(updatedUser.getUsername())) {
+                users.set(i, updatedUser); // Ganti objek lama dengan yang baru
+                found = true;
+                break;
+            }
+        }
 
-    @Override
-    public List<User> findAllUsers() {
-        return new ArrayList<>(users);
+        if (found) {
+            data.setUsers(users);
+            return saveDatabase(data);
+        }
+        return false;
     }
 }

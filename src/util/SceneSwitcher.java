@@ -1,6 +1,5 @@
 package util;
 
-import java.io.IOException;
 import java.net.URL;
 
 import app.Main;
@@ -13,16 +12,17 @@ import javafx.stage.Stage;
 public class SceneSwitcher {
     private Pane halaman;
     
-    public Pane getPane(String namaFile) {
+    public Pane getPane(String namaFile){
         try {
-            URL fileHalaman = Main.class.getResource(namaFile+".fxml");
-            if(fileHalaman==null){
+            URL fileHalaman = Main.class.getResource(namaFile + ".fxml");
+            if(fileHalaman == null){
                 throw new java.io.FileNotFoundException("Halaman tidak ditemukan");
             }
             new FXMLLoader();
             halaman = FXMLLoader.load(fileHalaman);
-        } catch (IOException e) {
-            System.out.println("Perhatian: "+e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Tidak ditemukan halaman tersebut");
+            e.printStackTrace();
         }
         return halaman;
     }

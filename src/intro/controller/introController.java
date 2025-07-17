@@ -19,14 +19,14 @@ public class introController implements Initializable {
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        PauseTransition delay = new PauseTransition(Duration.millis(800));
+        PauseTransition delay = new PauseTransition(Duration.millis(500));
         delay.setOnFinished(e -> fadeOutScene());
         delay.play();
     }
 
     private void fadeOutScene() {
         pindahScene = new SceneSwitcher();
-        FadeTransition fade = new FadeTransition(Duration.millis(1000), intro);
+        FadeTransition fade = new FadeTransition(Duration.millis(500), intro);
         fade.setFromValue(1.0);
         fade.setToValue(0.0);
         fade.setOnFinished(e -> {

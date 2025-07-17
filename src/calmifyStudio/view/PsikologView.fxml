@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="820.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PsikologiController">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightgray;">
+         <StackPane.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </StackPane.margin>
+      </AnchorPane>
+      <VBox alignment="TOP_CENTER" spacing="10.0" style="-fx-background-color: rgba(255, 255, 255, 0.85); -fx-background-radius: 10;">
+         <children>
+            <Label text="Calmify Studio: Unggah Konten Relaksasi">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+            </Label>
+            <GridPane hgap="10.0" prefWidth="972.0" vgap="10.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="97.39999389648438" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="746.2000122070312" minWidth="10.0" prefWidth="672.6000061035156" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="50.4" minHeight="10.0" prefHeight="20.000008010864256" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="90.39999198913574" minHeight="10.0" prefHeight="90.39999198913574" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label prefHeight="18.0" prefWidth="77.0" text="Judul Konten:" />
+                  <TextField fx:id="titleField" promptText="Masukkan judul konten" GridPane.columnIndex="1" />
+                  <Label text="Deskripsi:" GridPane.rowIndex="1" />
+                  <TextArea fx:id="descriptionArea" prefHeight="200.0" prefWidth="200.0" promptText="Masukkan deskripsi konten" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="contentLinkField" promptText="Masukkan link konten (misal: URL YouTube)" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label prefHeight="18.0" prefWidth="100.0" text="Link Konten:" GridPane.rowIndex="2" />
+               </children>
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" />
+               </VBox.margin>
+            </GridPane>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0" spacing="15.0">
+               <children>
+                  <Button fx:id="addButton" mnemonicParsing="false" onAction="#handleAddContent" prefWidth="100.0" text="Unggah" />
+                  <Button fx:id="updateButton" mnemonicParsing="false" onAction="#handleUpdateContent" prefWidth="100.0" text="Edit" />
+                  <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#handleDeleteContent" prefWidth="100.0" text="Hapus" />
+                  <Button fx:id="clearButton" mnemonicParsing="false" onAction="#clearForm" prefWidth="100.0" text="Bersihkan Form" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <Label fx:id="statusLabel" alignment="CENTER" prefHeight="20.0" prefWidth="972.0" textFill="#2a2a2a">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </Label>
+            <Label text="Daftar Konten Relaksasi">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" top="20.0" />
+               </VBox.margin>
+            </Label>
+            <TableView fx:id="contentTable" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+              <columns>
+                <TableColumn fx:id="titleColumn" prefWidth="150.0" text="Judul" />
+                  <TableColumn fx:id="descriptionColumn" prefWidth="300.0" text="Deskripsi" />
+                  <TableColumn fx:id="contentLinkColumn" prefWidth="200.0" text="Link Konten" />
+              </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+               <VBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" />
+               </VBox.margin>
+            </TableView>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </VBox>
+   </children>
+</StackPane>
