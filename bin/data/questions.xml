@@ -1,13 +1,1 @@
-<?xml version="1.0" ?>
-<questions>
-    <question>
-        <id>1</id>
-        <pertanyaan>Bagaimana Perasaan anda hari ini?</pertanyaan>
-        <skor>50</skor>
-    </question>
-    <question>
-        <id>2</id>
-        <pertanyaan>Bagaimana Kualitas tidur anda tadi malam?</pertanyaan>
-        <skor>50</skor>
-    </question>
-</questions>
+<?xml version="1.0" ?><questions><question><id>1</id><pertanyaan>Bagaimana Perasaan anda hari ini?</pertanyaan><skor>50</skor></question><question><id>2</id><pertanyaan>Bagaimana Kualitas tidur anda tadi malam?</pertanyaan><skor>50</skor></question><question><id>3</id><pertanyaan>khuihuohu</pertanyaan><skor>90</skor></question></questions>

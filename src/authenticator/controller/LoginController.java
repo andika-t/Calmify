@@ -6,8 +6,9 @@ import java.util.ResourceBundle;
 
 import authenticator.model.User;
 import authenticator.services.XMLUserService;
-import home.controller.PsikologHomeController;
-import home.controller.UserHomeController;
+import home.controller.MainController;
+import home.controller.PsikologNavigationController;
+import home.controller.UserNavigationController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -66,9 +67,9 @@ public class LoginController implements Initializable {
                 if ("Psikolog".equalsIgnoreCase(user.getUserType())) {
                     showAlert(AlertType.INFORMATION, "Login Berhasil", "Mengarahkan ke Halaman Psikolog...");
                     try {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/home/view/PsikologHomeView.fxml"));
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/home/view/MainView.fxml"));
                         Pane root = loader.load();
-                        PsikologHomeController controller = loader.getController();
+                        MainController controller = loader.getController();
                         controller.setData(user);
                         Stage stage = (Stage) buttonLogin.getScene().getWindow();
                         stage.getScene().setRoot(root);
@@ -78,9 +79,9 @@ public class LoginController implements Initializable {
                 } else if ("Pengguna Umum".equalsIgnoreCase(user.getUserType())) {
                     showAlert(AlertType.INFORMATION, "Login Berhasil", "Mengarahkan ke Halaman User...");
                     try {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/home/view/UserHomeView.fxml"));
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/home/view/MainView.fxml"));
                         Pane root = loader.load();
-                        UserHomeController controller = loader.getController();
+                        MainController controller = loader.getController();
                         controller.setData(user);
                         Stage stage = (Stage) buttonLogin.getScene().getWindow();
                         stage.getScene().setRoot(root);

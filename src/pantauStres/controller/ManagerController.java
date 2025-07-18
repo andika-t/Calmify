@@ -14,6 +14,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import pantauStres.model.Question;
@@ -37,6 +38,12 @@ public class ManagerController implements Initializable {
     private TableColumn<Question, String> tcQuestion;
     @FXML
     private TableColumn<Question, Number> tcScore;
+
+    private BorderPane mainPane;
+
+    public void setMainPane(BorderPane mainPane){
+        this.mainPane = mainPane;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
