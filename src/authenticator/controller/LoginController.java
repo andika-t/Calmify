@@ -6,8 +6,11 @@ import java.util.ResourceBundle;
 
 import authenticator.model.User;
 import authenticator.services.XMLUserService;
+import home.controller.PsikologHomeController;
+import home.controller.UserHomeController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -17,8 +20,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import profile.controller.MainSettingController;
 import util.SceneSwitcher;
 
 public class LoginController implements Initializable {
@@ -38,8 +43,9 @@ public class LoginController implements Initializable {
     @FXML
     private ImageView imgCalmify;
 
+    private User currentUser;
     SceneSwitcher pindahScene;
-    
+
     @FXML
     private void handleLogin(ActionEvent event) {
         String username = tfUsername.getText();
@@ -51,7 +57,7 @@ public class LoginController implements Initializable {
         }
 
         Optional<User> userOptional = XMLUserService.findUserByUsername(username);
-        
+
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             if (user.getPassword().equals(password)) {
@@ -59,12 +65,28 @@ public class LoginController implements Initializable {
 
                 if ("Psikolog".equalsIgnoreCase(user.getUserType())) {
                     showAlert(AlertType.INFORMATION, "Login Berhasil", "Mengarahkan ke Halaman Psikolog...");
-                    pindahScene = new SceneSwitcher();
-                    pindahScene.switchScene("/home/view/PsikologHomeView");
-                } else {
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/home/view/PsikologHomeView.fxml"));
+                        Pane root = loader.load();
+                        PsikologHomeController controller = loader.getController();
+                        controller.setData(user);
+                        Stage stage = (Stage) buttonLogin.getScene().getWindow();
+                        stage.getScene().setRoot(root);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else if ("Pengguna Umum".equalsIgnoreCase(user.getUserType())) {
                     showAlert(AlertType.INFORMATION, "Login Berhasil", "Mengarahkan ke Halaman User...");
-                    pindahScene = new SceneSwitcher();
-                    pindahScene.switchScene("/home/view/UserHomeView");
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/home/view/UserHomeView.fxml"));
+                        Pane root = loader.load();
+                        UserHomeController controller = loader.getController();
+                        controller.setData(user);
+                        Stage stage = (Stage) buttonLogin.getScene().getWindow();
+                        stage.getScene().setRoot(root);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
 
             } else {
@@ -76,7 +98,7 @@ public class LoginController implements Initializable {
     }
 
     @FXML
-    private void handleRegister(ActionEvent event){
+    private void handleRegister(ActionEvent event) {
         goToRegiter();
     }
 
@@ -98,5 +120,6 @@ public class LoginController implements Initializable {
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {}
+    public void initialize(URL location, ResourceBundle resources) {
+    }
 }

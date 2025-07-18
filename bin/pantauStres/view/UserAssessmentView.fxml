@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="820.0" styleClass="transparent-background" stylesheets="@../../resources/css/Style.css" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pantauStres.controller.UserAssessmentController">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <VBox alignment="CENTER" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <padding>
+                  <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+               </padding>
+               <children>
+                  <Label text="Selamat Datang di Pantau Stres" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="22.0" />
+                     </font>
+                  </Label>
+                  <Label text="Tes ini akan membantu Anda memahami tingkat stres Anda berdasarkan aktivitas dan perasaan Anda baru-baru ini." textAlignment="CENTER" wrapText="true" />
+                  <Button fx:id="startButton" onAction="#handleMulai" prefWidth="250.0" style="-fx-font-size: 16px;" text="Mulai Tes Sekarang" />
+               </children>
+            </VBox>
+         </children>
+         <styleClass>
+            <String fx:value="main-background-img" />
+            <String fx:value="background-radius-large" />
+            <String fx:value="main-background-gradient" />
+         </styleClass>
+         <StackPane.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </StackPane.margin>
+      </AnchorPane>
+   </children>
+</StackPane>

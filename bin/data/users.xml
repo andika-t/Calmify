@@ -1,5 +1,29 @@
 <?xml version="1.0" ?>
 <user-data>
     <users>
+        <user>
+            <firstName>andika</firstName>
+            <lastName>tahang</lastName>
+            <username>andika</username>
+            <email>andika</email>
+            <password>andika</password>
+            <userType>Pengguna Umum</userType>
+            <phoneNumber></phoneNumber>
+            <bio></bio>
+            <totalPoints>0</totalPoints>
+            <activityHistory></activityHistory>
+            <recoveryCodes>
+                <string>FBO5VZA8</string>
+                <string>166MDR5E</string>
+                <string>P9VF81PH</string>
+                <string>78UMHQ30</string>
+                <string>UO33C10E</string>
+                <string>HPWL5RRY</string>
+            </recoveryCodes>
+            <address></address>
+            <country></country>
+            <city></city>
+            <postalCode></postalCode>
+        </user>
     </users>
 </user-data>

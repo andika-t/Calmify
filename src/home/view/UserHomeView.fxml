@@ -34,7 +34,7 @@
                               <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="30.0" spacing="30.0" styleClass="shadow">
                                  <children>
                                     <Button id="btn-home" fx:id="btnHome" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="icon-button" />
-                                    <Button id="btn-settings" fx:id="btnSetting" layoutX="10.0" layoutY="45.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="icon-button" />
+                                    <Button id="btn-settings" fx:id="btnSetting" layoutX="10.0" layoutY="45.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleSetting" prefHeight="30.0" prefWidth="30.0" styleClass="icon-button" />
                                  </children>
                                  <VBox.margin>
                                     <Insets top="260.0" />
@@ -176,22 +176,20 @@
                         <Button id="btn-chat" fx:id="btnChat" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="icon-button" />
                      </children>
                   </HBox>
-                  <HBox id="profile-container" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="180.0" spacing="5.0">
+                  <VBox id="profile-container" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="180.0">
                      <children>
-                        <VBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="100.0">
-                           <children>
-                              <Label fx:id="lnamaLengkap" text="Nama Lengkap" textFill="WHITE">
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font></Label>
-                              <Label fx:id="lusername" layoutX="10.0" layoutY="10.0" text="username" textFill="WHITE" />
-                           </children>
-                        </VBox>
+                        <Label fx:id="lnamaLengkap" text="Nama Lengkap" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lusername" layoutX="10.0" layoutY="10.0" text="username" textFill="WHITE" />
+                        <Label fx:id="ltipePengguna" layoutX="34.0" layoutY="40.0" text="tipe Pengguna" textFill="WHITE" />
                      </children>
-                     <padding>
-                        <Insets left="5.0" right="5.0" />
-                     </padding>
-                  </HBox>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </VBox>
                   <HBox id="score-container" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="180.0" spacing="7.0">
                      <children>
                         <ImageView fitHeight="50.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">

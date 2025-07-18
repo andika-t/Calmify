@@ -14,63 +14,61 @@ import java.util.ArrayList;
 public class QuestionManager {
 
     private static final String FILENAME = "src/data/questions.xml";
-    private ArrayList<Question> data;
-    private QuestionXML questionBank;
-    private XStream xstream;
+    private ArrayList<Question> data = this.getQuestions();
+    private QuestionXML questionBank = new QuestionXML();
 
-    public QuestionManager() {
-        xstream = new XStream(new StaxDriver());
+    public ArrayList<Question> getQuestions() {
+        XStream xstream = new XStream(new StaxDriver());
         xstream.processAnnotations(QuestionXML.class);
         xstream.alias("question", Question.class);
 
         xstream.addPermission(NoTypePermission.NONE);
-        xstream.allowTypes(new Class[]{QuestionXML.class, Question.class});
+        xstream.allowTypes(new Class[] { QuestionXML.class, Question.class });
 
-        questionBank = new QuestionXML();
-        this.data = loadQuestionsFromFile(); // Muat data saat inisialisasi
-    }
+        ArrayList<Question> data = new ArrayList<>();
 
-    private ArrayList<Question> loadQuestionsFromFile() {
         try (FileReader reader = new FileReader(FILENAME)) {
-            QuestionXML bank = (QuestionXML) xstream.fromXML(reader);
-            if (bank != null && bank.getQuestions() != null) {
-                return bank.getQuestions();
+            QuestionXML myData = (QuestionXML) xstream.fromXML(reader);
+            for (int i = 0; i < myData.getQuestions().size(); i++) {
+                Question question = myData.getQuestions().get(i);
+                data.add(new Question(question.getId(), question.getPertanyaan(), question.getSkor()));
             }
-        } catch (IOException e) {
-            System.err.println("Gagal membaca file " + FILENAME + ": " + e.getMessage() + ". Memulai dengan list kosong.");
-        }
-        return new ArrayList<>();
-    }
 
-    // Mengembalikan data yang sudah ada di memori
-    public ArrayList<Question> getQuestions() {
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return data;
     }
+    
 
     public void tambahData(Question question) {
         data.add(question);
-        saveDataToFile(); // Simpan perubahan ke XML
+        questionBank.setQuestions(data);
+        processXML(questionBank);
     }
 
     public void hapusData(int id) {
-        // Operasi dilakukan pada list 'data' milik kelas
-        data.removeIf(q -> q.getId() == id);
-        saveDataToFile(); // Simpan perubahan ke XML
+        ArrayList<Question> data = this.getQuestions();
+        data.removeIf(question -> question.getId() == id);
+        questionBank.setQuestions(data);
+        processXML(questionBank);
     }
 
     public void editData(int index, Question questionEdit) {
-        if (index >= 0 && index < data.size()) {
-            data.set(index, questionEdit);
-            saveDataToFile(); // Simpan perubahan ke XML
-        }
+        data.set(index, questionEdit);
+        questionBank.setQuestions(data);
+        processXML(questionBank);
     }
 
-    private void saveDataToFile() {
-        questionBank.setQuestions(data);
+    private void processXML(QuestionXML question) {
+        XStream xstream = new XStream(new StaxDriver());
+        xstream.processAnnotations(QuestionXML.class);
+        xstream.alias("question", Question.class);
+
         try (FileOutputStream fos = new FileOutputStream(FILENAME)) {
-            xstream.toXML(questionBank, fos);
+            xstream.toXML(question, fos);
         } catch (IOException e) {
-            System.err.println("Gagal menulis ke file " + FILENAME + ": " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }

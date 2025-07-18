@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
@@ -55,6 +57,8 @@ public class QuestionnaireController implements Initializable {
 
     private Map<Integer, Integer> answers;
     private Map<Integer, String> descriptions;
+
+    private BorderPane mainPane;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -193,7 +197,7 @@ public class QuestionnaireController implements Initializable {
         }
     }
 
-    private java.util.Optional<Button> getButtonByScore(int score) {
+    private Optional<Button> getButtonByScore(int score) {
         switch (score) {
             case 1:
                 return java.util.Optional.of(ratingBtn1);
@@ -208,5 +212,9 @@ public class QuestionnaireController implements Initializable {
             default:
                 return java.util.Optional.empty();
         }
+    }
+
+    public void setMainPane(BorderPane maiPane){
+        this.mainPane = maiPane;
     }
 }

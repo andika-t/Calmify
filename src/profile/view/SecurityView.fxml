@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane prefHeight="680.0" prefWidth="720.0" stylesheets="@../../resources/css/Style.css" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="profile.controller.SecurityController">
+   <children>
+      <VBox maxWidth="1.7976931348623157E308" prefWidth="700.0" spacing="20.0">
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+         <children>
+            <VBox spacing="10.0">
+               <children>
+                  <Label styleClass="text-fill-darkblue" text="Password">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <VBox alignment="TOP_RIGHT" prefWidth="100.0">
+                     <children>
+                        <GridPane hgap="10.0" vgap="10.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <Label text="Email" />
+                              <TextField fx:id="tfEmail" promptText="Alamat email" GridPane.columnIndex="1" />
+                              <Label text="Password" GridPane.rowIndex="1" />
+                              <Button id="btn-change" mnemonicParsing="false" onAction="#handleGantiPassword" prefWidth="200.0" text="Ganti Password" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                           </children>
+                        </GridPane>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+            <Separator prefWidth="200.0" />
+            <VBox layoutX="30.0" layoutY="30.0" spacing="10.0">
+               <children>
+                  <Label styleClass="text-fill-darkblue" text="Security">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="50.0">
+                     <children>
+                        <Label text="Kode Pemulihan Akun" />
+                        <Button id="btn-change" mnemonicParsing="false" onAction="#handleLihatKode" prefWidth="200.0" text="Lihat Kode Pemulihan" />
+                     </children>
+                  </HBox>
+                  <VBox alignment="TOP_RIGHT" prefWidth="100.0" />
+               </children>
+            </VBox>
+         </children>
+         <styleClass>
+            <String fx:value="main-background" />
+            <String fx:value="background-radius-large" />
+         </styleClass>
+      </VBox>
+   </children>
+</StackPane>

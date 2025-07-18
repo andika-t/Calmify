@@ -41,7 +41,7 @@ public class ManagerController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadDataFromXML();
-        
+
         tcID.setCellValueFactory(cell -> new SimpleIntegerProperty(cell.getValue().getId()));
         tcQuestion.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getPertanyaan()));
         tcScore.setCellValueFactory(cell -> new SimpleIntegerProperty(cell.getValue().getSkor()));
@@ -79,31 +79,40 @@ public class ManagerController implements Initializable {
     @FXML
     private void buttonEdit(ActionEvent event) {
         Question selected = tableview.getSelectionModel().getSelectedItem();
-        if (selected == null) {
+        if (selected != null) {
+            int id = selected.getId();
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/pantauStres/view/EditView.fxml"));
+                Parent root = loader.load();
+                EditController controller = loader.getController();
+                Question editData = null;
+                
+                for (int i = 0; i < data.size(); i++) {
+                    if (data.get(i).getId() == id) {
+                        editData = data.get(i);
+                        break;
+                    }
+                }
+                controller.setData(editData);
+
+                Stage stage = new Stage();
+                stage.setTitle("Edit Pertanyaan");
+                stage.setScene(new Scene(root));
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.showAndWait();
+
+                loadDataFromXML();
+                this.tableview.refresh();
+            } catch (IOException e) {
+                e.printStackTrace();
+                Alert errorAlert = new Alert(Alert.AlertType.ERROR, "Gagal membuka form edit.");
+                errorAlert.showAndWait();
+            }
+        } else {
             Alert alert = new Alert(Alert.AlertType.WARNING, "Silakan pilih item yang ingin diedit.");
             alert.setHeaderText(null);
             alert.showAndWait();
             return;
-        }
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/pantauStres/view/EditView.fxml"));
-            Parent root = loader.load();
-            EditController controller = loader.getController();
-            controller.setData(selected);
-
-            Stage stage = new Stage();
-            stage.setTitle("Edit Pertanyaan");
-            stage.setScene(new Scene(root));
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.showAndWait();
-
-            loadDataFromXML();
-            this.tableview.refresh();
-        } catch (IOException e) {
-            e.printStackTrace();
-            Alert errorAlert = new Alert(Alert.AlertType.ERROR, "Gagal membuka form edit.");
-            errorAlert.setHeaderText(null);
-            errorAlert.showAndWait();
         }
     }
 

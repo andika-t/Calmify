@@ -3,6 +3,7 @@ package home.controller;
 import authenticator.model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -11,9 +12,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import util.SceneSwitcher;
 
+import java.net.URL;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
-public class PsikologHomeController {
+public class PsikologHomeController implements Initializable {
 
     @FXML private BorderPane mainPane;
     @FXML private Label lnamaLengkap;
@@ -24,7 +27,7 @@ public class PsikologHomeController {
     private User currentUser;
     private SceneSwitcher pindahScene;
 
-    public void initData(User user) {
+    public void setData(User user) {
         this.currentUser = user;
         lnamaLengkap.setText(user.getFirstName() + " " + user.getLastName());
         lusername.setText("@" + user.getUsername());
@@ -103,4 +106,7 @@ public class PsikologHomeController {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {}
 }

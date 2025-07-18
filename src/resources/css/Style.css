@@ -59,17 +59,30 @@
 }
 
 /* Text Fill Colors */
-.text-fill-white { -fx-text-fill: #ffffff; }
-.text-fill-darkblue { -fx-text-fill: #393E46; }
-.text-fill-darkgreen { -fx-text-fill: #006A71; }
+.text-fill-white {
+    -fx-text-fill: #ffffff;
+}
+
+.text-fill-darkblue {
+    -fx-text-fill: #393E46;
+}
+
+.text-fill-darkgreen {
+    -fx-text-fill: #006A71;
+}
 
 /* Shape Fill Colors */
-.fill-darkblue { -fx-fill: #393E46; }
-.fill-darkgreen { -fx-fill: #006A71; }
+.fill-darkblue {
+    -fx-fill: #393E46;
+}
+
+.fill-darkgreen {
+    -fx-fill: #006A71;
+}
 
 /* --- Background Effects --- */
 .background-shadow {
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 20, 0.1, 0, 1);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.1, 0, 3);
 }
 
 .background-radius-large {
@@ -97,20 +110,31 @@ Button:pressed {
     -fx-translate-y: 0;
 }
 
+
 .button-add-style {}
-.button-add-style:hover {-fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #43a481 , #589879 );}
+.button-add-style:hover {
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #43a481, #589879);
+}
 
 .button-delete-style {}
-.button-delete-style:hover {-fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #ff5252, #ff1744);}
+.button-delete-style:hover {
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #ff5252, #ff1744);
+}
 
 .button-update-style {}
-.button-update-style:hover {-fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #ffca28, #ffc107);}
+.button-update-style:hover {
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #ffca28, #ffc107);
+}
 
 .button-edit-style {}
-.button-edit-style:hover {-fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #5CACEE, #4682B4);}
+.button-edit-style:hover {
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #5CACEE, #4682B4);
+}
 
-.button-white-style {}
-.button-white-style:hover {-fx-background-color: #ffffff;}
+.button-gray-style {}
+.button-gray-style:hover {
+    -fx-background-color: #dbdbdb;
+}
 
 .button-authenticator {
     -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #4e535a, #222831);
@@ -125,18 +149,41 @@ Button:pressed {
     -fx-border-color: #222831;
     -fx-text-fill: #222831;
 }
+
 .button-transparent-style:hover {
     -fx-background-color: #222831;
     -fx-text-fill: #ffffff;
 }
-.button-transparent-style:pressed {
-    -fx-background-color: #393E46;
+
+.button-userType-selected {
+    -fx-background-color: #222831;
+    -fx-background-color: #222831;
+    -fx-text-fill: #ffffff;
+}
+.button-settings-selected {
+    -fx-background-color: #ffffff;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0.2, 0, 3);
+}
+
+#btn-change {
+    -fx-background-color: #4e535a;
+    -fx-text-fill: #ffffff;
+}
+#btn-change:hover {
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #393E46, #222831);
+    -fx-text-fill: #ffffff;
+}
+
+#btnHapusAkun {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ff5252;
+}
+#btnHapusAkun:hover {
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #ff1744, #ff5252);
     -fx-text-fill: #ffffff;
 }
 
 
-
-/* Icon Buttons (often transparent) */
 .icon-button {
     -fx-background-color: transparent;
     -fx-background-size: cover;
@@ -154,10 +201,21 @@ Button:pressed {
 }
 
 /* Specific Icon Button Images */
-#btn-home     { -fx-background-image: url("../assets/home-icon.png"); }
-#btn-settings { -fx-background-image: url("../assets/setting-icon.png"); }
-#btn-bell     { -fx-background-image: url("../assets/bell-icon.png"); }
-#btn-chat     { -fx-background-image: url("../assets/chat-icon.png"); }
+#btn-home {
+    -fx-background-image: url("../assets/home-icon.png");
+}
+
+#btn-settings {
+    -fx-background-image: url("../assets/setting-icon.png");
+}
+
+#btn-bell {
+    -fx-background-image: url("../assets/bell-icon.png");
+}
+
+#btn-chat {
+    -fx-background-image: url("../assets/chat-icon.png");
+}
 
 
 /* --- Form Components --- */
@@ -174,11 +232,13 @@ Button:pressed {
     -fx-background-radius: 10px;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0.2, 0, 3);
 }
+
 #button-right-container {
     -fx-background-color: #ffffff;
     -fx-background-radius: 10px;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0.2, 0, 3);
 }
+
 #score-container {
     -fx-background-color: #f4f4f4;
     -fx-background-radius: 10px;

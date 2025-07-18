@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="980.0" styleClass="transparent-background" stylesheets="@../../resources/css/Style.css" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="profile.controller.MainSettingController">
+   <children>
+      <BorderPane fx:id="mainPane" prefHeight="200.0" prefWidth="200.0" styleClass="background-shadow">
+         <left>
+            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="240.0" BorderPane.alignment="TOP_CENTER">
+               <styleClass>
+                  <String fx:value="main-background" />
+                  <String fx:value="background-radius-large" />
+               </styleClass>
+               <BorderPane.margin>
+                  <Insets right="20.0" />
+               </BorderPane.margin>
+               <children>
+                  <Button fx:id="btnMyAccount" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleMyAccount" prefHeight="30.0" prefWidth="200.0" text="My Account">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="btnSecurity" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleSecurity" prefHeight="30.0" prefWidth="200.0" text="Password and Authentication">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Separator prefWidth="200.0">
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </Separator>
+                  <Button id="btnHapusAkun" mnemonicParsing="false" onAction="#handleDeleteAccount" prefHeight="30.0" prefWidth="200.0" text="Delete Account">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </padding>
+            </VBox>
+         </left>
+         <StackPane.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </StackPane.margin>
+      </BorderPane>
+   </children>
+</StackPane>

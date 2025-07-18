@@ -19,27 +19,27 @@ public class EditController {
     @FXML
     private TextField tfSkor;
 
-    private QuestionManager manager = new QuestionManager();
-    private ArrayList<Question> dataList = manager.getQuestions();
+    QuestionManager manager = new QuestionManager();
+    ArrayList<Question> dataList = manager.getQuestions();
 
     @FXML
-    private void prosesTambahData() {
+    private void prosesEditData() {
         int id = Integer.parseInt(tfId.getText());
         int skor = Integer.parseInt(tfSkor.getText());
         String pertanyaan = taPertanyaan.getText();
+        Question newQuestion = new Question(id, pertanyaan, skor);
 
         if (tfId.getText().isEmpty() || taPertanyaan.getText().isEmpty() || tfSkor.getText().isEmpty()) {
             showAlert(Alert.AlertType.WARNING, "Input Tidak Lengkap", "Harap isi semua field yang tersedia.");
             return;
         }
 
-        Question newQuestion = new Question(id, pertanyaan, skor);
-
         int index = 0;
 
         for (int i = 0; i < dataList.size(); i++) {
             if (dataList.get(i).getId() == id) {
-                index++;
+                index = i;
+                break;
             }
         }
 

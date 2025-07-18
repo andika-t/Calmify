@@ -16,10 +16,9 @@ import util.SceneSwitcher;
 
 public class RegisterController implements Initializable {
 
-    private static final String PENGGUNA_BIASA = "Pengguna Biasa";
+    private static final String PENGGUNA_UMUM = "Pengguna Umum";
     private static final String PSIKOLOG = "Psikolog";
-    private static final String STYLE_SELECTED = "-fx-background-color: #1976D2; -fx-text-fill: white; -fx-border-color: #1976D2; -fx-border-width: 1;";
-    private static final String STYLE_DEFAULT = "-fx-background-color: #E0E0E0; -fx-text-fill: black; -fx-border-color: transparent;";
+    private static final String STYLE_CLASS_SELECTED = "button-userType-selected";
 
     @FXML private TextField tfFirstName;
     @FXML private TextField tfLastName;
@@ -33,27 +32,19 @@ public class RegisterController implements Initializable {
 
     private String selectedUserType;
     private SceneSwitcher pindahScene;
+    private User currentUser;
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        // Set default user type
-        selectedUserType = PENGGUNA_BIASA;
-        btnPengguna.setStyle(STYLE_SELECTED);
-        btnPsikolog.setStyle(STYLE_DEFAULT);
-    }
+    public void initialize(URL location, ResourceBundle resources) {}
 
     @FXML
     private void selectPenggunaAction(ActionEvent event) {
-        selectedUserType = PENGGUNA_BIASA;
-        btnPengguna.setStyle(STYLE_SELECTED);
-        btnPsikolog.setStyle(STYLE_DEFAULT);
+        selectUserType(PENGGUNA_UMUM);
     }
 
     @FXML
     private void selectPsikologAction(ActionEvent event) {
-        selectedUserType = PSIKOLOG;
-        btnPsikolog.setStyle(STYLE_SELECTED);
-        btnPengguna.setStyle(STYLE_DEFAULT);
+        selectUserType(PSIKOLOG);
     }
 
     @FXML
@@ -88,6 +79,22 @@ public class RegisterController implements Initializable {
     @FXML
     private void handleHaveAccount(ActionEvent event) {
         goToLogin();
+    }
+
+    private void selectUserType(String userType) {
+        this.selectedUserType = userType;
+        updateButtonStyles();
+    }
+
+    private void updateButtonStyles() {
+        btnPengguna.getStyleClass().remove(STYLE_CLASS_SELECTED);
+        btnPsikolog.getStyleClass().remove(STYLE_CLASS_SELECTED);
+
+        if (PENGGUNA_UMUM.equals(selectedUserType)) {
+            btnPengguna.getStyleClass().add(STYLE_CLASS_SELECTED);
+        } else {
+            btnPsikolog.getStyleClass().add(STYLE_CLASS_SELECTED);
+        }
     }
 
     private void goToLogin() {

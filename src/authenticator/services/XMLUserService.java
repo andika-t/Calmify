@@ -91,4 +91,13 @@ public class XMLUserService {
         }
         return false;
     }
+
+    public static boolean deleteUser(String username) {
+        UserDataXML data = loadData();
+        boolean removed = data.getUsers().removeIf(user -> user.getUsername().equalsIgnoreCase(username));
+        if (removed) {
+            saveDatabase(data);
+        }
+        return removed;
+    }
 }
