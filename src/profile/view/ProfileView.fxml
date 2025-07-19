@@ -35,7 +35,7 @@
                   </Label>
                   <HBox alignment="BOTTOM_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" spacing="20.0">
                      <children>
-                        <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="80.0" style="-fx-background-color: #ffffff; -fx-background-radius: 50;">
+                        <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="80.0" style="-fx-background-color: #ffffff;">
                            <children>
                               <ImageView fx:id="profileImageView" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                                  <image>

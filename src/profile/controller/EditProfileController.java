@@ -1,7 +1,5 @@
 package profile.controller;
 
-import java.io.File;
-
 import authenticator.model.User;
 import authenticator.services.UserManager;
 import javafx.event.ActionEvent;
@@ -12,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import util.ImageUtils;
 
 public class EditProfileController {
 
@@ -39,17 +38,16 @@ public class EditProfileController {
         tfLastName.setText(user.getLastName());
         tfEmail.setText(user.getEmail());
         tfPhoneNumber.setText(user.getPhoneNumber());
+
+        String base64Image = user.getProfilePictureBase64();
+        Image image = ImageUtils.decodeBase64ToImage(base64Image);
         
-        String imagePath = user.getProfilePicturePath();
-        if (imagePath != null && !imagePath.isEmpty()) {
-            File imgFile = new File(imagePath);
-            if (imgFile.exists()) {
-                profileImageView.setImage(new Image(imgFile.toURI().toString()));
-                return;
-            }
+        if (image != null) {
+            profileImageView.setImage(image);
+        } else {
+            profileImageView.setImage(new Image(getClass().getResourceAsStream("/resources/assets/CALMIFY-LOGO.png")));
         }
-        profileImageView.setImage(new Image(getClass().getResourceAsStream("/resources/assets/CALMIFY-LOGO.png")));
-    }
+        }
 
     @FXML
     private void prosesEditProfile(ActionEvent event) {

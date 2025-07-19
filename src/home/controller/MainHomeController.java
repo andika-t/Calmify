@@ -35,7 +35,7 @@ public class MainHomeController implements Initializable {
     @FXML private Label labelPoint;
 
     private User currentUser;
-    private AnswerModel answerModel;
+    private AnswerModel answerModel = new AnswerModel();
     private Node panelNavigasiKiri;
 
     @Override
@@ -184,10 +184,14 @@ public class MainHomeController implements Initializable {
     }
 
     public void refreshUIData() {
-        if (currentUser == null) return;
+        if (currentUser == null) {
+            System.err.println("Error: currentUser belum diatur. Tidak bisa refresh UI.");
+            return;
+        }
         List<Answer> userAnswers = answerModel.getAnswers().stream()
-            .filter(answer -> currentUser.getUsername().equals(answer.getUsername()))
-            .collect(Collectors.toList());
+                .filter(answer -> currentUser.getUsername().equals(answer.getUsername()))
+                .collect(Collectors.toList());
+
         int totalPoin = userAnswers.stream().mapToInt(ans -> ans.getSkorMood() + ans.getSkorKualitas()).sum();
         labelPoint.setText(totalPoin + " Poin");
     }
@@ -199,8 +203,7 @@ public class MainHomeController implements Initializable {
         alert.setContentText(content);
         alert.showAndWait();
     }
-    
-    // Metode getter agar controller anak bisa mengakses mainPane
+
     public BorderPane getMainPane() {
         return this.mainPane;
     }

@@ -16,22 +16,23 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import util.ImageUtils; // <-- IMPORT KELAS BANTUAN
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.ResourceBundle;
 
-public class ProfileController implements Initializable{
+public class ProfileController implements Initializable {
 
-    @FXML private ImageView profileImageView;
-    @FXML private TextField tfUsername, tfFirstName, tfLastName, tfEmail, tfPhoneNumber;
-    @FXML private TextArea taBio;
-    @FXML private TextField tfKota, tfNegara, tfAlamat, tfKodePos;
+    @FXML
+    private ImageView profileImageView;
+    @FXML
+    private TextField tfUsername, tfFirstName, tfLastName, tfEmail, tfPhoneNumber;
+    @FXML
+    private TextArea taBio;
+    @FXML
+    private TextField tfKota, tfNegara, tfAlamat, tfKodePos;
 
     private User currentUser;
 
@@ -41,6 +42,7 @@ public class ProfileController implements Initializable{
             System.err.println("User yang dikirim ke ProfileController adalah null!");
             return;
         }
+        // Menampilkan data teks
         tfUsername.setText("@" + getDisplayString(user.getUsername()));
         tfFirstName.setText(getDisplayString(user.getFirstName()));
         tfLastName.setText(getDisplayString(user.getLastName()));
@@ -52,66 +54,47 @@ public class ProfileController implements Initializable{
         tfKota.setText(getDisplayString(user.getCity()));
         tfKodePos.setText(getDisplayString(user.getPostalCode()));
 
-        loadProfileImage(user.getProfilePicturePath());
+        displayProfileImage();
     }
 
     private String getDisplayString(String text) {
         return (text == null || text.trim().isEmpty()) ? "-" : text;
     }
 
-    private void loadProfileImage(String imagePath) {
-        if (imagePath != null && !imagePath.isEmpty()) {
-            File imgFile = new File(imagePath);
-            if (imgFile.exists()) {
-                try {
-                    profileImageView.setImage(new Image(imgFile.toURI().toString()));
-                    return;
-                } catch (Exception e) {
-                    System.err.println("Gagal memuat gambar profil dari path: " + imagePath);
-                }
-            }
+    private void displayProfileImage() {
+        // Ambil data Base64 dari user
+        String base64Image = currentUser.getProfilePictureBase64();
+        // Ubah Base64 menjadi Image yang bisa ditampilkan
+        Image image = ImageUtils.decodeBase64ToImage(base64Image);
+
+        if (image != null) {
+            profileImageView.setImage(image);
+        } else {
+            // Jika tidak ada gambar, tampilkan gambar default/placeholder
+            profileImageView.setImage(new Image(getClass().getResourceAsStream("/resources/assets/CALMIFY-LOGO.png")));
         }
-        profileImageView.setImage(new Image(getClass().getResourceAsStream("/resources/assets/CALMIFY-LOGO.png")));
     }
 
     @FXML
     private void handleEditFoto(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Pilih Gambar Profil Baru");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
+        fileChooser.getExtensionFilters()
+                .add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
         File selectedFile = fileChooser.showOpenDialog(profileImageView.getScene().getWindow());
 
         if (selectedFile != null) {
-            String newAbsolutePath = saveProfilePicture(selectedFile, currentUser.getUsername());
-            
-            if (newAbsolutePath != null) {
-                currentUser.setProfilePicturePath(newAbsolutePath);
+            String base64String = ImageUtils.encodeImageToBase64(selectedFile);
+            if (base64String != null) {
+                currentUser.setProfilePictureBase64(base64String);
+
                 if (UserManager.updateUser(currentUser)) {
-                    loadProfileImage(newAbsolutePath);
+                    displayProfileImage();
                     showAlert(Alert.AlertType.INFORMATION, "Berhasil", "Foto profil berhasil diperbarui.");
                 } else {
-                    showAlert(Alert.AlertType.ERROR, "Gagal", "Gagal menyimpan path foto profil ke data pengguna.");
+                    showAlert(Alert.AlertType.ERROR, "Gagal", "Gagal menyimpan foto profil ke data pengguna.");
                 }
             }
-        }
-    }
-
-    private String saveProfilePicture(File file, String username) {
-        try {
-            Path targetDir = Paths.get(System.getProperty("user.home"), ".CalmifyApp", "profile_images");
-            if (!Files.exists(targetDir)) {
-                Files.createDirectories(targetDir);
-            }
-
-            String extension = file.getName().substring(file.getName().lastIndexOf("."));
-            Path targetPath = targetDir.resolve(username + extension);
-            Files.copy(file.toPath(), targetPath, StandardCopyOption.REPLACE_EXISTING);
-            return targetPath.toAbsolutePath().toString();
-            
-        } catch (IOException e) {
-            e.printStackTrace();
-            showAlert(Alert.AlertType.ERROR, "Gagal Menyimpan Gambar", "Terjadi kesalahan saat menyimpan file gambar.");
-            return null;
         }
     }
 
@@ -119,7 +102,7 @@ public class ProfileController implements Initializable{
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
-            
+
             if (loader.getController() instanceof EditProfileController) {
                 ((EditProfileController) loader.getController()).setData(currentUser);
             } else if (loader.getController() instanceof EditUsernameController) {
@@ -141,18 +124,23 @@ public class ProfileController implements Initializable{
         }
     }
 
-    @FXML private void handleEditUsername(ActionEvent event) {
+    @FXML
+    private void handleEditUsername(ActionEvent event) {
         showEditPopup("/profile/view/EditUsernameView.fxml", "Edit Username");
     }
-    @FXML private void handleEditProfil(ActionEvent event) {
+
+    @FXML
+    private void handleEditProfil(ActionEvent event) {
         showEditPopup("/profile/view/EditProfileView.fxml", "Edit Profil");
     }
-    @FXML private void handleEditAlamat(ActionEvent event) {
+
+    @FXML
+    private void handleEditAlamat(ActionEvent event) {
         showEditPopup("/profile/view/EditAlamatView.fxml", "Edit Alamat");
     }
 
     @FXML
-    private void handleSimpanBio(ActionEvent event){
+    private void handleSimpanBio(ActionEvent event) {
         String bio = taBio.getText().trim();
         currentUser.setBio(bio);
         boolean isUpdated = UserManager.updateUser(currentUser);

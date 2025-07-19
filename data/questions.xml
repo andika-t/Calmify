@@ -1,1 +1,27 @@
-<?xml version="1.0" ?><questions><question><id>1</id><pertanyaan>Bagaimana kualitas tidur Anda tadi malam?</pertanyaan><skor>10</skor><kategori>Kualitas</kategori></question><question><id>2</id><pertanyaan>Bagaimana Perasaan Anda hari ini?</pertanyaan><skor>10</skor><kategori>Mood</kategori></question><question><id>3</id><pertanyaan>Tes Tes aja</pertanyaan><skor>100</skor><kategori>Mood</kategori></question><question><id>4</id><pertanyaan>1</pertanyaan><skor>1</skor><kategori>Mood</kategori></question></questions>
+<?xml version="1.0" ?>
+<questions>
+    <question>
+        <id>1</id>
+        <pertanyaan>Bagaimana kualitas tidur Anda tadi malam?</pertanyaan>
+        <skor>10</skor>
+        <kategori>Kualitas</kategori>
+    </question>
+    <question>
+        <id>2</id>
+        <pertanyaan>Bagaimana Perasaan Anda hari ini?</pertanyaan>
+        <skor>10</skor>
+        <kategori>Mood</kategori>
+    </question>
+    <question>
+        <id>3</id>
+        <pertanyaan>Tes Tes aja</pertanyaan>
+        <skor>100</skor>
+        <kategori>Mood</kategori>
+    </question>
+    <question>
+        <id>4</id>
+        <pertanyaan>1</pertanyaan>
+        <skor>1</skor>
+        <kategori>Mood</kategori>
+    </question>
+</questions>

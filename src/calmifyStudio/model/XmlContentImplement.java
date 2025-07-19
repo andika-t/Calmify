@@ -54,7 +54,7 @@ public class XmlContentImplement implements XmlContentInterface {
     private Document loadXmlFile() throws IOException, org.xml.sax.SAXException {
         File file = new File(filePath);
         if (!file.exists()) {
-            initializeXmlFile(); 
+            initializeXmlFile();
         }
         return dBuilder.parse(file);
     }
@@ -62,7 +62,7 @@ public class XmlContentImplement implements XmlContentInterface {
     private void saveXmlFile(Document doc) throws TransformerException {
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         Transformer transformer = transformerFactory.newTransformer();
-        transformer.setOutputProperty(OutputKeys.INDENT, "yes"); // Indentasi untuk keterbacaan
+        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
         DOMSource source = new DOMSource(doc);
         StreamResult result = new StreamResult(new File(filePath));
         transformer.transform(source, result);

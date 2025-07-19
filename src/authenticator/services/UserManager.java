@@ -2,9 +2,9 @@ package authenticator.services;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.StaxDriver;
-
 import authenticator.model.User;
 import authenticator.model.UserDataXML;
+import pantauStres.services.AnswerModel;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -31,7 +31,7 @@ public class UserManager {
             try (FileInputStream fis = new FileInputStream(file)) {
                 return (UserDataXML) xstream.fromXML(fis);
             } catch (Exception e) {
-                System.err.println("Error memuat database: " + e.getMessage());
+                System.err.println("Error memuat database pengguna: " + e.getMessage());
                 return new UserDataXML();
             }
         }
@@ -69,16 +69,24 @@ public class UserManager {
         return saveDatabase(data);
     }
 
+    /**
+     * Memperbarui informasi pengguna yang ada di database.
+     * @param updatedUser Objek pengguna dengan data yang sudah diperbarui.
+     * @return true jika berhasil, false jika pengguna tidak ditemukan atau gagal menyimpan.
+     */
     public static boolean updateUser(User updatedUser) {
         if (updatedUser == null || updatedUser.getUsername() == null || updatedUser.getUsername().isEmpty()) {
             return false;
         }
+        
+        // PERBAIKAN KRUSIAL: Memuat data yang ada, bukan membuat baru.
         UserDataXML data = loadData();
-        List<User> users = new ArrayList<>(data.getUsers());
+        List<User> users = data.getUsers();
 
         boolean found = false;
         for (int i = 0; i < users.size(); i++) {
             if (users.get(i).getUsername().equalsIgnoreCase(updatedUser.getUsername())) {
+                // Ganti objek user lama dengan yang baru
                 users.set(i, updatedUser);
                 found = true;
                 break;
@@ -86,19 +94,41 @@ public class UserManager {
         }
 
         if (found) {
-            data.setUsers(users);
+            // Simpan seluruh daftar pengguna yang sudah diperbarui
             return saveDatabase(data);
         }
+        
+        // Kembalikan false jika pengguna dengan username tersebut tidak ditemukan
         return false;
     }
 
     public static boolean deleteUser(String username) {
         UserDataXML data = loadData();
-        boolean removed = data.getUsers().removeIf(user -> user.getUsername().equalsIgnoreCase(username));
-        if (removed) {
-            saveDatabase(data);
+        Optional<User> userToDeleteOpt = data.getUsers().stream()
+                .filter(user -> user.getUsername().equalsIgnoreCase(username))
+                .findFirst();
+
+        if (!userToDeleteOpt.isPresent()) {
+            return false;
         }
-        return removed;
+
+        User userToDelete = userToDeleteOpt.get();
+
+        if ("Psikolog".equalsIgnoreCase(userToDelete.getUserType())) {
+            userToDelete.setPassword(null);
+            System.out.println("Akun psikolog '" + username + "' telah dinonaktifkan, data tetap tersimpan.");
+            return saveDatabase(data);
+        } else {
+            AnswerModel answerModel = new AnswerModel();
+            answerModel.deleteAnswersByUsername(username);
+
+            boolean removed = data.getUsers().removeIf(user -> user.getUsername().equalsIgnoreCase(username));
+            if (removed) {
+                System.out.println("Akun pengguna umum '" + username + "' dan semua datanya telah dihapus.");
+                return saveDatabase(data);
+            }
+            return false;
+        }
     }
 
     public static void updateShareData(String username, boolean consentStatus) {
@@ -119,6 +149,6 @@ public class UserManager {
 
     public static boolean getShareData(String username) {
         Optional<User> userOpt = findUserByUsername(username);
-        return userOpt.map(user -> user.isShareData()).orElse(false);
+        return userOpt.map(User::isShareData).orElse(false);
     }
 }

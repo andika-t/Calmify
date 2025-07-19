@@ -11,7 +11,7 @@ public class User {
     private String email;
     private String password;
     private String userType;
-    private String profilePicturePath;
+    private String profilePictureBase64;
     private String phoneNumber;
     private String bio;
     private int totalPoints;
@@ -34,7 +34,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.userType = userType;
-        this.profilePicturePath = null;
+        this.profilePictureBase64 = null;
         this.phoneNumber = "";
         this.bio = "";
         this.totalPoints = 0;
@@ -83,8 +83,8 @@ public class User {
     public boolean isShareData(){ return shareData; }
     public void setShareData(boolean shareData){ this.shareData = shareData; }
     
-    public String getProfilePicturePath() { return profilePicturePath; }
-    public void setProfilePicturePath(String profilePicturePath) { this.profilePicturePath = profilePicturePath; }
+    public String getProfilePictureBase64() { return profilePictureBase64; }
+    public void setProfilePictureBase64(String profilePictureBase64) { this.profilePictureBase64 = profilePictureBase64; }
     
     public String getPhoneNumber() { return phoneNumber; }
     public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }

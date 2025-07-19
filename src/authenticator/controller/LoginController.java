@@ -7,8 +7,6 @@ import java.util.ResourceBundle;
 import authenticator.model.User;
 import authenticator.services.UserManager;
 import home.controller.MainHomeController;
-import home.controller.PsikologNavigationController;
-import home.controller.UserNavigationController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,7 +22,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import profile.controller.MainSettingController;
 import util.SceneSwitcher;
 
 public class LoginController implements Initializable {

@@ -10,10 +10,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import calmifyStudio.model.Content;
 import calmifyStudio.model.XmlContentImplement;
+import calmifyStudio.controller.ContentService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import java.util.Optional;
 
-import java.util.List; 
+import java.io.File;
+import java.util.List;
 
 public class PsikologiController {
 
@@ -64,7 +69,7 @@ public class PsikologiController {
                 addButton.setDisable(true);
             } else {
                 selectedContent = null;
-                clearForm();
+                doClearFormLogic();
                 updateButton.setDisable(true);
                 deleteButton.setDisable(true);
                 addButton.setDisable(false);
@@ -82,8 +87,7 @@ public class PsikologiController {
         contentLinkField.setText(content.getContentLink());
     }
 
-    @FXML
-    private void clearForm() {
+    private void doClearFormLogic() {
         titleField.clear();
         descriptionArea.clear();
         contentLinkField.clear();
@@ -93,6 +97,22 @@ public class PsikologiController {
         addButton.setDisable(false);
         updateButton.setDisable(true);
         deleteButton.setDisable(true);
+    }
+
+    @FXML
+    private void clearForm() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Konfirmasi Bersihkan Form");
+        alert.setHeaderText(null);
+        alert.setContentText("Apakah Anda yakin ingin membersihkan semua bidang form?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            doClearFormLogic();
+            statusLabel.setText("Form dibersihkan.");
+        } else {
+            statusLabel.setText("Pembersihan form dibatalkan.");
+        }
     }
 
     @FXML
@@ -109,20 +129,31 @@ public class PsikologiController {
         List<Content> allContents = contentService.getAllContents();
         for (Content existingContent : allContents) {
             if (existingContent.getTitle().equalsIgnoreCase(title) &&
-                existingContent.getDescription().equalsIgnoreCase(description) &&
-                existingContent.getContentLink().equalsIgnoreCase(link)) {
+                    existingContent.getDescription().equalsIgnoreCase(description) &&
+                    existingContent.getContentLink().equalsIgnoreCase(link)) {
                 statusLabel.setText("Konten dengan judul, deskripsi, dan link yang sama sudah ada!");
-                return; 
+                return;
             }
         }
 
         Content newContent = new Content(null, title, description, link);
         if (contentService.addContent(newContent)) {
             statusLabel.setText("Konten berhasil diunggah!");
-            clearForm();
+            Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
+            infoAlert.setTitle("Unggah Berhasil");
+            infoAlert.setHeaderText(null);
+            infoAlert.setContentText("Konten '" + title + "' berhasil diunggah!");
+            infoAlert.showAndWait();
+
+            doClearFormLogic();
             refreshTableView();
         } else {
             statusLabel.setText("Gagal mengunggah konten.");
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+            errorAlert.setTitle("Unggah Gagal");
+            errorAlert.setHeaderText(null);
+            errorAlert.setContentText("Terjadi kesalahan saat mengunggah konten. Silakan coba lagi.");
+            errorAlert.showAndWait();
         }
     }
 
@@ -142,27 +173,50 @@ public class PsikologiController {
             return;
         }
 
+        if (selectedContent.getTitle().equalsIgnoreCase(title) &&
+                selectedContent.getDescription().equalsIgnoreCase(description) &&
+                selectedContent.getContentLink().equalsIgnoreCase(link)) {
+
+            Alert noChangeAlert = new Alert(Alert.AlertType.INFORMATION);
+            noChangeAlert.setTitle("Tidak Ada Perubahan");
+            noChangeAlert.setHeaderText(null);
+            noChangeAlert.setContentText("Tidak ada perubahan yang terdeteksi pada konten ini.");
+            noChangeAlert.showAndWait();
+            statusLabel.setText("Pembaruan dibatalkan: Tidak ada perubahan.");
+            return;
+        }
+
         List<Content> allContents = contentService.getAllContents();
         for (Content existingContent : allContents) {
             if (!existingContent.getId().equals(selectedContent.getId()) &&
-                existingContent.getTitle().equalsIgnoreCase(title) &&
-                existingContent.getDescription().equalsIgnoreCase(description) &&
-                existingContent.getContentLink().equalsIgnoreCase(link)) {
+                    existingContent.getTitle().equalsIgnoreCase(title) &&
+                    existingContent.getDescription().equalsIgnoreCase(description) &&
+                    existingContent.getContentLink().equalsIgnoreCase(link)) {
                 statusLabel.setText("Konten lain dengan judul, deskripsi, dan link yang sama sudah ada!");
-                return; 
+                return;
             }
         }
 
-        selectedContent.setTitle(title);
-        selectedContent.setDescription(description);
-        selectedContent.setContentLink(link);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Konfirmasi Edit Konten");
+        alert.setHeaderText("Anda akan memperbarui konten yang dipilih.");
+        alert.setContentText("Apakah Anda yakin ingin menyimpan perubahan ini?");
 
-        if (contentService.updateContent(selectedContent)) {
-            statusLabel.setText("Konten berhasil diperbarui!");
-            clearForm();
-            refreshTableView();
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            selectedContent.setTitle(title);
+            selectedContent.setDescription(description);
+            selectedContent.setContentLink(link);
+
+            if (contentService.updateContent(selectedContent)) {
+                statusLabel.setText("Konten berhasil diperbarui!");
+                doClearFormLogic();
+                refreshTableView();
+            } else {
+                statusLabel.setText("Gagal memperbarui konten.");
+            }
         } else {
-            statusLabel.setText("Gagal memperbarui konten.");
+            statusLabel.setText("Pembaruan konten dibatalkan.");
         }
     }
 
@@ -173,12 +227,22 @@ public class PsikologiController {
             return;
         }
 
-        if (contentService.deleteContent(selectedContent.getId())) {
-            statusLabel.setText("Konten berhasil dihapus!");
-            clearForm();
-            refreshTableView();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Konfirmasi Hapus Konten");
+        alert.setHeaderText("Anda akan menghapus konten yang dipilih.");
+        alert.setContentText("Apakah Anda yakin ingin menghapus konten '" + selectedContent.getTitle() + "'?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            if (contentService.deleteContent(selectedContent.getId())) {
+                statusLabel.setText("Konten berhasil dihapus!");
+                doClearFormLogic();
+                refreshTableView();
+            } else {
+                statusLabel.setText("Gagal menghapus konten.");
+            }
         } else {
-            statusLabel.setText("Gagal menghapus konten.");
+            statusLabel.setText("Penghapusan konten dibatalkan.");
         }
     }
 

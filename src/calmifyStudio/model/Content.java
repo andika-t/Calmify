@@ -52,8 +52,10 @@ public class Content {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         Content content = (Content) o;
         return Objects.equals(id, content.id);
     }
@@ -66,10 +68,10 @@ public class Content {
     @Override
     public String toString() {
         return "Content{" +
-               "id='" + id + '\'' +
-               ", title='" + title + '\'' +
-               ", description='" + description + '\'' +
-               ", contentLink='" + contentLink + '\'' +
-               '}';
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", contentLink='" + contentLink + '\'' +
+                '}';
     }
 }
