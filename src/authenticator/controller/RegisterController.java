@@ -20,22 +20,30 @@ public class RegisterController implements Initializable {
     private static final String PSIKOLOG = "Psikolog";
     private static final String STYLE_CLASS_SELECTED = "button-userType-selected";
 
-    @FXML private TextField tfFirstName;
-    @FXML private TextField tfLastName;
-    @FXML private TextField tfUsername;
-    @FXML private TextField tfEmail;
-    @FXML private PasswordField tfPassword;
+    @FXML
+    private TextField tfFirstName;
+    @FXML
+    private TextField tfLastName;
+    @FXML
+    private TextField tfUsername;
+    @FXML
+    private TextField tfEmail;
+    @FXML
+    private PasswordField tfPassword;
 
-    @FXML private Button btnPengguna;
-    @FXML private Button btnPsikolog;
-    @FXML private Button buttonCreateAcc;
+    @FXML
+    private Button btnPengguna;
+    @FXML
+    private Button btnPsikolog;
+    @FXML
+    private Button buttonCreateAcc;
 
     private String selectedUserType;
     private SceneSwitcher pindahScene;
-    private User currentUser;
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {}
+    public void initialize(URL location, ResourceBundle resources) {
+    }
 
     @FXML
     private void selectPenggunaAction(ActionEvent event) {
@@ -65,14 +73,26 @@ public class RegisterController implements Initializable {
             return;
         }
 
+        if (username.contains(" ")) {
+            showAlert(Alert.AlertType.ERROR, "Registrasi Gagal", "Username tidak boleh mengandung spasi.");
+            return;
+        }
+
+        if (password.length() < 6) {
+            showAlert(Alert.AlertType.ERROR, "Registrasi Gagal", "Password minimal harus 6 karakter.");
+            return;
+        }
+
         User newUser = new User(firstName, lastName, username, email, password, selectedUserType, false);
         boolean isAdded = UserManager.addUser(newUser);
 
         if (isAdded) {
-            showAlert(Alert.AlertType.INFORMATION, "Registrasi Berhasil", "Akun untuk '" + username + "' berhasil dibuat.");
+            showAlert(Alert.AlertType.INFORMATION, "Registrasi Berhasil",
+                    "Akun untuk '" + username + "' berhasil dibuat.");
             goToLogin();
         } else {
-            showAlert(Alert.AlertType.ERROR, "Registrasi Gagal", "Username '" + username + "' sudah digunakan atau terjadi kesalahan.");
+            showAlert(Alert.AlertType.ERROR, "Registrasi Gagal",
+                    "Username '" + username + "' sudah digunakan atau terjadi kesalahan.");
         }
     }
 

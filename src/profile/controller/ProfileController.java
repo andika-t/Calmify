@@ -16,7 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import util.ImageUtils; // <-- IMPORT KELAS BANTUAN
+import util.ImageUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -61,15 +61,12 @@ public class ProfileController implements Initializable {
     }
 
     private void displayProfileImage() {
-        // Ambil data Base64 dari user
         String base64Image = currentUser.getProfilePictureBase64();
-        // Ubah Base64 menjadi Image yang bisa ditampilkan
         Image image = ImageUtils.decodeBase64ToImage(base64Image);
 
         if (image != null) {
             profileImageView.setImage(image);
         } else {
-            // Jika tidak ada gambar, tampilkan gambar default/placeholder
             profileImageView.setImage(new Image(getClass().getResourceAsStream("/resources/assets/CALMIFY-LOGO.png")));
         }
     }
@@ -83,7 +80,7 @@ public class ProfileController implements Initializable {
         File selectedFile = fileChooser.showOpenDialog(profileImageView.getScene().getWindow());
 
         if (selectedFile != null) {
-            String base64String = ImageUtils.encodeImageToBase64(selectedFile);
+            String base64String = ImageUtils.encodeAndResizeImageToBase64(selectedFile, 100);
             if (base64String != null) {
                 currentUser.setProfilePictureBase64(base64String);
 

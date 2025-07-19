@@ -48,7 +48,6 @@ public class UserAssessmentController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/pantauStres/view/HistoryChartView.fxml"));
             Parent historyPane = loader.load();
-            // Kirim konteks ke HistoryChartController
             HistoryChartController controller = loader.getController();
             controller.setData(currentUser);
             mainPane.setCenter(historyPane);
@@ -59,7 +58,6 @@ public class UserAssessmentController {
 
     private void checkHistoryAndSetButtonState() {
         if (currentUser == null) return;
-        // Baca data dari file untuk memeriksa riwayat
         boolean hasHistory = answerModel.getAnswers().stream()
                 .anyMatch(answer -> currentUser.getUsername().equals(answer.getUsername()));
         

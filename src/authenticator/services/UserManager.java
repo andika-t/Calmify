@@ -10,7 +10,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,6 +58,17 @@ public class UserManager {
         if (newUser == null || newUser.getUsername() == null || newUser.getUsername().isEmpty()) {
             return false;
         }
+
+        if (newUser.getUsername().contains(" ")) {
+            System.err.println("VALIDATION FAILED: Username tidak boleh mengandung spasi.");
+            return false;
+        }
+
+        if (newUser.getPassword() == null || newUser.getPassword().length() < 6) {
+            System.err.println("VALIDATION FAILED: Password minimal harus 6 karakter.");
+            return false;
+        }
+
         UserDataXML data = loadData();
         boolean usernameExists = data.getUsers().stream()
                 .anyMatch(user -> user.getUsername().equalsIgnoreCase(newUser.getUsername()));
@@ -69,24 +79,17 @@ public class UserManager {
         return saveDatabase(data);
     }
 
-    /**
-     * Memperbarui informasi pengguna yang ada di database.
-     * @param updatedUser Objek pengguna dengan data yang sudah diperbarui.
-     * @return true jika berhasil, false jika pengguna tidak ditemukan atau gagal menyimpan.
-     */
     public static boolean updateUser(User updatedUser) {
         if (updatedUser == null || updatedUser.getUsername() == null || updatedUser.getUsername().isEmpty()) {
             return false;
         }
-        
-        // PERBAIKAN KRUSIAL: Memuat data yang ada, bukan membuat baru.
+
         UserDataXML data = loadData();
         List<User> users = data.getUsers();
 
         boolean found = false;
         for (int i = 0; i < users.size(); i++) {
             if (users.get(i).getUsername().equalsIgnoreCase(updatedUser.getUsername())) {
-                // Ganti objek user lama dengan yang baru
                 users.set(i, updatedUser);
                 found = true;
                 break;
@@ -94,11 +97,8 @@ public class UserManager {
         }
 
         if (found) {
-            // Simpan seluruh daftar pengguna yang sudah diperbarui
             return saveDatabase(data);
         }
-        
-        // Kembalikan false jika pengguna dengan username tersebut tidak ditemukan
         return false;
     }
 
@@ -133,10 +133,10 @@ public class UserManager {
 
     public static void updateShareData(String username, boolean consentStatus) {
         UserDataXML data = loadData();
-        
+
         Optional<User> userToUpdateOpt = data.getUsers().stream()
-            .filter(user -> user.getUsername().equalsIgnoreCase(username))
-            .findFirst();
+                .filter(user -> user.getUsername().equalsIgnoreCase(username))
+                .findFirst();
 
         if (userToUpdateOpt.isPresent()) {
             userToUpdateOpt.get().setShareData(consentStatus);

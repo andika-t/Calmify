@@ -4,10 +4,10 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
 import java.util.ArrayList;
 
-@XStreamAlias("questions") // Root element di file XML akan menjadi <questions>
+@XStreamAlias("questions")
 public class QuestionList {
 
-    @XStreamImplicit // Setiap item di dalam list tidak perlu dibungkus tag tambahan
+    @XStreamImplicit
     private ArrayList<Question> listPertanyaan = new ArrayList<>();
 
     public ArrayList<Question> getListPertanyaan() {

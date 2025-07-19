@@ -19,7 +19,6 @@ public class SecurityController {
     
     private User currentUser;
 
-    // PERBAIKAN: Metode initData dan setData digabung menjadi satu agar lebih jelas.
     public void setData(User user) {
         this.currentUser = user;
         if (user != null) {

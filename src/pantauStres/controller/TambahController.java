@@ -16,7 +16,7 @@ import pantauStres.services.QuestionModel;
 public class TambahController implements Initializable {
     private static final String STYLE_CLASS_SELECTED = "button-userType-selected";
     private static final String KATEGORI_MOOD = "Mood";
-    private static final String KATEGORI_KUALITAS = "Kualitas"; // Sesuaikan jika ada kategori lain
+    private static final String KATEGORI_KUALITAS = "Kualitas";
 
     @FXML private TextField tfId;
     @FXML private TextArea taPertanyaan;
@@ -24,13 +24,11 @@ public class TambahController implements Initializable {
     @FXML private Button btnMood;
     @FXML private Button btnKualitas;
 
-    // Sesuai pola, controller ini membuat instance modelnya sendiri
     private final QuestionModel model = new QuestionModel();
     private String selectKategori;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Mencari ID berikutnya berdasarkan data dari file
         int nextId = model.getQuestions().stream()
                 .mapToInt(Question::getId)
                 .max()
@@ -50,12 +48,11 @@ public class TambahController implements Initializable {
             int id = Integer.parseInt(tfId.getText());
             int skor = Integer.parseInt(tfSkor.getText());
             String pertanyaan = taPertanyaan.getText();
-            
-            // Cek duplikasi ID dengan membaca ulang data dari file
+
             boolean isDuplicate = model.getQuestions().stream().anyMatch(q -> q.getId() == id);
             if (isDuplicate) {
                 showAlert(Alert.AlertType.WARNING, "ID Duplikat", "ID " + id + " sudah ada. ID akan diatur ulang.");
-                initialize(null, null); // Atur ulang ID jika duplikat
+                initialize(null, null);
                 return;
             }
 

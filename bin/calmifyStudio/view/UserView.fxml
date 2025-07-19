@@ -12,7 +12,7 @@
 
 <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="820.0" style="-fx-background-color: transparent;"
    xmlns="http://javafx.com/javafx/9"
-   xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UserViewController">
+   xmlns:fx="http://javafx.com/fxml/1" fx:controller="calmifyStudio.controller.UserViewController">
    <children>
       <VBox alignment="TOP_CENTER" spacing="10.0" style="-fx-background-color: rgba(255, 255, 255, 0.85); -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 0);">
          <children>

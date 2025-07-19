@@ -48,7 +48,7 @@ public class ResultController implements Initializable {
             data = FXCollections.observableArrayList();
             tableView.setItems(data);
         }
-        data.setAll(model.getAnswers()); // Selalu baca ulang dari file
+        data.setAll(model.getAnswers());
     }
 
     @FXML

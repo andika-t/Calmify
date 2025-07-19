@@ -37,7 +37,6 @@ public class HistoryChartController {
             return;
         }
         
-        // Atur status CheckBox
         boolean hasConsented = UserManager.getShareData(currentUser.getUsername());
         cbBagikan.setSelected(hasConsented);
 
@@ -48,8 +47,6 @@ public class HistoryChartController {
         if (currentUser == null) return;
         
         lineChart.getData().clear();
-        
-        // Ambil semua jawaban dan filter untuk pengguna saat ini
         ArrayList<Answer> allAnswers = answerModel.getAnswers();
         List<Answer> userAnswers = allAnswers.stream()
                 .filter(answer -> currentUser.getUsername().equals(answer.getUsername()))

@@ -28,7 +28,6 @@ public class AnswerModel {
         try (FileReader reader = new FileReader(file)) {
             AnswerList list = (AnswerList) xstream.fromXML(reader);
             if (list != null && list.getListJawaban() != null) {
-                // Jika berhasil, kembalikan list dari file
                 return list.getListJawaban();
             }
         } catch (Exception e) {

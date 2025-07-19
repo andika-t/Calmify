@@ -20,7 +20,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         mainStage = stage;
-        Parent root = FXMLLoader.load(getClass().getResource("/authenticator/view/loginView.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/intro/view/introView.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setFullScreenExitKeyCombination(

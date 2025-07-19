@@ -1,7 +1,11 @@
 package util;
 
 import javafx.scene.image.Image;
+import javax.imageio.ImageIO;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -9,15 +13,35 @@ import java.util.Base64;
 
 public class ImageUtils {
 
-    public static String encodeImageToBase64(File imageFile) {
+    public static String encodeAndResizeImageToBase64(File imageFile, int targetSize) {
         if (imageFile == null || !imageFile.exists()) {
             return null;
         }
         try {
-            byte[] fileContent = Files.readAllBytes(imageFile.toPath());
-            return Base64.getEncoder().encodeToString(fileContent);
+            BufferedImage originalImage = ImageIO.read(imageFile);
+            int originalWidth = originalImage.getWidth();
+            int originalHeight = originalImage.getHeight();
+            int newWidth, newHeight;
+
+            if (originalWidth > originalHeight) {
+                newWidth = targetSize;
+                newHeight = (targetSize * originalHeight) / originalWidth;
+            } else {
+                newHeight = targetSize;
+                newWidth = (targetSize * originalWidth) / originalHeight;
+            }
+            BufferedImage resizedImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_RGB);
+            Graphics2D g = resizedImage.createGraphics();
+            g.drawImage(originalImage, 0, 0, newWidth, newHeight, null);
+            g.dispose();
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(resizedImage, "jpg", baos);
+            byte[] imageBytes = baos.toByteArray();
+
+            return Base64.getEncoder().encodeToString(imageBytes);
         } catch (IOException e) {
-            System.err.println("Gagal membaca file gambar: " + e.getMessage());
+            System.err.println("Gagal membaca atau me-resize file gambar: " + e.getMessage());
             return null;
         }
     }

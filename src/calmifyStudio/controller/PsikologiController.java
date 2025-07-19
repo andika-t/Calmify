@@ -10,14 +10,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import calmifyStudio.model.Content;
 import calmifyStudio.model.XmlContentImplement;
-import calmifyStudio.controller.ContentService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import java.util.Optional;
 
-import java.io.File;
 import java.util.List;
 
 public class PsikologiController {

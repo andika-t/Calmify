@@ -16,11 +16,16 @@ public class EditController {
     private static final String KATEGORI_MOOD = "Mood";
     private static final String KATEGORI_KUALITAS = "Kualitas";
 
-    @FXML private TextField tfId;
-    @FXML private TextArea taPertanyaan;
-    @FXML private TextField tfSkor;
-    @FXML private Button btnMood;
-    @FXML private Button btnKualitas;
+    @FXML
+    private TextField tfId;
+    @FXML
+    private TextArea taPertanyaan;
+    @FXML
+    private TextField tfSkor;
+    @FXML
+    private Button btnMood;
+    @FXML
+    private Button btnKualitas;
 
     private final QuestionModel model = new QuestionModel();
     private String selectKategori;
@@ -29,9 +34,9 @@ public class EditController {
     public void setData(Question item) {
         this.questionToEdit = item;
         tfId.setText(String.valueOf(item.getId()));
-        tfId.setDisable(true); // ID tidak seharusnya diubah
+        tfId.setDisable(true);
         taPertanyaan.setText(item.getPertanyaan());
-        tfSkor.setText(String.valueOf(item.getSkor())); // PERBAIKAN: Menggunakan getSkor()
+        tfSkor.setText(String.valueOf(item.getSkor()));
         selectKategori(item.getKategori());
         updateButtonStyles();
     }
@@ -47,10 +52,9 @@ public class EditController {
             int id = Integer.parseInt(tfId.getText());
             int skor = Integer.parseInt(tfSkor.getText());
             String pertanyaan = taPertanyaan.getText();
-            
+
             Question newQuestion = new Question(id, pertanyaan, skor, selectKategori);
 
-            // Cari index dari data yang akan di-edit dengan membaca ulang dari file
             ArrayList<Question> dataList = model.getQuestions();
             int index = -1;
             for (int i = 0; i < dataList.size(); i++) {
@@ -65,23 +69,28 @@ public class EditController {
                 showAlert(Alert.AlertType.INFORMATION, "Sukses", "Data berhasil diubah");
                 ((Stage) tfId.getScene().getWindow()).close();
             } else {
-                 showAlert(Alert.AlertType.ERROR, "Error", "Data yang akan diubah tidak ditemukan.");
+                showAlert(Alert.AlertType.ERROR, "Error", "Data yang akan diubah tidak ditemukan.");
             }
         } catch (NumberFormatException e) {
             showAlert(Alert.AlertType.ERROR, "Input Salah", "Skor harus berupa angka.");
         }
     }
-        
-    @FXML private void handleKategoriMood(ActionEvent event) {
+
+    @FXML
+    private void handleKategoriMood(ActionEvent event) {
         selectKategori(KATEGORI_MOOD);
     }
-    @FXML private void handleKategoriKualitas(ActionEvent event) {
+
+    @FXML
+    private void handleKategoriKualitas(ActionEvent event) {
         selectKategori(KATEGORI_KUALITAS);
     }
+
     private void selectKategori(String kategori) {
         this.selectKategori = kategori;
         updateButtonStyles();
     }
+
     private void updateButtonStyles() {
         btnMood.getStyleClass().remove(STYLE_CLASS_SELECTED);
         btnKualitas.getStyleClass().remove(STYLE_CLASS_SELECTED);
@@ -91,6 +100,7 @@ public class EditController {
             btnKualitas.getStyleClass().add(STYLE_CLASS_SELECTED);
         }
     }
+
     private void showAlert(Alert.AlertType type, String title, String content) {
         Alert alert = new Alert(type);
         alert.setTitle(title);

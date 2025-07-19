@@ -26,7 +26,6 @@ import java.util.ResourceBundle;
 
 public class ManagerController implements Initializable {
 
-    // Setiap controller membuat instance modelnya sendiri, sesuai pola ModelXML
     private final QuestionModel model = new QuestionModel();
     private ObservableList<Question> data;
 
@@ -38,23 +37,20 @@ public class ManagerController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Setup kolom tabel
         tcID.setCellValueFactory(cell -> new SimpleIntegerProperty(cell.getValue().getId()));
         tcQuestion.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getPertanyaan()));
         tcScore.setCellValueFactory(cell -> new SimpleIntegerProperty(cell.getValue().getSkor()));
         tcKategori.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getKategori()));
 
-        // Muat data awal
         refreshTable();
     }
 
-    // Metode ini sekarang penting untuk selalu mendapatkan data terbaru dari file
     private void refreshTable() {
         if (data == null) {
             data = FXCollections.observableArrayList();
             tableview.setItems(data);
         }
-        data.setAll(model.getQuestions()); // Selalu baca ulang dari file
+        data.setAll(model.getQuestions());
     }
 
     @FXML
@@ -63,14 +59,12 @@ public class ManagerController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/pantauStres/view/TambahView.fxml"));
             Parent root = loader.load();
 
-            // Controller 'Tambah' mandiri dan membuat instance modelnya sendiri
             Stage stage = new Stage();
             stage.setTitle("Tambah Pertanyaan Baru");
             stage.setScene(new Scene(root));
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
-
-            refreshTable(); // Muat ulang data setelah window ditutup
+            refreshTable();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -87,10 +81,8 @@ public class ManagerController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/pantauStres/view/EditView.fxml"));
             Parent root = loader.load();
-
             EditController controller = loader.getController();
-            controller.setData(selected); // Kirim hanya data yang dipilih
-
+            controller.setData(selected);
             Stage stage = new Stage();
             stage.setTitle("Edit Pertanyaan");
             stage.setScene(new Scene(root));

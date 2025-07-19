@@ -16,7 +16,6 @@ import java.util.ArrayList;
 public class QuestionModel {
     private static final String FILE_PATH = "data/questions.xml";
 
-    // Metode ini membaca file setiap kali dipanggil, sesuai pola ModelXML.
     public ArrayList<Question> getQuestions() {
         XStream xstream = new XStream(new StaxDriver());
         xstream.processAnnotations(QuestionList.class);
@@ -35,10 +34,9 @@ public class QuestionModel {
                 System.err.println("Gagal memuat data pertanyaan: " + e.getMessage());
             }
         }
-        return new ArrayList<>(); // Kembalikan list kosong jika file tidak ada atau error
+        return new ArrayList<>();
     }
-    
-    // Metode ini membaca data, mengubahnya, lalu menulis ulang semuanya ke file.
+
     public void addQuestion(Question question) {
         ArrayList<Question> currentQuestions = getQuestions();
         currentQuestions.add(question);
@@ -67,8 +65,7 @@ public class QuestionModel {
         questionList.setListPertanyaan(currentQuestions);
         processXML(questionList);
     }
-    
-    // Metode privat untuk menulis ke file, sama seperti di ModelXML.
+
     private void processXML(QuestionList list) {
         XStream xstream = new XStream(new StaxDriver());
         xstream.processAnnotations(QuestionList.class);
@@ -76,7 +73,7 @@ public class QuestionModel {
 
         try {
             File file = new File(FILE_PATH);
-            file.getParentFile().mkdirs(); // Buat folder 'data' jika belum ada
+            file.getParentFile().mkdirs();
             try (FileOutputStream fos = new FileOutputStream(file)) {
                 xstream.toXML(list, fos);
             }
