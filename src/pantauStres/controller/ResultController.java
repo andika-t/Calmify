@@ -1,7 +1,6 @@
 package pantauStres.controller;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -16,17 +15,15 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import pantauStres.model.Answer; // Sesuaikan import
-import pantauStres.services.AnswerManager; // Sesuaikan import
+import pantauStres.model.Answer;
+import pantauStres.services.AnswerModel;
 
 public class ResultController implements Initializable {
 
-    // Gunakan AnswerManager yang sesuai
-    private AnswerManager resultManager = new AnswerManager();
-    private ObservableList<Answer> resultData;
+    private final AnswerModel model = new AnswerModel();
+    private ObservableList<Answer> data;
 
     @FXML private TableView<Answer> tableView;
-    // ... (FXML untuk kolom tabel lainnya) ...
     @FXML private TableColumn<Answer, String> tcId;
     @FXML private TableColumn<Answer, String> tcWaktu;
     @FXML private TableColumn<Answer, Number> tcMood;
@@ -36,22 +33,22 @@ public class ResultController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // ... (Pengaturan cellValueFactory tetap sama) ...
         tcId.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
         tcWaktu.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getWaktuTes()));
         tcMood.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getSkorMood()));
-        tcSleep.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getSkorTidur()));
+        tcSleep.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getSkorKualitas()));
         tcInterpretasi.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getInterpretasi()));
         tcShare.setCellValueFactory(cellData -> new SimpleBooleanProperty(cellData.getValue().isShareData()));
         
-        loadDataFromFile();
+        refreshTable();
     }
     
-    private void loadDataFromFile() {
-        // --- PENYESUAIAN DI SINI ---
-        ArrayList<Answer> answers = resultManager.getAnswers();
-        resultData = FXCollections.observableArrayList(answers);
-        tableView.setItems(resultData);
+    private void refreshTable() {
+        if (data == null) {
+            data = FXCollections.observableArrayList();
+            tableView.setItems(data);
+        }
+        data.setAll(model.getAnswers()); // Selalu baca ulang dari file
     }
 
     @FXML
@@ -68,19 +65,17 @@ public class ResultController implements Initializable {
         Optional<ButtonType> result = confirm.showAndWait();
 
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            // --- PENYESUAIAN DI SINI ---
-            // Langsung panggil metode hapusData dari manager
-            resultManager.hapusData(selected.getId());
-            
+            model.deleteAnswer(selected.getId());
             showAlert(Alert.AlertType.INFORMATION, "Sukses", "Data berhasil dihapus.");
-            
-            // Muat ulang data untuk merefresh tabel
-            loadDataFromFile();
-            tableView.refresh();
+            refreshTable();
         }
     }
 
     private void showAlert(Alert.AlertType type, String title, String content) {
-        // ... (kode tidak berubah) ...
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 }

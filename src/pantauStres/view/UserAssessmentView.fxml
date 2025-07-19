@@ -25,6 +25,7 @@
                   </Label>
                   <Label text="Tes ini akan membantu Anda memahami tingkat stres Anda berdasarkan aktivitas dan perasaan Anda baru-baru ini." textAlignment="CENTER" wrapText="true" />
                   <Button fx:id="startButton" onAction="#handleMulai" prefWidth="250.0" style="-fx-font-size: 16px;" text="Mulai Tes Sekarang" />
+                  <Button fx:id="btnLihatRiwayat" layoutX="275.0" layoutY="347.0" onAction="#handleRiwayat" prefWidth="250.0" style="-fx-font-size: 16px;" text="Lihat Riwayat Tes" />
                </children>
             </VBox>
          </children>

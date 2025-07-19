@@ -3,7 +3,7 @@ package profile.controller;
 import java.util.Optional;
 
 import authenticator.model.User;
-import authenticator.services.XMLUserService;
+import authenticator.services.UserManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -24,6 +24,11 @@ public class EditUsernameController {
 
     private Button btnSave;
     private User currentUser;
+
+    public void setData(User user){
+        this.currentUser = user;
+        tfUsername.setText(currentUser.getUsername());
+    }
 
     @FXML
     private void prosesEditUsername(ActionEvent event) {
@@ -46,7 +51,7 @@ public class EditUsernameController {
             return;
         }
 
-        Optional<User> existingUser = XMLUserService.findUserByUsername(newUsername);
+        Optional<User> existingUser = UserManager.findUserByUsername(newUsername);
         if (existingUser.isPresent()) {
             showAlert(Alert.AlertType.ERROR, "Registrasi Gagal",
                     "Username '" + newUsername + "' sudah digunakan. Silakan pilih yang lain.");
@@ -61,7 +66,7 @@ public class EditUsernameController {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
             currentUser.setUsername(newUsername);
-            if (XMLUserService.updateUser(currentUser)) {
+            if (UserManager.updateUser(currentUser)) {
                 showAlert(Alert.AlertType.INFORMATION, "Berhasil", "Username berhasil diubah.");
             } else {
                 showAlert(Alert.AlertType.ERROR, "Gagal", "Terjadi kesalahan saat menyimpan perubahan.");
@@ -72,16 +77,12 @@ public class EditUsernameController {
 
 
     @FXML
-    void handleCancel(ActionEvent event) {
+    private void handleBatal(ActionEvent event) {
         closeWindow();
     }
 
     private void closeWindow() {
         ((Stage) btnSave.getScene().getWindow()).close();
-    }
-
-    public void setData(User user){
-        tfUsername.setText(currentUser.getUsername());
     }
 
     private void showAlert(Alert.AlertType type, String title, String message) {

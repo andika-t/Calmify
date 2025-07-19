@@ -39,10 +39,10 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <TextField fx:id="tfKota" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <TextField fx:id="tfKodePos" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <TextField fx:id="tfNegara" editable="false" GridPane.rowIndex="2" />
-                        <TextField fx:id="tfAlamat" editable="false" GridPane.rowIndex="4" />
+                        <TextField fx:id="tfKota" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="tfKodePos" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <TextField fx:id="tfNegara" GridPane.rowIndex="2" />
+                        <TextField fx:id="tfAlamat" GridPane.rowIndex="4" />
                         <Label text="Alamat" GridPane.rowIndex="3" />
                         <Label text="Kode Pos" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <Label text="Negara" GridPane.rowIndex="1" />
@@ -53,8 +53,8 @@
             </VBox>
             <HBox prefWidth="200.0" spacing="20.0">
                <children>
-                  <Button id="btn-change" mnemonicParsing="false" onAction="#handleEditAlamat" prefWidth="200.0" stylesheets="@../../resources/css/Style.css" text="Simpan Perubahan" />
-                  <Button mnemonicParsing="false" onAction="#handleCancel" prefWidth="100.0" text="Batal" />
+                  <Button id="btn-change" fx:id="btnSimpan" mnemonicParsing="false" onAction="#prosesEditAlamat" prefHeight="25.0" prefWidth="150.0" stylesheets="@../../resources/css/Style.css" text="Simpan" />
+                  <Button id="btn-batal" mnemonicParsing="false" onAction="#handleBatal" prefHeight="25.0" prefWidth="75.0" text="Batal" />
                </children>
             </HBox>
          </children>

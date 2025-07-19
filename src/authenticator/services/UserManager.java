@@ -14,9 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class XMLUserService {
+public class UserManager {
 
-    private static final String DATABASE_FILE = "src/data/users.xml";
+    private static final String DATABASE_FILE = "data/users.xml";
     private static final XStream xstream = new XStream(new StaxDriver());
 
     static {
@@ -63,7 +63,7 @@ public class XMLUserService {
         boolean usernameExists = data.getUsers().stream()
                 .anyMatch(user -> user.getUsername().equalsIgnoreCase(newUser.getUsername()));
         if (usernameExists) {
-            return false; // Mengindikasikan username sudah ada
+            return false;
         }
         data.addUser(newUser);
         return saveDatabase(data);
@@ -79,7 +79,7 @@ public class XMLUserService {
         boolean found = false;
         for (int i = 0; i < users.size(); i++) {
             if (users.get(i).getUsername().equalsIgnoreCase(updatedUser.getUsername())) {
-                users.set(i, updatedUser); // Ganti objek lama dengan yang baru
+                users.set(i, updatedUser);
                 found = true;
                 break;
             }
@@ -99,5 +99,26 @@ public class XMLUserService {
             saveDatabase(data);
         }
         return removed;
+    }
+
+    public static void updateShareData(String username, boolean consentStatus) {
+        UserDataXML data = loadData();
+        
+        Optional<User> userToUpdateOpt = data.getUsers().stream()
+            .filter(user -> user.getUsername().equalsIgnoreCase(username))
+            .findFirst();
+
+        if (userToUpdateOpt.isPresent()) {
+            userToUpdateOpt.get().setShareData(consentStatus);
+            saveDatabase(data);
+            System.out.println("Status persetujuan untuk '" + username + "' berhasil diubah ke: " + consentStatus);
+        } else {
+            System.err.println("Gagal mengubah persetujuan: Pengguna '" + username + "' tidak ditemukan.");
+        }
+    }
+
+    public static boolean getShareData(String username) {
+        Optional<User> userOpt = findUserByUsername(username);
+        return userOpt.map(user -> user.isShareData()).orElse(false);
     }
 }

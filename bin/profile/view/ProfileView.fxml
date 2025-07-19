@@ -21,7 +21,7 @@
 
 <StackPane prefHeight="680.0" prefWidth="720.0" stylesheets="@../../resources/css/Style.css" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="profile.controller.ProfileController">
    <children>
-      <VBox maxWidth="1.7976931348623157E308" prefWidth="700.0" spacing="30.0">
+      <VBox maxWidth="1.7976931348623157E308" prefWidth="700.0" spacing="20.0">
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
@@ -92,11 +92,32 @@
                               <TextField fx:id="tfPhoneNumber" editable="false" promptText="Nomor telepon" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                            </children>
                         </GridPane>
-                        <TextArea fx:id="taBio" prefHeight="80.0" prefWidth="200.0" promptText="Tentang diri anda..">
+                        <VBox prefWidth="100.0" spacing="5.0">
+                           <children>
+                              <Label text="Biodata">
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </Label>
+                              <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="200.0">
+                                 <children>
+                                    <TextArea fx:id="taBio" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="70.0" prefWidth="500.0" promptText="Tentang diri anda..">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </TextArea>
+                                    <Button id="btn-change" mnemonicParsing="false" onAction="#handleSimpanBio" prefHeight="70.0" prefWidth="120.0" text="Simpan Bio">
+                                       <HBox.margin>
+                                          <Insets left="35.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
                            <VBox.margin>
                               <Insets top="10.0" />
                            </VBox.margin>
-                        </TextArea>
+                        </VBox>
                      </children>
                   </VBox>
                </children>

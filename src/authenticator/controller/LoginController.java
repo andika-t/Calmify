@@ -5,8 +5,8 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import authenticator.model.User;
-import authenticator.services.XMLUserService;
-import home.controller.MainController;
+import authenticator.services.UserManager;
+import home.controller.MainHomeController;
 import home.controller.PsikologNavigationController;
 import home.controller.UserNavigationController;
 import javafx.event.ActionEvent;
@@ -57,7 +57,7 @@ public class LoginController implements Initializable {
             return;
         }
 
-        Optional<User> userOptional = XMLUserService.findUserByUsername(username);
+        Optional<User> userOptional = UserManager.findUserByUsername(username);
 
         if (userOptional.isPresent()) {
             User user = userOptional.get();
@@ -67,9 +67,9 @@ public class LoginController implements Initializable {
                 if ("Psikolog".equalsIgnoreCase(user.getUserType())) {
                     showAlert(AlertType.INFORMATION, "Login Berhasil", "Mengarahkan ke Halaman Psikolog...");
                     try {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/home/view/MainView.fxml"));
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/home/view/MainHomeView.fxml"));
                         Pane root = loader.load();
-                        MainController controller = loader.getController();
+                        MainHomeController controller = loader.getController();
                         controller.setData(user);
                         Stage stage = (Stage) buttonLogin.getScene().getWindow();
                         stage.getScene().setRoot(root);
@@ -79,9 +79,9 @@ public class LoginController implements Initializable {
                 } else if ("Pengguna Umum".equalsIgnoreCase(user.getUserType())) {
                     showAlert(AlertType.INFORMATION, "Login Berhasil", "Mengarahkan ke Halaman User...");
                     try {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/home/view/MainView.fxml"));
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/home/view/MainHomeView.fxml"));
                         Pane root = loader.load();
-                        MainController controller = loader.getController();
+                        MainHomeController controller = loader.getController();
                         controller.setData(user);
                         Stage stage = (Stage) buttonLogin.getScene().getWindow();
                         stage.getScene().setRoot(root);

@@ -48,7 +48,7 @@ public class PsikologiController {
 
     @FXML
     public void initialize() {
-        contentService = new ContentService(new XmlContentImplement("src/data/contents.xml"));
+        contentService = new ContentService(new XmlContentImplement("data/contents.xml"));
         contentList = FXCollections.observableArrayList();
 
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));

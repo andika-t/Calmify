@@ -1,16 +1,10 @@
 package profile.controller;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.Optional;
-import java.util.ResourceBundle;
-
 import authenticator.model.User;
-import authenticator.services.XMLUserService;
+import authenticator.services.UserManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -18,53 +12,50 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import util.SceneSwitcher;
 
-public class MainSettingController implements Initializable {
+import java.io.IOException;
+import java.util.Optional;
+
+public class MainSettingController {
 
     private static final String STYLE_CLASS_SELECTED = "button-settings-selected";
 
-    @FXML
-    private BorderPane mainPane;
-    @FXML
-    private Button btnSecurity;
-    @FXML
-    private Button btnMyAccount;
-
+    @FXML private BorderPane mainPane;
+    @FXML private Button btnSecurity;
+    @FXML private Button btnMyAccount;
 
     private User currentUser;
 
     public void setCurrentUser(User user) {
         this.currentUser = user;
+        handleMyAccount(null); 
     }
 
     @FXML
     private void handleMyAccount(ActionEvent event) {
         updateButtonStyles(btnMyAccount);
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/profile/view/ProfileView.fxml"));
-            Pane pane = loader.load();
-            ProfileController controller = loader.getController();
-            controller.setData(currentUser);
-
-            controller.setMainPane(mainPane);
-            mainPane.setCenter(pane);
-            btnMyAccount.getStyleClass().add(STYLE_CLASS_SELECTED);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        loadPaneToCenter("/profile/view/ProfileView.fxml");
     }
 
     @FXML
     private void handleSecurity(ActionEvent event) {
         updateButtonStyles(btnSecurity);
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/profile/view/SecurityView.fxml"));
-            Pane pane = loader.load();
-            SecurityController controller = loader.getController();
-            controller.setData(currentUser);
+        loadPaneToCenter("/profile/view/SecurityView.fxml");
+    }
 
-            controller.setMainPane(mainPane);
+    private void loadPaneToCenter(String fxmlPath) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Pane pane = loader.load();
+
+            if (loader.getController() instanceof ProfileController) {
+                ProfileController controller = loader.getController();
+                controller.setData(currentUser);
+            } else if (loader.getController() instanceof SecurityController) {
+                SecurityController controller = loader.getController();
+                controller.setData(currentUser);
+            }
+            
             mainPane.setCenter(pane);
-            btnSecurity.getStyleClass().add(STYLE_CLASS_SELECTED);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -75,16 +66,14 @@ public class MainSettingController implements Initializable {
         Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
         confirmation.setTitle("Konfirmasi Hapus Akun");
         confirmation.setHeaderText("Apakah Anda benar-benar yakin?");
-        confirmation
-                .setContentText("Tindakan ini akan menghapus akun Anda secara permanen dan tidak dapat diurungkan.");
+        confirmation.setContentText("Tindakan ini akan menghapus akun Anda secara permanen.");
 
         Optional<ButtonType> result = confirmation.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            if (XMLUserService.deleteUser(currentUser.getUsername())) {
+            if (UserManager.deleteUser(currentUser.getUsername())) {
                 showAlert(Alert.AlertType.INFORMATION, "Berhasil", "Akun Anda telah dihapus.");
                 try {
-                    SceneSwitcher pindahScene = new SceneSwitcher();
-                    pindahScene.switchScene("/authenticator/view/LoginView");
+                    new SceneSwitcher().switchScene("/authenticator/view/LoginView");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -97,14 +86,8 @@ public class MainSettingController implements Initializable {
     private void updateButtonStyles(Button selectedButton) {
         btnMyAccount.getStyleClass().remove(STYLE_CLASS_SELECTED);
         btnSecurity.getStyleClass().remove(STYLE_CLASS_SELECTED);
-
-        if (selectedButton.equals(btnSecurity)) {
-            btnSecurity.getStyleClass().add(STYLE_CLASS_SELECTED);
-        } else if (selectedButton.equals(btnMyAccount)) {
-            btnMyAccount.getStyleClass().add(STYLE_CLASS_SELECTED);
-        } else {
-            btnMyAccount.getStyleClass().remove(STYLE_CLASS_SELECTED);
-            btnSecurity.getStyleClass().remove(STYLE_CLASS_SELECTED);
+        if (selectedButton != null) {
+            selectedButton.getStyleClass().add(STYLE_CLASS_SELECTED);
         }
     }
 
@@ -114,9 +97,5 @@ public class MainSettingController implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
     }
 }

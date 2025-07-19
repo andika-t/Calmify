@@ -17,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="profile.controller.EditProfilController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="700.0" stylesheets="@../../resources/css/Style.css" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="profile.controller.EditProfileController">
    <children>
       <VBox layoutX="10.0" layoutY="10.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -69,21 +69,21 @@
                      </rowConstraints>
                      <children>
                         <Label text="Nama Depan" />
-                        <TextField fx:id="tfFirstName" editable="false" promptText="Nama depan" GridPane.rowIndex="1" />
+                        <TextField fx:id="tfFirstName" promptText="Nama depan" GridPane.rowIndex="1" />
                         <Label text="Nama Belakang" GridPane.columnIndex="1" />
-                        <TextField fx:id="tfLastName" editable="false" promptText="Nama belakang" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="tfLastName" promptText="Nama belakang" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label text="Email" GridPane.rowIndex="2" />
-                        <TextField fx:id="tfEmail" editable="false" promptText="Alamat email" GridPane.rowIndex="3" />
+                        <TextField fx:id="tfEmail" promptText="Alamat email" GridPane.rowIndex="3" />
                         <Label text="Nomor Telepon" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <TextField fx:id="tfPhoneNumber" editable="false" promptText="Nomor telepon" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <TextField fx:id="tfPhoneNumber" promptText="Nomor telepon" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                      </children>
                   </GridPane>
                </children>
             </VBox>
             <HBox prefWidth="200.0" spacing="20.0">
                <children>
-                  <Button id="btn-change" mnemonicParsing="false" onAction="#prosesEditProfile" prefWidth="200.0" stylesheets="@../../resources/css/Style.css" text="Simpan Perubahan" />
-                  <Button mnemonicParsing="false" onAction="#handleCancel" prefWidth="100.0" text="Batal" />
+                  <Button id="btn-change" fx:id="btnSimpan" mnemonicParsing="false" onAction="#prosesEditProfile" prefHeight="25.0" prefWidth="150.0" text="Simpan" />
+                  <Button id="btn-batal" fx:id="btnBatal" mnemonicParsing="false" onAction="#handleBatal" prefHeight="25.0" prefWidth="75.0" text="Batal" />
                </children>
             </HBox>
          </children>

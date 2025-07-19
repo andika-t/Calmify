@@ -4,7 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import authenticator.model.User;
-import authenticator.services.XMLUserService;
+import authenticator.services.UserManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -65,8 +65,8 @@ public class RegisterController implements Initializable {
             return;
         }
 
-        User newUser = new User(firstName, lastName, username, email, password, selectedUserType);
-        boolean isAdded = XMLUserService.addUser(newUser);
+        User newUser = new User(firstName, lastName, username, email, password, selectedUserType, false);
+        boolean isAdded = UserManager.addUser(newUser);
 
         if (isAdded) {
             showAlert(Alert.AlertType.INFORMATION, "Registrasi Berhasil", "Akun untuk '" + username + "' berhasil dibuat.");

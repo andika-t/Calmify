@@ -1,23 +1,33 @@
 package pantauStres.model;
 
 public class Answer {
+    private String username;
     private String id;
     private String waktuTes;
     private String interpretasi;
     private boolean shareData;
     private int skorMood;
-    private int skorTidur;
+    private int skorKualitas;
 
     public Answer() {
     }
 
-    public Answer(String id, String waktuTes, String interpretasi, boolean shareData, int skorMood, int skorTidur) {
+    public Answer(String id, String username, String waktuTes, String interpretasi, boolean shareData, int skorMood, int skorKualitas) {
         this.id = id;
+        this.username = username;
         this.waktuTes = waktuTes;
         this.interpretasi = interpretasi;
         this.shareData = shareData;
         this.skorMood = skorMood;
-        this.skorTidur = skorTidur;
+        this.skorKualitas = skorKualitas;
+    }
+
+    public String getUsername(){
+        return username;
+    }
+
+    public void setUsername(String username){
+        this.username = username;
     }
 
     public String getId() {
@@ -60,12 +70,12 @@ public class Answer {
         this.skorMood = skorMood;
     }
 
-    public int getSkorTidur() {
-        return skorTidur;
+    public int getSkorKualitas() {
+        return skorKualitas;
     }
 
-    public void setSkorTidur(int skorTidur) {
-        this.skorTidur = skorTidur;
+    public void setSkorKualitas(int skorKualitas) {
+        this.skorKualitas = skorKualitas;
     }
 
 }

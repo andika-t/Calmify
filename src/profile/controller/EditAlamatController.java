@@ -1,7 +1,7 @@
 package profile.controller;
 
 import authenticator.model.User;
-import authenticator.services.XMLUserService;
+import authenticator.services.UserManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -20,6 +20,7 @@ public class EditAlamatController {
     private User currentUser;
 
     public void setData(User user) {
+        this.currentUser = user;
         tfNegara.setText(user.getCountry());
         tfKota.setText(user.getCity());
         tfAlamat.setText(user.getAddress());
@@ -27,7 +28,7 @@ public class EditAlamatController {
     }
 
     @FXML
-    private void handleEditAlamat(ActionEvent event) {
+    private void prosesEditAlamat(ActionEvent event) {
         String negara = tfNegara.getText().trim();
         String kota = tfKota.getText().trim();
         String alamat = tfAlamat.getText().trim();
@@ -43,7 +44,7 @@ public class EditAlamatController {
         currentUser.setAddress(alamat);
         currentUser.setPostalCode(kodePos);
 
-        boolean isUpdated = XMLUserService.updateUser(currentUser);
+        boolean isUpdated = UserManager.updateUser(currentUser);
 
         if (isUpdated) {
             showAlert(Alert.AlertType.INFORMATION, "Berhasil", "Alamat berhasil diperbarui.");
@@ -54,7 +55,7 @@ public class EditAlamatController {
     }
 
     @FXML
-    void handleCancel(ActionEvent event) {
+    private void handleBatal(ActionEvent event) {
         closeWindow();
     }
 

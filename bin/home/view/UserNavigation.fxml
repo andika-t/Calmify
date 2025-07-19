@@ -6,153 +6,124 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox id="panel-kiri" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="260.0" styleClass="background-shadow" stylesheets="@../../resources/css/Style.css" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="panel-kiri" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="200.0" stylesheets="@../../resources/css/Style.css" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="home.controller.UserNavigationController">
    <children>
-      <StackPane id="panel-kiri1" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="60.0">
+      <VBox id="panel-kiri2" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0">
          <children>
-            <VBox id="panel-kiri1" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
                <children>
-                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.8;" styleClass="background-shadow">
-                     <image>
-                        <Image url="@../../resources/assets/CALMIFY-LOGO.png" />
-                     </image>
-                     <VBox.margin>
-                        <Insets top="20.0" />
-                     </VBox.margin>
-                  </ImageView>
-                  <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="30.0" spacing="30.0" styleClass="shadow">
+                  <HBox id="-" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="200.0" styleClass="transparent-background">
                      <children>
-                        <Button id="btn-home" fx:id="btnHome" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleHome" prefHeight="30.0" prefWidth="30.0" styleClass="icon-button" />
-                        <Button id="btn-settings" fx:id="btnSetting" layoutX="10.0" layoutY="45.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleSetting" prefHeight="30.0" prefWidth="30.0" styleClass="icon-button" />
+                        <Button id="btn-dashboard" fx:id="btnDashboard" alignment="CENTER_LEFT" graphicTextGap="10" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDashboard" prefHeight="35.0" prefWidth="180.0" text="Dashboard">
+                           <graphic>
+                              <ImageView fitWidth="30" opacity="0.9" preserveRatio="true" smooth="true">
+                                 <image>
+                                    <Image url="@../../resources/assets/dashboard-icon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <styleClass>
+                              <String fx:value="icon-button" />
+                              <String fx:value="button-white-style" />
+                           </styleClass>
+                        </Button>
                      </children>
                      <VBox.margin>
-                        <Insets top="260.0" />
+                        <Insets />
                      </VBox.margin>
-                  </VBox>
+                  </HBox>
+                  <HBox id="-" alignment="CENTER" layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="200.0" styleClass="transparent-background">
+                     <children>
+                        <Button id="-" alignment="CENTER_LEFT" graphicTextGap="10" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handlePantauStres" prefHeight="35.0" prefWidth="180.0" text="Pantau Stres">
+                           <graphic>
+                              <ImageView fitWidth="30" opacity="0.9" preserveRatio="true" smooth="true">
+                                 <image>
+                                    <Image url="@../../resources/assets/lotus-icon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <styleClass>
+                              <String fx:value="icon-button" />
+                              <String fx:value="button-white-style" />
+                           </styleClass>
+                        </Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox id="-" alignment="CENTER" layoutX="10.0" layoutY="50.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="200.0" styleClass="transparent-background">
+                     <children>
+                        <Button id="-" fx:id="btnSelfCare" alignment="CENTER_LEFT" graphicTextGap="10" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleSelfCare" prefHeight="35.0" prefWidth="180.0" text="Daily Self-care">
+                           <graphic>
+                              <ImageView fitWidth="30" opacity="0.9" preserveRatio="true" smooth="true">
+                                 <image>
+                                    <Image url="@../../resources/assets/care-icon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <styleClass>
+                              <String fx:value="icon-button" />
+                              <String fx:value="button-white-style" />
+                           </styleClass>
+                        </Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox id="-" alignment="CENTER" layoutX="10.0" layoutY="90.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="200.0" styleClass="transparent-background">
+                     <children>
+                        <Button id="-" fx:id="btnStudio" alignment="CENTER_LEFT" graphicTextGap="10" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleCalmifyStudio" prefHeight="35.0" prefWidth="180.0" text="Calmify Studio">
+                           <graphic>
+                              <ImageView fitWidth="30" opacity="0.9" preserveRatio="true" smooth="true">
+                                 <image>
+                                    <Image url="@../../resources/assets/studio-icon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <styleClass>
+                              <String fx:value="icon-button" />
+                              <String fx:value="button-white-style" />
+                           </styleClass>
+                        </Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox id="-" alignment="CENTER" layoutX="10.0" layoutY="130.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="200.0" styleClass="transparent-background">
+                     <children>
+                        <Button id="-" fx:id="btnCommunity" alignment="CENTER_LEFT" graphicTextGap="10" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleCommunity" prefHeight="35.0" prefWidth="180.0" text="Community">
+                           <graphic>
+                              <ImageView fitWidth="30" opacity="0.9" preserveRatio="true" smooth="true">
+                                 <image>
+                                    <Image url="@../../resources/assets/community-icon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <styleClass>
+                              <String fx:value="icon-button" />
+                              <String fx:value="button-white-style" />
+                           </styleClass>
+                        </Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
                </children>
             </VBox>
          </children>
-      </StackPane>
-      <HBox id="panel-kiri" alignment="CENTER_LEFT" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="260.0" styleClass="background-shadow">
-         <children>
-            <VBox id="panel-kiri2" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0">
-               <children>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
-                     <children>
-                        <HBox id="-" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="200.0" styleClass="transparent-background">
-                           <children>
-                              <Button id="btn-dashboard" fx:id="btnDashboard" alignment="CENTER_LEFT" graphicTextGap="10" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleDashboard" prefHeight="35.0" prefWidth="180.0" text="Dashboard">
-                                 <graphic>
-                                    <ImageView fitWidth="30" opacity="0.9" preserveRatio="true" smooth="true">
-                                       <image>
-                                          <Image url="@../../resources/assets/dashboard-icon.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                                 <styleClass>
-                                    <String fx:value="icon-button" />
-                                    <String fx:value="button-white-style" />
-                                 </styleClass>
-                              </Button>
-                           </children>
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                        </HBox>
-                        <HBox id="-" alignment="CENTER" layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="200.0" styleClass="transparent-background">
-                           <children>
-                              <Button id="-" alignment="CENTER_LEFT" graphicTextGap="10" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handlePantauStres" prefHeight="35.0" prefWidth="180.0" text="Pantau Stres">
-                                 <graphic>
-                                    <ImageView fitWidth="30" opacity="0.9" preserveRatio="true" smooth="true">
-                                       <image>
-                                          <Image url="@../../resources/assets/lotus-icon.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                                 <styleClass>
-                                    <String fx:value="icon-button" />
-                                    <String fx:value="button-white-style" />
-                                 </styleClass>
-                              </Button>
-                           </children>
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                        </HBox>
-                        <HBox id="-" alignment="CENTER" layoutX="10.0" layoutY="50.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="200.0" styleClass="transparent-background">
-                           <children>
-                              <Button id="-" fx:id="btnSelfCare" alignment="CENTER_LEFT" graphicTextGap="10" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleSelfCare" prefHeight="35.0" prefWidth="180.0" text="Daily Self-care">
-                                 <graphic>
-                                    <ImageView fitWidth="30" opacity="0.9" preserveRatio="true" smooth="true">
-                                       <image>
-                                          <Image url="@../../resources/assets/care-icon.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                                 <styleClass>
-                                    <String fx:value="icon-button" />
-                                    <String fx:value="button-white-style" />
-                                 </styleClass>
-                              </Button>
-                           </children>
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                        </HBox>
-                        <HBox id="-" alignment="CENTER" layoutX="10.0" layoutY="90.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="200.0" styleClass="transparent-background">
-                           <children>
-                              <Button id="-" fx:id="btnStudio" alignment="CENTER_LEFT" graphicTextGap="10" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleCalmifyStudio" prefHeight="35.0" prefWidth="180.0" text="Calmify Studio">
-                                 <graphic>
-                                    <ImageView fitWidth="30" opacity="0.9" preserveRatio="true" smooth="true">
-                                       <image>
-                                          <Image url="@../../resources/assets/studio-icon.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                                 <styleClass>
-                                    <String fx:value="icon-button" />
-                                    <String fx:value="button-white-style" />
-                                 </styleClass>
-                              </Button>
-                           </children>
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                        </HBox>
-                        <HBox id="-" alignment="CENTER" layoutX="10.0" layoutY="130.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="200.0" styleClass="transparent-background">
-                           <children>
-                              <Button id="-" fx:id="btnCommunity" alignment="CENTER_LEFT" graphicTextGap="10" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleCommunity" prefHeight="35.0" prefWidth="180.0" text="Community">
-                                 <graphic>
-                                    <ImageView fitWidth="30" opacity="0.9" preserveRatio="true" smooth="true">
-                                       <image>
-                                          <Image url="@../../resources/assets/community-icon.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                                 <styleClass>
-                                    <String fx:value="icon-button" />
-                                    <String fx:value="button-white-style" />
-                                 </styleClass>
-                              </Button>
-                           </children>
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                        </HBox>
-                     </children>
-                  </VBox>
-               </children>
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-               <padding>
-                  <Insets top="25.0" />
-               </padding>
-            </VBox>
-         </children>
-      </HBox>
+         <padding>
+            <Insets top="25.0" />
+         </padding>
+      </VBox>
    </children>
+   <styleClass>
+      <String fx:value="background-shadow" />
+      <String fx:value="main-background" />
+   </styleClass>
 </HBox>

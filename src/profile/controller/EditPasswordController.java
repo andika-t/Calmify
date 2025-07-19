@@ -1,7 +1,7 @@
 package profile.controller;
 
 import authenticator.model.User;
-import authenticator.services.XMLUserService;
+import authenticator.services.UserManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -14,11 +14,11 @@ public class EditPasswordController {
     @FXML private PasswordField pfOldPassword;
     @FXML private PasswordField pfNewPassword;
     @FXML private PasswordField pfConfirmPassword;
-    @FXML private Button btnSave;
+    @FXML private Button btnSimpan;
 
     private User currentUser;
 
-    public void initData(User user) {
+    public void setData(User user) {
         this.currentUser = user;
     }
 
@@ -45,7 +45,7 @@ public class EditPasswordController {
 
         currentUser.setPassword(newPass);
 
-        if (XMLUserService.updateUser(currentUser)) {
+        if (UserManager.updateUser(currentUser)) {
             showAlert(Alert.AlertType.INFORMATION, "Berhasil", "Password berhasil diubah.");
             closeWindow();
         } else {
@@ -54,12 +54,12 @@ public class EditPasswordController {
     }
 
     @FXML
-    private void handleCancel(ActionEvent event) {
+    private void handleBatal(ActionEvent event) {
         closeWindow();
     }
 
     private void closeWindow() {
-        ((Stage) btnSave.getScene().getWindow()).close();
+        ((Stage) btnSimpan.getScene().getWindow()).close();
     }
 
     private void showAlert(Alert.AlertType type, String title, String message) {

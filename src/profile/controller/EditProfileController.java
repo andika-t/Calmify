@@ -3,7 +3,7 @@ package profile.controller;
 import java.io.File;
 
 import authenticator.model.User;
-import authenticator.services.XMLUserService;
+import authenticator.services.UserManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -15,22 +15,31 @@ import javafx.stage.Stage;
 
 public class EditProfileController {
 
-    @FXML private ImageView profileImageView; 
-    @FXML private TextField tfUsername;
-    @FXML private TextField tfFirstName;
-    @FXML private TextField tfLastName;
-    @FXML private TextField tfEmail;
-    @FXML private TextField tfPhoneNumber;
-    @FXML private Button btnSave;
+    @FXML
+    private ImageView profileImageView;
+    @FXML
+    private TextField tfUsername;
+    @FXML
+    private TextField tfFirstName;
+    @FXML
+    private TextField tfLastName;
+    @FXML
+    private TextField tfEmail;
+    @FXML
+    private TextField tfPhoneNumber;
+    @FXML
+    private Button btnSimpan;
 
     private User currentUser;
 
     public void setData(User user) {
+        this.currentUser = user;
         tfUsername.setText(user.getUsername());
         tfFirstName.setText(user.getFirstName());
         tfLastName.setText(user.getLastName());
         tfEmail.setText(user.getEmail());
         tfPhoneNumber.setText(user.getPhoneNumber());
+        
         String imagePath = user.getProfilePicturePath();
         if (imagePath != null && !imagePath.isEmpty()) {
             File imgFile = new File(imagePath);
@@ -59,7 +68,7 @@ public class EditProfileController {
         currentUser.setEmail(email);
         currentUser.setPhoneNumber(phoneNumber);
 
-        boolean isUpdated = XMLUserService.updateUser(currentUser);
+        boolean isUpdated = UserManager.updateUser(currentUser);
 
         if (isUpdated) {
             showAlert(Alert.AlertType.INFORMATION, "Berhasil", "Profil berhasil diperbarui.");
@@ -70,12 +79,12 @@ public class EditProfileController {
     }
 
     @FXML
-    private void handleCancel(ActionEvent event) {
+    private void handleBatal(ActionEvent event) {
         closeWindow();
     }
 
     private void closeWindow() {
-        ((Stage) btnSave.getScene().getWindow()).close();
+        ((Stage) btnSimpan.getScene().getWindow()).close();
     }
 
     private void showAlert(Alert.AlertType type, String title, String message) {
