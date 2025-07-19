@@ -42,7 +42,6 @@ public class ProfileController implements Initializable {
             System.err.println("User yang dikirim ke ProfileController adalah null!");
             return;
         }
-        // Menampilkan data teks
         tfUsername.setText("@" + getDisplayString(user.getUsername()));
         tfFirstName.setText(getDisplayString(user.getFirstName()));
         tfLastName.setText(getDisplayString(user.getLastName()));
