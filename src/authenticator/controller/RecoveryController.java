@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Font;
-import util.SceneSwitcher;
+import javafx.stage.Stage;
 
 import java.util.List;
 
@@ -28,8 +28,7 @@ public class RecoveryController {
     @FXML
     private void handleDoneAction(ActionEvent event) {
         try {
-            SceneSwitcher pindahScene = new SceneSwitcher();
-            pindahScene.switchScene("/authenticator/view/LoginView");
+            ((Stage) btnDone.getScene().getWindow()).close();
         } catch (Exception e) {
             e.printStackTrace();
         }

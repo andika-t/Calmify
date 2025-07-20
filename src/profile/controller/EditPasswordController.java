@@ -42,7 +42,7 @@ public class EditPasswordController {
             showAlert(Alert.AlertType.ERROR, "Verifikasi Gagal", "Password baru dan konfirmasi tidak cocok.");
             return;
         }
-
+        System.out.println("");
         currentUser.setPassword(newPass);
 
         if (UserManager.updateUser(currentUser)) {

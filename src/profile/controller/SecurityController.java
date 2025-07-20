@@ -33,6 +33,7 @@ public class SecurityController {
             Parent root = loader.load();
             EditPasswordController controller = loader.getController();
             controller.setData(currentUser);
+            System.out.println("Ganti password untuk: "+currentUser.getUsername());
             Stage stage = createPopupStage("Ubah Password", root);
             stage.showAndWait();
         } catch (IOException e) {

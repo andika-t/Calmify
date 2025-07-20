@@ -1,1 +1,47 @@
-<?xml version="1.0" ?><user-data><users><user><firstName>akundemo</firstName><lastName>akundemo</lastName><username>akundemo</username><email>akundemo</email><password>akundemo</password><userType>Pengguna Umum</userType><phoneNumber></phoneNumber><bio></bio><totalPoints>0</totalPoints><activityHistory></activityHistory><recoveryCodes><string>V73VLL3L</string><string>72LFL97U</string></recoveryCodes><shareData>false</shareData><address></address><country></country><city></city><postalCode></postalCode></user><user><firstName>psikolog</firstName><lastName>psikolog</lastName><username>psikolog</username><email>psikolog</email><password>psikolog</password><userType>Psikolog</userType><phoneNumber></phoneNumber><bio></bio><totalPoints>0</totalPoints><activityHistory></activityHistory><recoveryCodes><string>MRO9CPVD</string><string>UFALJGJ3</string></recoveryCodes><shareData>false</shareData><address></address><country></country><city></city><postalCode></postalCode></user></users></user-data>
+<?xml version="1.0" ?>
+<user-data>
+    <users>
+        <user>
+            <firstName>akundemo</firstName>
+            <lastName>akundemo</lastName>
+            <username>akundemo</username>
+            <email>akundemo</email>
+            <password>123456</password>
+            <userType>Pengguna Umum</userType>
+            <phoneNumber></phoneNumber>
+            <bio></bio>
+            <totalPoints>0</totalPoints>
+            <activityHistory></activityHistory>
+            <recoveryCodes>
+                <string>V73VLL3L</string>
+                <string>72LFL97U</string>
+            </recoveryCodes>
+            <shareData>false</shareData>
+            <address></address>
+            <country></country>
+            <city></city>
+            <postalCode></postalCode>
+        </user>
+        <user>
+            <firstName>psikolog</firstName>
+            <lastName>psikolog</lastName>
+            <username>psikolog</username>
+            <email>psikolog</email>
+            <password>psikolog</password>
+            <userType>Psikolog</userType>
+            <phoneNumber></phoneNumber>
+            <bio></bio>
+            <totalPoints>0</totalPoints>
+            <activityHistory></activityHistory>
+            <recoveryCodes>
+                <string>MRO9CPVD</string>
+                <string>UFALJGJ3</string>
+            </recoveryCodes>
+            <shareData>false</shareData>
+            <address></address>
+            <country></country>
+            <city></city>
+            <postalCode></postalCode>
+        </user>
+    </users>
+</user-data>

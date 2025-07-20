@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="500.0" spacing="15.0" style="-fx-background-color: #ffffff; -fx-border-color: #e5e7eb; -fx-border-width: 1; -fx-border-radius: 8;" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="authenticator.controller.RecoveryController">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="500.0" spacing="15.0" style="-fx-background-color: #ffffff; -fx-border-color: #e5e7eb; -fx-border-width: 1; -fx-border-radius: 8;" stylesheets="@../../resources/css/Style.css" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="authenticator.controller.RecoveryController">
    <padding>
       <Insets bottom="20.0" left="25.0" right="25.0" top="20.0" />
    </padding>
@@ -22,6 +22,6 @@
       <Separator prefWidth="200.0" />
       <FlowPane fx:id="codesPane" alignment="CENTER" hgap="15.0" prefWrapLength="400.0" vgap="15.0" />
       <Separator prefWidth="200.0" />
-      <Button fx:id="btnDone" mnemonicParsing="false" onAction="#handleDoneAction" style="-fx-background-color: #222831; -fx-text-fill: white;" text="Selesai, Saya Sudah Menyimpan Kode" />
+      <Button id="btn-change" fx:id="btnDone" mnemonicParsing="false" onAction="#handleDoneAction" text="Selesai, Saya Sudah Menyimpan Kode" />
    </children>
 </VBox>
