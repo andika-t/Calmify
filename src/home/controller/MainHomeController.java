@@ -17,6 +17,8 @@ import pantauStres.controller.UserAssessmentController;
 import pantauStres.model.Answer;
 import pantauStres.services.AnswerModel;
 import profile.controller.MainSettingController;
+import selfCare.controller.SCPsychologistViewController;
+import selfCare.controller.SCUserViewController;
 import util.SceneSwitcher;
 
 import java.io.IOException;
@@ -135,9 +137,36 @@ public class MainHomeController implements Initializable {
                     "Data pengguna tidak ditemukan. Silakan coba login ulang.");
             return;
         }
+
         mainPane.setLeft(panelNavigasiKiri);
         mainPane.setRight(panelKanan);
-        showAlert(AlertType.INFORMATION,"TIDAK TERSEDIA","Fitur dalam pengembangan");
+
+        String fxmlPath;
+        boolean isUserView = "Pengguna Umum".equalsIgnoreCase(currentUser.getUserType());
+
+        if (isUserView) {
+            fxmlPath = "/selfCare/view/SCUserView.fxml";
+        } else {
+            fxmlPath = "/selfCare/view/SCPsychologistView.fxml";
+        }
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Pane scene = loader.load();
+            if (isUserView) {
+                SCUserViewController controller = loader.getController();
+                controller.setData(currentUser);
+            } else {
+                SCPsychologistViewController controller = loader.getController();
+                controller.initialize();
+            }
+            mainPane.setCenter(scene);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Gunakan helper method yang sudah ada untuk menampilkan error
+            showAlert(Alert.AlertType.ERROR, "Gagal Memuat", "Tidak dapat memuat halaman: " + fxmlPath);
+        }
     }
 
     @FXML
@@ -152,7 +181,7 @@ public class MainHomeController implements Initializable {
     @FXML
     public void handleCommunity(ActionEvent event) {
         mainPane.setLeft(panelNavigasiKiri);
-        showAlert(AlertType.INFORMATION,"TIDAK TERSEDIA","Fitur dalam pengembangan");
+        showAlert(AlertType.INFORMATION, "TIDAK TERSEDIA", "Fitur dalam pengembangan");
     }
 
     @FXML
@@ -217,6 +246,26 @@ public class MainHomeController implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText(content);
         alert.showAndWait();
+    }
+
+    private void loadSelfCareView() {
+        if (currentUser == null)
+            return;
+        String fxmlPath = "Pengguna Umum".equalsIgnoreCase(currentUser.getUserType())
+                ? "/selfCare/view/SCUserView.fxml"
+                : "/selfCare/view/SCPsychologistView.fxml";
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Node view = loader.load();
+            if ("Pengguna Umum".equalsIgnoreCase(currentUser.getUserType())) {
+                SCUserViewController controller = loader.getController();
+                controller.setData(currentUser);
+            }
+            mainPane.setCenter(view);
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Gagal Memuat", "Tidak dapat menemukan file: " + fxmlPath);
+        }
     }
 
     public BorderPane getMainPane() {

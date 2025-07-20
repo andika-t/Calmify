@@ -1,115 +1,133 @@
 package selfCare.services;
 
-import selfCare.model.GeneralUser;
-import selfCare.model.SelfCareMission;
+import selfCare.model.AssignedMission;
+import selfCare.model.PointHistory;
 import selfCare.model.SelfCareUser;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class SelfCareUserService implements ISelfCareUserService {
-    private static ISelfCareUserService instance;
+    private static SelfCareUserService instance;
     private final IDataManager dataManager;
-    private final MainAccountService mainAccountService;
-    private List<SelfCareUser> selfCareUsers;
+    private final Map<String, SelfCareUser> users;
 
     private SelfCareUserService(IDataManager dataManager) {
         this.dataManager = dataManager;
-        this.mainAccountService = MainAccountService.getInstance();
-        this.selfCareUsers = this.dataManager.loadUsers();
+        this.users = loadData();
     }
 
-    public static ISelfCareUserService getInstance() {
+    public static synchronized SelfCareUserService getInstance() {
         if (instance == null) {
-            IDataManager dataManager = new XmlDataManager("data/selfcare_users.xml");
-            instance = new SelfCareUserService(dataManager);
+            instance = new SelfCareUserService(new XmlDataManager("data/selfCareData.xml"));
         }
         return instance;
     }
 
-    private void save() {
-        dataManager.saveUsers(selfCareUsers);
+    private Map<String, SelfCareUser> loadData() {
+        return dataManager.loadUsers().stream()
+                .collect(Collectors.toMap(SelfCareUser::getUsername, Function.identity()));
     }
-    
-    @Override
-    public SelfCareUser getOrCreateUser(String username, String name) {
-        return selfCareUsers.stream()
-            .filter(u -> u.getUsername().equals(username))
-            .findFirst()
-            .orElseGet(() -> {
-                SelfCareUser newUser = new SelfCareUser(username, name);
-                selfCareUsers.add(newUser);
-                save();
-                return newUser;
-            });
+
+    private void saveData() {
+        dataManager.saveUsers(new ArrayList<>(users.values()));
     }
-    
+
     @Override
     public List<SelfCareUser> getSharedDataUsers() {
-        Set<String> generalUsernames = mainAccountService.getAllGeneralUsers().stream()
-            .map(GeneralUser::getUsername)
-            .collect(Collectors.toSet());
-
-        return selfCareUsers.stream()
-            .filter(scUser -> generalUsernames.contains(scUser.getUsername()) && scUser.isShareData())
-            .collect(Collectors.toList());
+        return users.values().stream()
+                .filter(SelfCareUser::isShareData)
+                .collect(Collectors.toList());
     }
-    
+
     @Override
-    public boolean updateUser(SelfCareUser updatedUser) {
-        for (int i = 0; i < selfCareUsers.size(); i++) {
-            if (selfCareUsers.get(i).getUsername().equals(updatedUser.getUsername())) {
-                selfCareUsers.set(i, updatedUser);
-                save();
-                return true;
-            }
+    public SelfCareUser getOrCreateUser(String username, String name, String userType) {
+        return users.computeIfAbsent(username, u -> {
+            SelfCareUser newUser = new SelfCareUser(u, name, userType);
+            saveData();
+            return newUser;
+        });
+    }
+
+    @Override
+    public boolean updateUser(SelfCareUser user) {
+        if (user == null || !users.containsKey(user.getUsername()))
+            return false;
+        users.put(user.getUsername(), user);
+        saveData();
+        return true;
+    }
+
+    @Override
+    public boolean deleteUserSelfCareData(String username) {
+        if (users.remove(username) != null) {
+            saveData();
+            return true;
         }
         return false;
     }
 
     @Override
-    public boolean deleteUserSelfCareData(String username) {
-        boolean removed = selfCareUsers.removeIf(user -> user.getUsername().equals(username));
-        if (removed) save();
-        return removed;
-    }
-
-    @Override
     public Optional<SelfCareUser> addPointsToUser(String username, int points, String activityName) {
-        return selfCareUsers.stream()
-            .filter(u -> u.getUsername().equals(username))
-            .findFirst()
-            .map(user -> {
-                user.addPoints(points, activityName);
-                updateUser(user);
-                return user;
-            });
+        SelfCareUser user = users.get(username);
+        if (user != null) {
+            user.addPoints(points);
+            user.getPointHistory().add(new PointHistory(activityName, points));
+            saveData();
+            return Optional.of(user);
+        }
+        return Optional.empty();
     }
 
     @Override
-    public boolean assignMissionToUser(String username, String activityId, String activityName) {
-        return selfCareUsers.stream()
-            .filter(u -> u.getUsername().equals(username))
-            .findFirst()
-            .map(user -> {
-                user.addAssignedMission(new SelfCareMission(activityId, activityName));
-                return updateUser(user);
-            }).orElse(false);
+public boolean assignMissionToUser(String username, String activityName) {
+    SelfCareUser user = users.get(username);
+    if (user == null) {
+        return false; // User tidak ditemukan
     }
 
+    // === PERBAIKAN DIMULAI DI SINI ===
+    List<AssignedMission> missions = user.getAssignedMissions();
+
+    // Periksa apakah list-nya null sebelum digunakan
+    if (missions == null) {
+        // Ini adalah kondisi data yang tidak diharapkan.
+        // Kita bisa catat sebagai error dan kembalikan false agar aplikasi tidak crash.
+        System.err.println("FATAL: List 'assignedMissions' untuk user '" + username + "' adalah null!");
+        return false;
+    }
+
+    // Jika tidak null, baru tambahkan misi
+    missions.add(new AssignedMission(activityName));
+    // === PERBAIKAN SELESAI ===
+    
+    saveData();
+    return true;
+}
+
+
     @Override
-    public Optional<SelfCareUser> completeAssignedMission(String username, String missionId) {
-        return selfCareUsers.stream()
-            .filter(u -> u.getUsername().equals(username))
-            .findFirst()
-            .flatMap(user -> user.getAssignedMissions().stream()
-                .filter(m -> m.getId().equals(missionId) && !m.isCompleted())
-                .findFirst()
-                .flatMap(mission -> {
-                    mission.markAsCompleted();
-                    return addPointsToUser(username, 25, "Misi Selesai: " + mission.getActivityName());
-                })
-            );
+    public Optional<SelfCareUser> completeAssignedMission(String username, String missionName) {
+        SelfCareUser user = users.get(username);
+        if (user == null)
+            return Optional.empty();
+
+        Optional<AssignedMission> missionOpt = user.getAssignedMissions().stream()
+                .filter(m -> m.getMissionName().equals(missionName)
+                        && m.getStatus() == AssignedMission.MissionStatus.DITUGASKAN)
+                .findFirst();
+
+        if (missionOpt.isPresent()) {
+            AssignedMission mission = missionOpt.get();
+            mission.setStatus(AssignedMission.MissionStatus.SELESAI);
+            mission.setCompletionDate(LocalDate.now());
+            addPointsToUser(username, 50, "Misi Selesai: " + missionName);
+            return Optional.of(user);
+        }
+        return Optional.empty();
     }
 }

@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane prefHeight="660.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="selfCare.controller.SCPsychologistViewController">
+<StackPane prefHeight="660.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="selfCare.controller.SCPsychologistViewController">
    <children>
       <VBox spacing="10.0" style="-fx-padding: 20;">
          <children>
@@ -34,8 +34,8 @@
                            <children>
                               <ComboBox fx:id="assignUserComboBox" prefWidth="150.0" promptText="Pilih Pengguna" />
                               <ComboBox fx:id="assignActivityComboBox" prefWidth="150.0" promptText="Pilih Aktivitas" />
-                              <Button fx:id="assignMissionButton" mnemonicParsing="false" onAction="#handleAssignMission" text="Tugaskan" />
-                              <Button fx:id="refreshButton" mnemonicParsing="false" onAction="#refreshUI" text="Refresh" />
+                              <Button fx:id="assignMissionButton" onAction="#handleAssignMission" text="Tugaskan" />
+                              <Button fx:id="refreshButton" onAction="#refreshUI" text="Refresh" />
                            </children>
                            <VBox.margin>
                               <Insets top="5.0" />
@@ -45,7 +45,7 @@
                   </VBox>
                   <VBox fx:id="leaderboardContainer" alignment="TOP_LEFT" prefWidth="250.0" spacing="5.0" style="-fx-background-color: #f0f0f0; -fx-padding: 10; -fx-border-color: #ccc; -fx-border-radius: 5;">
                      <children>
-                        <Label text="Papan Peringkat" style="-fx-font-weight: bold; -fx-font-size: 16px;" />
+                        <Label style="-fx-font-weight: bold; -fx-font-size: 16px;" text="Papan Peringkat" />
                      </children>
                   </VBox>
                </children>
@@ -84,7 +84,7 @@
                                  <children>
                                     <Label minWidth="80.0" text="Edit Nama:" />
                                     <TextField fx:id="userNameField" HBox.hgrow="ALWAYS" />
-                                    <Button onAction="#handleUpdateUser" text="Simpan" />
+                                    <Button fx:id="saveNameButton" text="Simpan" />
                                  </children>
                                  <VBox.margin>
                                     <Insets top="5.0" />
