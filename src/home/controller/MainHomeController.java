@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -27,12 +28,18 @@ import java.util.stream.Collectors;
 
 public class MainHomeController implements Initializable {
 
-    @FXML private BorderPane mainPane;
-    @FXML private VBox panelKanan;
-    @FXML private Label lnamaLengkap;
-    @FXML private Label lusername;
-    @FXML private Label ltipePengguna;
-    @FXML private Label labelPoint;
+    @FXML
+    private BorderPane mainPane;
+    @FXML
+    private VBox panelKanan;
+    @FXML
+    private Label lnamaLengkap;
+    @FXML
+    private Label lusername;
+    @FXML
+    private Label ltipePengguna;
+    @FXML
+    private Label labelPoint;
 
     private User currentUser;
     private AnswerModel answerModel = new AnswerModel();
@@ -49,14 +56,15 @@ public class MainHomeController implements Initializable {
         lnamaLengkap.setText(user.getFirstName() + " " + user.getLastName());
         lusername.setText("@" + user.getUsername());
         ltipePengguna.setText(user.getUserType());
-        
+
         muatPanelNavigasiSesuaiTipePengguna();
         handleHome(null);
         refreshUIData();
     }
 
     private void muatPanelNavigasiSesuaiTipePengguna() {
-        if (currentUser == null) return;
+        if (currentUser == null)
+            return;
 
         String fxmlPath = "";
         String userType = currentUser.getUserType();
@@ -94,7 +102,7 @@ public class MainHomeController implements Initializable {
         mainPane.setRight(panelKanan);
         mainPane.setCenter(null);
     }
-    
+
     @FXML
     public void handlePantauStres(ActionEvent event) {
         mainPane.setLeft(panelNavigasiKiri);
@@ -121,8 +129,15 @@ public class MainHomeController implements Initializable {
 
     @FXML
     public void handleSelfCare(ActionEvent event) {
+        if (currentUser == null) {
+            System.err.println("FATAL ERROR: currentUser di MainHomeController adalah null!");
+            showAlert(Alert.AlertType.ERROR, "Error Kritis",
+                    "Data pengguna tidak ditemukan. Silakan coba login ulang.");
+            return;
+        }
         mainPane.setLeft(panelNavigasiKiri);
-        muatTampilanKeTengah("/selfCare/view/DashboardView.fxml");
+        mainPane.setRight(panelKanan);
+        showAlert(AlertType.INFORMATION,"TIDAK TERSEDIA","Fitur dalam pengembangan");
     }
 
     @FXML
@@ -137,12 +152,12 @@ public class MainHomeController implements Initializable {
     @FXML
     public void handleCommunity(ActionEvent event) {
         mainPane.setLeft(panelNavigasiKiri);
-        muatTampilanKeTengah("/community/view/MainView.fxml");
+        showAlert(AlertType.INFORMATION,"TIDAK TERSEDIA","Fitur dalam pengembangan");
     }
 
     @FXML
     public void handleSetting(ActionEvent event) {
-        mainPane.setLeft(null); 
+        mainPane.setLeft(null);
         mainPane.setRight(panelKanan);
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/profile/view/MainSettingView.fxml"));

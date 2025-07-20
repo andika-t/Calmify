@@ -115,9 +115,12 @@ public class UserManager {
         User userToDelete = userToDeleteOpt.get();
 
         if ("Psikolog".equalsIgnoreCase(userToDelete.getUserType())) {
-            userToDelete.setPassword(null);
-            System.out.println("Akun psikolog '" + username + "' telah dinonaktifkan, data tetap tersimpan.");
-            return saveDatabase(data);
+            boolean removed = data.getUsers().removeIf(user -> user.getUsername().equalsIgnoreCase(username));
+            if(removed){
+                System.out.println("Akun psikolog '" + username + "' telah dinonaktifkan, data tetap tersimpan.");
+                return saveDatabase(data);
+            }
+            return false;
         } else {
             AnswerModel answerModel = new AnswerModel();
             answerModel.deleteAnswersByUsername(username);

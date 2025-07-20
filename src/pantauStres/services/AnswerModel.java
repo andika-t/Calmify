@@ -11,7 +11,11 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Optional;
 
 public class AnswerModel {
     private static final String FILE_PATH = "data/answers.xml";
@@ -84,4 +88,34 @@ public class AnswerModel {
             System.err.println("Perhatian: Gagal menulis data jawaban. " + e.getMessage());
         }
     }
+
+    public boolean hasUserTestedToday(String username) {
+    ArrayList<Answer> allAnswers = getAnswers();
+    Optional<Answer> lastTest = allAnswers.stream()
+            .filter(answer -> username.equals(answer.getUsername()))
+            .max(Comparator.comparing(Answer::getWaktuTes));
+
+    if (!lastTest.isPresent()) {
+        return false;
+    }
+
+    try {
+        // 3. Ambil String waktu dari tes terakhir
+        String lastTestString = lastTest.get().getWaktuTes();
+
+        // 4. Ambil 10 karakter pertama ("YYYY-MM-DD") dan ubah menjadi objek tanggal
+        LocalDate lastTestDate = LocalDate.parse(lastTestString.substring(0, 10));
+        
+        LocalDate todayDate = LocalDate.now();
+
+        // 5. Bandingkan tanggalnya
+        return lastTestDate.isEqual(todayDate);
+
+    } catch (DateTimeParseException | StringIndexOutOfBoundsException e) {
+        // Ini akan menangani jika format string di XML rusak atau tidak sesuai
+        System.err.println("Format tanggal tidak valid pada data tes terakhir: " + e.getMessage());
+        return false; // Anggap saja boleh tes jika data lama rusak
+    }
+}
+
 }

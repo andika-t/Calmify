@@ -72,7 +72,7 @@ public class EditUsernameController {
                 showAlert(Alert.AlertType.ERROR, "Gagal", "Terjadi kesalahan saat menyimpan perubahan.");
             }
         }
-        Stage stage = (Stage) btnSave.getScene().getWindow();stage.close();
+        ((Stage) btnSave.getScene().getWindow()).close();
     }
 
 

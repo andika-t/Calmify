@@ -84,22 +84,19 @@ public class QuestionnaireController {
         else
             interpretasi = Score.TINGGI.getDisplayValue();
 
-        LocalDateTime waktuTes = LocalDateTime.now();
+        LocalDateTime waktuTesObjek = LocalDateTime.now();
+        String waktuTesString = waktuTesObjek.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         String idJawaban = currentUser.getUsername() + "_"
-                + waktuTes.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
-        String waktuTesString = waktuTes.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-
+                + waktuTesObjek.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
         Answer newAnswer = new Answer(idJawaban, currentUser.getUsername(), waktuTesString, interpretasi, false,
                 totalSkorMood, totalSkorTidur);
 
         answerModel.addAnswer(newAnswer);
-
         if (mainController != null) {
             mainController.refreshUIData();
         }
 
         new Alert(Alert.AlertType.INFORMATION, "Hasil asesmen Anda telah berhasil disimpan.").showAndWait();
-
         kembaliKeHalamanUtama();
     }
 
@@ -156,7 +153,7 @@ public class QuestionnaireController {
                 break;
             default:
                 System.err.println("Tombol rating tidak dikenal: " + buttonId);
-                return; 
+                return;
         }
         userAnswers.put(currentQuestionIndex, score);
         clearRatingSelection();

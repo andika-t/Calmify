@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane prefHeight="660.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="selfCare.controller.SCPsychologistViewController">
+   <children>
+      <VBox spacing="10.0" style="-fx-padding: 20;">
+         <children>
+            <Label text="Pemantauan Aktivitas Self-Care">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <HBox spacing="10.0">
+               <children>
+                  <VBox HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label text="Tugaskan Misi kepada Pengguna">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                           <children>
+                              <ComboBox fx:id="assignUserComboBox" prefWidth="150.0" promptText="Pilih Pengguna" />
+                              <ComboBox fx:id="assignActivityComboBox" prefWidth="150.0" promptText="Pilih Aktivitas" />
+                              <Button fx:id="assignMissionButton" mnemonicParsing="false" onAction="#handleAssignMission" text="Tugaskan" />
+                              <Button fx:id="refreshButton" mnemonicParsing="false" onAction="#refreshUI" text="Refresh" />
+                           </children>
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox fx:id="leaderboardContainer" alignment="TOP_LEFT" prefWidth="250.0" spacing="5.0" style="-fx-background-color: #f0f0f0; -fx-padding: 10; -fx-border-color: #ccc; -fx-border-radius: 5;">
+                     <children>
+                        <Label text="Papan Peringkat" style="-fx-font-weight: bold; -fx-font-size: 16px;" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox spacing="20.0" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <children>
+                  <VBox HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label text="Daftar Pengguna (yang Berbagi Data)" />
+                        <TableView fx:id="userTable" VBox.vgrow="ALWAYS">
+                           <columns>
+                              <TableColumn fx:id="colUserId" text="ID Pengguna" />
+                              <TableColumn fx:id="colUserName" text="Nama" />
+                              <TableColumn fx:id="colUserPoints" text="Poin" />
+                              <TableColumn fx:id="colUserLevel" text="Level/Badge" />
+                           </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                     </children>
+                  </VBox>
+                  <VBox prefWidth="400.0" spacing="10.0">
+                     <children>
+                        <Label text="Detail Pengguna Terpilih" />
+                        <VBox spacing="5.0" style="-fx-border-color: #ccc; -fx-border-radius: 5; -fx-padding: 10;">
+                           <children>
+                              <HBox><Label minWidth="80.0" text="ID:" /><Label fx:id="detailUserIdLabel" text="-" /></HBox>
+                              <HBox><Label minWidth="80.0" text="Nama:" /><Label fx:id="detailUserNameLabel" text="-" /></HBox>
+                              <HBox><Label minWidth="80.0" text="Total Poin:" /><Label fx:id="detailUserPointsLabel" text="-" /></HBox>
+                              <HBox><Label minWidth="80.0" text="Level:" /><Label fx:id="detailUserLevelLabel" text="-" /></HBox>
+                              <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                 <children>
+                                    <Label minWidth="80.0" text="Edit Nama:" />
+                                    <TextField fx:id="userNameField" HBox.hgrow="ALWAYS" />
+                                    <Button onAction="#handleUpdateUser" text="Simpan" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="5.0" />
+                                 </VBox.margin>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <Label text="Riwayat Poin" />
+                        <TableView fx:id="historyTable" prefHeight="100.0">
+                           <columns>
+                              <TableColumn fx:id="colHistoryActivity" text="Aktivitas" />
+                              <TableColumn fx:id="colHistoryPoints" text="Poin" />
+                              <TableColumn fx:id="colHistoryTimestamp" text="Waktu" />
+                           </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                        <Label text="Misi yang Ditugaskan" />
+                        <TableView fx:id="assignedMissionsTable" VBox.vgrow="ALWAYS">
+                           <columns>
+                              <TableColumn fx:id="colAssignedMissionName" text="Misi" />
+                              <TableColumn fx:id="colAssignedMissionAssignedDate" text="Ditugaskan" />
+                              <TableColumn fx:id="colAssignedMissionStatus" text="Status" />
+                              <TableColumn fx:id="colAssignedMissionCompletionDate" text="Selesai" />
+                           </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                        <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                           <children>
+                              <Button fx:id="deleteButton" onAction="#handleDeleteUser" style="-fx-text-fill: red;" text="Hapus Data Self-Care" />
+                              <Button fx:id="clearButton" onAction="#handleClearInput" text="Bersihkan Pilihan" />
+                           </children>
+                           <padding>
+                              <Insets top="10.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</StackPane>
