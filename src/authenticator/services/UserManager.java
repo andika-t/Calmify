@@ -80,16 +80,27 @@ public class UserManager {
     }
 
     public static boolean updateUser(User updatedUser) {
-        if (updatedUser == null || updatedUser.getUsername() == null || updatedUser.getUsername().isEmpty()) {
+        if (updatedUser == null || updatedUser.getUsername() == null) {
+            System.err.println("DEBUG: updateUser failed - updatedUser or username is null.");
             return false;
         }
 
         UserDataXML data = loadData();
+        if (data == null || data.getUsers() == null) {
+            System.err.println("DEBUG: updateUser failed - Failed to load UserDataXML or users list is null.");
+            return false;
+        }
         List<User> users = data.getUsers();
 
         boolean found = false;
+        System.out.println("DEBUG: Users loaded from data:");
+        for (User u : users) {
+            System.out.println("  - " + u.getUsername());
+        }
         for (int i = 0; i < users.size(); i++) {
             if (users.get(i).getUsername().equalsIgnoreCase(updatedUser.getUsername())) {
+                System.out.println(
+                        "DEBUG: User '" + updatedUser.getUsername() + "' found at index " + i + ". Updating...");
                 users.set(i, updatedUser);
                 found = true;
                 break;
@@ -97,10 +108,66 @@ public class UserManager {
         }
 
         if (found) {
-            return saveDatabase(data);
+            System.out.println("DEBUG: User found and updated in memory. Attempting to save database...");
+            boolean saveResult = saveDatabase(data);
+            System.out.println("DEBUG: saveDatabase returned: " + saveResult);
+            return saveResult;
+        } else {
+            System.err.println(
+                    "DEBUG: updateUser failed - User '" + updatedUser.getUsername() + "' not found in loaded data.");
+            return false;
         }
-        return false;
     }
+
+    public static boolean updateUsername(String oldUsername, String newUsername, String password) {
+        if (oldUsername == null || newUsername == null || password == null ||
+            oldUsername.trim().isEmpty() || newUsername.trim().isEmpty() || password.trim().isEmpty()) {
+            System.err.println("DEBUG: updateUsername failed - input parameters cannot be null or empty.");
+            return false;
+        }
+
+        UserDataXML data = loadData();
+        if (data == null || data.getUsers() == null) {
+            System.err.println("DEBUG: updateUsername failed - Failed to load UserDataXML or users list is null.");
+            return false;
+        }
+
+        List<User> users = data.getUsers();
+        User userToUpdate = null;
+        int userIndex = -1;
+
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getUsername().equalsIgnoreCase(oldUsername)) {
+                userToUpdate = users.get(i);
+                userIndex = i;
+                break;
+            }
+        }
+
+        if (userToUpdate == null) {
+            System.err.println("updateUsername failed - User with old username '" + oldUsername + "' not found.");
+            return false;
+        }
+        if (!userToUpdate.getPassword().equals(password)) {
+            System.err.println("updateUsername failed - Incorrect password for user '" + oldUsername + "'.");
+            return false;
+        }
+
+        if (!newUsername.equalsIgnoreCase(oldUsername)) {
+            for (User user : users) {
+                if (user.getUsername().equalsIgnoreCase(newUsername)) {
+                    System.err.println("DEBUG: updateUsername failed - New username '" + newUsername + "' already exists.");
+                    return false;
+                }
+            }
+        }
+
+        userToUpdate.setUsername(newUsername);
+        users.set(userIndex, userToUpdate);
+        System.out.println("DEBUG: updateUsername - User '" + oldUsername + "' username changed to '" + newUsername + "'. Attempting to save...");
+        return saveDatabase(data);
+    }
+
 
     public static boolean deleteUser(String username) {
         UserDataXML data = loadData();
@@ -116,7 +183,7 @@ public class UserManager {
 
         if ("Psikolog".equalsIgnoreCase(userToDelete.getUserType())) {
             boolean removed = data.getUsers().removeIf(user -> user.getUsername().equalsIgnoreCase(username));
-            if(removed){
+            if (removed) {
                 System.out.println("Akun psikolog '" + username + "' telah dinonaktifkan, data tetap tersimpan.");
                 return saveDatabase(data);
             }
@@ -153,5 +220,9 @@ public class UserManager {
     public static boolean getShareData(String username) {
         Optional<User> userOpt = findUserByUsername(username);
         return userOpt.map(User::isShareData).orElse(false);
+    }
+
+    public static List<User> getAllUsers() {
+        return loadData().getUsers();
     }
 }

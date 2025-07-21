@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pantauStres.controller.HistoryChartController">
+   <children>
+      <VBox alignment="TOP_CENTER" spacing="15.0" style="-fx-background-color: #ffffff; -fx-padding: 25;">
+         <children>
+            <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Riwayat Skor Asesmen Anda" />
+            <LineChart fx:id="lineChart" animated="false" legendVisible="true" prefHeight="450.0" title="Rata-Rata Skor Harian" VBox.vgrow="ALWAYS">
+               <xAxis>
+                  <CategoryAxis label="Tanggal Tes" side="BOTTOM" fx:id="xAxis" />
+               </xAxis>
+               <yAxis>
+                  <NumberAxis fx:id="yAxis" label="Rata-Rata Skor" side="LEFT" />
+               </yAxis>
+            </LineChart>
+            <HBox alignment="CENTER_LEFT" spacing="20.0" style="-fx-padding: 10 0 10 0;">
+               <children>
+                  <Label style="-fx-font-weight: bold;" text="Tampilkan Data:" />
+                  <CheckBox fx:id="cbMood" onAction="#handleFilterChange" selected="true" text="Skor Mood" />
+                  <CheckBox fx:id="cbSleep" onAction="#handleFilterChange" selected="true" text="Skor Tidur" />
+                  <HBox alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Button onAction="#handleRefreshButton" text="Refresh Grafik" />
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <VBox style="-fx-border-color: #e0e0e0; -fx-border-width: 1 0 0 0; -fx-padding: 15 5 5 5;">
+               <children>
+                  <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #34495e;" text="Berbagi Data dengan Psikolog" />
+                  <Label style="-fx-font-size: 12px; -fx-text-fill: #7f8c8d;" text="Dengan mencentang kotak di bawah, Anda mengizinkan psikolog yang terhubung dengan Anda untuk melihat riwayat data asesmen ini untuk keperluan konsultasi." textAlignment="LEFT" wrapText="true" />
+                  <CheckBox fx:id="cbBagikan" onAction="#handleShareConsent" text="Ya, saya mengizinkan data saya untuk dibagikan." VBox.vgrow="NEVER">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </CheckBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</StackPane>

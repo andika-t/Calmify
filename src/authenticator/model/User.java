@@ -24,7 +24,10 @@ public class User {
     private String city;
     private String postalCode;
 
-    public User() {
+    public User(String username, String firstname, String lastname) {
+        this.username = username;
+        this.firstName = firstname;
+        this.lastName = lastname;
     }
 
     public User(String firstName, String lastName, String username, String email, String password, String userType,
@@ -180,5 +183,9 @@ public class User {
 
     public List<String> getRecoveryCodes() {
         return recoveryCodes;
+    }
+
+    public String getFullName() {
+        return firstName + " " + lastName;
     }
 }

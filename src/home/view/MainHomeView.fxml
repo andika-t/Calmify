@@ -42,7 +42,7 @@
                   </VBox>
                </children>
             </StackPane>
-            <BorderPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1220.0" styleClass="background-transparent">
+            <BorderPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1220.0" styleClass="main-background-img">
                <right>
                   <VBox id="panel-kanan" fx:id="panelKanan" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
                      <children>

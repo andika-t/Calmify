@@ -4,17 +4,21 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
 
-<StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="820.0" style="-fx-background-color: transparent;"
-   xmlns="http://javafx.com/javafx/9"
-   xmlns:fx="http://javafx.com/fxml/1" fx:controller="calmifyStudio.controller.UserViewController">
+<StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="calmifyStudio.controller.UserViewController">
    <children>
-      <VBox alignment="TOP_CENTER" spacing="10.0" style="-fx-background-color: rgba(255, 255, 255, 0.85); -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 0);">
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightgray; -fx-background-radius: 10;">
+         <StackPane.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </StackPane.margin>
+      </AnchorPane>
+      <VBox alignment="TOP_CENTER" spacing="10.0" style="-fx-background-color: rgba(255, 255, 255, 0.85); -fx-background-radius: 10;">
          <children>
             <Label text="Selamat Datang di Calmify: Konten Relaksasi">
                <font>
@@ -32,9 +36,9 @@
                   <Insets bottom="5.0" />
                </VBox.margin>
             </Label>
-            <ScrollPane fx:id="contentScrollPane" fitToWidth="true" VBox.vgrow="ALWAYS" style="-fx-background-color: transparent; -fx-hbar-policy: never; -fx-vbar-policy: as_needed;">
+            <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
                <content>
-                  <FlowPane fx:id="contentDisplayPane" alignment="TOP_LEFT" hgap="20.0" vgap="20.0">
+                  <FlowPane fx:id="contentDisplayPane" alignment="TOP_CENTER" hgap="20.0" vgap="20.0">
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
@@ -47,21 +51,25 @@
          </padding>
       </VBox>
 
-      <StackPane fx:id="webViewContainer" visible="false" managed="false" style="-fx-background-color: rgba(255, 255, 255, 0.95); -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0, 0, 0);">
+      <StackPane fx:id="webViewContainer" alignment="TOP_RIGHT" managed="false" style="-fx-background-color: rgba(0, 0, 0, 0.9); -fx-background-radius: 10;" visible="false">
          <children>
-            <WebView fx:id="webView" prefHeight="-1.0" prefWidth="-1.0" />
-            <Button fx:id="closeWebViewButton" text="Tutup" onAction="#handleCloseWebView" StackPane.alignment="TOP_LEFT">
+            <WebView fx:id="webView" prefHeight="200.0" prefWidth="200.0" />
+            <Button fx:id="closeWebViewButton" mnemonicParsing="false" onAction="#handleCloseWebView" text="X">
                <StackPane.margin>
-                  <Insets left="10.0" top="10.0" />
+                  <Insets right="150.0" top="10.0" />
                </StackPane.margin>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <style>
+                  -fx-background-color: #ff6347; /* Tomato */
+                  -fx-text-fill: white;
+                  -fx-border-radius: 5;
+                  -fx-background-radius: 5;
+                  -fx-padding: 5 10 5 10;
+               </style>
             </Button>
          </children>
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-         <StackPane.margin>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </StackPane.margin>
       </StackPane>
    </children>
 </StackPane>

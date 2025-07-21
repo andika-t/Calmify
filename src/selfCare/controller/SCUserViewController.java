@@ -16,18 +16,30 @@ public class SCUserViewController {
     private User currentUser;
     private SelfCareUser selfCareData;
 
-    @FXML private Label userNameLabel, totalPointsLabel, currentLevelOrBadgeLabel;
-    @FXML private CheckBox shareDataCheckBox;
-    @FXML private ComboBox<SelfCareActivity> activityComboBox;
-    @FXML private TableView<PointHistory> historyTable;
-    @FXML private TableColumn<PointHistory, String> colHistoryActivity;
-    @FXML private TableColumn<PointHistory, Integer> colHistoryPoints;
-    @FXML private TableColumn<PointHistory, String> colHistoryTimestamp;
-    @FXML private TableView<AssignedMission> assignedMissionsTable;
-    @FXML private TableColumn<AssignedMission, String> colMissionName;
-    @FXML private TableColumn<AssignedMission, String> colMissionStatus;
-    @FXML private TableColumn<AssignedMission, String> colMissionAssignedDate;
-    @FXML private TableColumn<AssignedMission, String> colMissionCompletionDate;
+    @FXML
+    private Label userNameLabel, totalPointsLabel, currentLevelOrBadgeLabel;
+    @FXML
+    private CheckBox shareDataCheckBox;
+    @FXML
+    private ComboBox<SelfCareActivity> activityComboBox;
+    @FXML
+    private TableView<PointHistory> historyTable;
+    @FXML
+    private TableColumn<PointHistory, String> colHistoryActivity;
+    @FXML
+    private TableColumn<PointHistory, Integer> colHistoryPoints;
+    @FXML
+    private TableColumn<PointHistory, String> colHistoryTimestamp;
+    @FXML
+    private TableView<AssignedMission> assignedMissionsTable;
+    @FXML
+    private TableColumn<AssignedMission, String> colMissionName;
+    @FXML
+    private TableColumn<AssignedMission, String> colMissionStatus;
+    @FXML
+    private TableColumn<AssignedMission, String> colMissionAssignedDate;
+    @FXML
+    private TableColumn<AssignedMission, String> colMissionCompletionDate;
 
     @FXML
     public void initialize() {
@@ -38,9 +50,11 @@ public class SCUserViewController {
 
     public void setData(User user) {
         this.currentUser = user;
-        if (currentUser == null) return;
+        if (currentUser == null)
+            return;
         String fullName = currentUser.getFirstName() + " " + currentUser.getLastName();
-        this.selfCareData = selfCareService.getOrCreateUser(currentUser.getUsername(), fullName, currentUser.getUserType());
+        this.selfCareData = selfCareService.getOrCreateUser(currentUser.getUsername(), fullName,
+                currentUser.getUserType());
         userNameLabel.setText("Selamat datang, " + fullName);
         refreshUI();
     }
@@ -54,7 +68,7 @@ public class SCUserViewController {
         colMissionAssignedDate.setCellValueFactory(new PropertyValueFactory<>("formattedAssignedDate"));
         colMissionCompletionDate.setCellValueFactory(new PropertyValueFactory<>("formattedCompletionDate"));
     }
-    
+
     private void populateActivityList() {
         List<SelfCareActivity> activities = new ArrayList<>();
         activities.add(new SelfCareActivity("Meditasi 10 menit", 15));
@@ -69,12 +83,19 @@ public class SCUserViewController {
         shareDataCheckBox.setSelected(selfCareData.isShareData());
         historyTable.setItems(FXCollections.observableArrayList(selfCareData.getPointHistory()));
         assignedMissionsTable.setItems(FXCollections.observableArrayList(selfCareData.getAssignedMissions()));
+        System.out.println("DEBUG SCUserViewController: Refreshing UI for user: " + selfCareData.getUsername());
+        System.out.println("DEBUG SCUserViewController: PointHistory size: " + selfCareData.getPointHistory().size());
+        System.out.println(
+                "DEBUG SCUserViewController: AssignedMissions size: " + selfCareData.getAssignedMissions().size());
     }
 
     @FXML
     private void handleCompleteActivity() {
         SelfCareActivity selected = activityComboBox.getSelectionModel().getSelectedItem();
-        if (selected == null) { showAlert("Peringatan", "Pilih aktivitas."); return; }
+        if (selected == null) {
+            showAlert("Peringatan", "Pilih aktivitas.");
+            return;
+        }
         selfCareService.addPointsToUser(currentUser.getUsername(), selected.getPoints(), selected.getName());
         showAlert("Sukses", "Selamat! Anda mendapatkan " + selected.getPoints() + " poin.");
         refreshUI();
@@ -90,8 +111,14 @@ public class SCUserViewController {
     @FXML
     private void handleCompleteAssignedMission() {
         AssignedMission selected = assignedMissionsTable.getSelectionModel().getSelectedItem();
-        if (selected == null) { showAlert("Peringatan", "Pilih misi."); return; }
-        if (selected.getStatus() == AssignedMission.MissionStatus.SELESAI) { showAlert("Info", "Misi ini sudah selesai."); return; }
+        if (selected == null) {
+            showAlert("Peringatan", "Pilih misi.");
+            return;
+        }
+        if (selected.getStatus() == AssignedMission.MissionStatus.SELESAI) {
+            showAlert("Info", "Misi ini sudah selesai.");
+            return;
+        }
         selfCareService.completeAssignedMission(currentUser.getUsername(), selected.getMissionName());
         showAlert("Selamat!", "Misi '" + selected.getMissionName() + "' selesai! Anda mendapat poin bonus.");
         refreshUI();

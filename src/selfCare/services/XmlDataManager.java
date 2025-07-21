@@ -28,12 +28,27 @@ public class XmlDataManager implements IDataManager {
     public List<SelfCareUser> loadUsers() {
         File file = new File(filePath);
         if (!file.exists()) {
+            System.out.println("DEBUG: File " + filePath + " tidak ditemukan. Mengembalikan list kosong.");
             return new ArrayList<>();
         }
         try (FileReader reader = new FileReader(file)) {
             SelfCareData data = (SelfCareData) xstream.fromXML(reader);
+            System.out.println("DEBUG: Memuat data dari " + filePath + ". Jumlah user: "
+                    + (data != null ? data.getSelfCareUsers().size() : 0));
+            if (data != null && !data.getSelfCareUsers().isEmpty()) {
+                SelfCareUser akunUmum = data.getSelfCareUsers().stream()
+                        .filter(u -> "AkunUmum".equals(u.getUsername()))
+                        .findFirst()
+                        .orElse(null);
+                if (akunUmum != null) {
+                    System.out.println("DEBUG: AkunUmum PointHistory size: " + akunUmum.getPointHistory().size());
+                    System.out
+                            .println("DEBUG: AkunUmum AssignedMissions size: " + akunUmum.getAssignedMissions().size());
+                }
+            }
             return data != null ? data.getSelfCareUsers() : new ArrayList<>();
         } catch (Exception e) {
+            System.err.println("ERROR: Terjadi kesalahan saat memuat data dari " + filePath);
             e.printStackTrace();
             return new ArrayList<>();
         }
@@ -45,7 +60,9 @@ public class XmlDataManager implements IDataManager {
         data.setSelfCareUsers(users);
         try (FileWriter writer = new FileWriter(filePath)) {
             xstream.toXML(data, writer);
+            System.out.println("DEBUG: Data berhasil disimpan ke " + filePath);
         } catch (IOException e) {
+            System.err.println("ERROR: Terjadi kesalahan saat menyimpan data ke " + filePath);
             e.printStackTrace();
         }
     }

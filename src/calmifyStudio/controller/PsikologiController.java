@@ -8,14 +8,17 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import calmifyStudio.model.Content;
-import calmifyStudio.model.XmlContentImplement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import java.util.Optional;
 
+import calmifyStudio.model.Content;
+import calmifyStudio.model.XmlContentImplement;
+import calmifyStudio.util.ArrayList;
+
+import java.io.File;
 import java.util.List;
 
 public class PsikologiController {
@@ -124,8 +127,9 @@ public class PsikologiController {
             return;
         }
 
-        List<Content> allContents = contentService.getAllContents();
-        for (Content existingContent : allContents) {
+        ArrayList<Content> allContents = (ArrayList<Content>) contentService.getAllContents();
+        for (int i = 0; i < allContents.size(); i++) {
+            Content existingContent = allContents.get(i);
             if (existingContent.getTitle().equalsIgnoreCase(title) &&
                     existingContent.getDescription().equalsIgnoreCase(description) &&
                     existingContent.getContentLink().equalsIgnoreCase(link)) {
@@ -184,8 +188,9 @@ public class PsikologiController {
             return;
         }
 
-        List<Content> allContents = contentService.getAllContents();
-        for (Content existingContent : allContents) {
+        ArrayList<Content> allContents = (ArrayList<Content>) contentService.getAllContents();
+        for (int i = 0; i < allContents.size(); i++) {
+            Content existingContent = allContents.get(i);
             if (!existingContent.getId().equals(selectedContent.getId()) &&
                     existingContent.getTitle().equalsIgnoreCase(title) &&
                     existingContent.getDescription().equalsIgnoreCase(description) &&
@@ -245,7 +250,13 @@ public class PsikologiController {
     }
 
     private void refreshTableView() {
-        contentList.setAll(contentService.getAllContents());
+        ArrayList<Content> customArrayList = (ArrayList<Content>) contentService.getAllContents();
+
+        java.util.List<Content> javaUtilList = new java.util.ArrayList<>();
+        for (int i = 0; i < customArrayList.size(); i++) {
+            javaUtilList.add(customArrayList.get(i));
+        }
+        contentList.setAll(javaUtilList);
         contentTable.setItems(contentList);
     }
 }

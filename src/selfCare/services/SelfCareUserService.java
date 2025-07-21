@@ -86,27 +86,25 @@ public class SelfCareUserService implements ISelfCareUserService {
     @Override
 public boolean assignMissionToUser(String username, String activityName) {
     SelfCareUser user = users.get(username);
-    if (user == null) {
-        return false; // User tidak ditemukan
-    }
+        if (user == null) {
+            System.err.println("User '" + username + "' tidak ditemukan saat menugaskan misi.");
+            return false; // User tidak ditemukan
+        }
 
-    // === PERBAIKAN DIMULAI DI SINI ===
-    List<AssignedMission> missions = user.getAssignedMissions();
-
-    // Periksa apakah list-nya null sebelum digunakan
-    if (missions == null) {
-        // Ini adalah kondisi data yang tidak diharapkan.
-        // Kita bisa catat sebagai error dan kembalikan false agar aplikasi tidak crash.
-        System.err.println("FATAL: List 'assignedMissions' untuk user '" + username + "' adalah null!");
-        return false;
-    }
-
-    // Jika tidak null, baru tambahkan misi
-    missions.add(new AssignedMission(activityName));
-    // === PERBAIKAN SELESAI ===
-    
-    saveData();
-    return true;
+        List<AssignedMission> missions = user.getAssignedMissions();
+        // Pemeriksaan ini seharusnya tidak lagi diperlukan jika SelfCareUser diinisialisasi dengan benar
+        // tapi tidak ada salahnya sebagai lapisan pengaman tambahan.
+        if (missions == null) {
+            // Ini adalah kondisi data yang tidak diharapkan, tapi jika terjadi, inisialisasi.
+            System.err.println("Peringatan: assignedMissions adalah null untuk user " + username + ", menginisialisasi ulang.");
+            missions = new ArrayList<>();
+            user.setAssignedMissions(missions); // Set kembali ke user
+        }
+        
+        missions.add(new AssignedMission(activityName));
+        
+        saveData();
+        return true;
 }
 
 

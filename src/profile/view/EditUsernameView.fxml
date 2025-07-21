@@ -27,7 +27,7 @@
          </VBox.margin></Label>
       <HBox alignment="CENTER_LEFT" spacing="10.0" stylesheets="@../../resources/css/Style.css">
          <children>
-            <Button id="btn-change" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#prosesEditUsername" prefHeight="25.0" prefWidth="75.0" text="Simpan" />
+            <Button id="btn-change" fx:id="btnSimpan" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#prosesEditUsername" prefHeight="25.0" prefWidth="75.0" text="Simpan" />
             <Button id="btn-batal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleBatal" prefHeight="25.0" prefWidth="75.0" text="Batal" />
          </children>
       </HBox>

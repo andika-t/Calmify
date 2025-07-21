@@ -1,10 +1,10 @@
 package calmifyStudio.controller;
 
+import java.util.Optional;
+
 import calmifyStudio.model.Content;
 import calmifyStudio.model.XmlContentInterface;
-
-import java.util.List;
-import java.util.Optional;
+import calmifyStudio.util.ArrayList;
 
 public class ContentService {
 
@@ -42,7 +42,7 @@ public class ContentService {
         return contentDao.deleteContent(id);
     }
 
-    public List<Content> getAllContents() {
+    public ArrayList<Content> getAllContents() {
         return contentDao.getAllContents();
     }
 

@@ -21,12 +21,15 @@ public class EditUsernameController {
     private PasswordField pfPassword;
     @FXML
     private Label lPeringatan;
+    @FXML
+    private Button btnSimpan;
 
-    private Button btnSave;
     private User currentUser;
+    private String originalUsername;
 
-    public void setData(User user){
+    public void setData(User user) {
         this.currentUser = user;
+        this.originalUsername = user.getUsername();
         tfUsername.setText(currentUser.getUsername());
     }
 
@@ -45,7 +48,7 @@ public class EditUsernameController {
             return;
         }
 
-        if (newUsername.equalsIgnoreCase(currentUser.getUsername())) {
+        if (newUsername.equalsIgnoreCase(originalUsername)) {
             showAlert(Alert.AlertType.INFORMATION, "Tidak Ada Perubahan",
                     "Username baru sama dengan username saat ini.");
             return;
@@ -65,16 +68,18 @@ public class EditUsernameController {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            currentUser.setUsername(newUsername);
-            if (UserManager.updateUser(currentUser)) {
+            boolean isUpdated = UserManager.updateUsername(originalUsername, newUsername, password);
+
+            if (isUpdated) {
+                currentUser.setUsername(newUsername);
+                this.originalUsername = newUsername; 
                 showAlert(Alert.AlertType.INFORMATION, "Berhasil", "Username berhasil diubah.");
+                closeWindow();
             } else {
                 showAlert(Alert.AlertType.ERROR, "Gagal", "Terjadi kesalahan saat menyimpan perubahan.");
             }
         }
-        ((Stage) btnSave.getScene().getWindow()).close();
     }
-
 
     @FXML
     private void handleBatal(ActionEvent event) {
@@ -82,7 +87,7 @@ public class EditUsernameController {
     }
 
     private void closeWindow() {
-        ((Stage) btnSave.getScene().getWindow()).close();
+        ((Stage) tfUsername.getScene().getWindow()).close();
     }
 
     private void showAlert(Alert.AlertType type, String title, String message) {

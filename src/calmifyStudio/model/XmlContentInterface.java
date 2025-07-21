@@ -1,7 +1,8 @@
 package calmifyStudio.model;
 
-import java.util.List;
 import java.util.Optional;
+
+import calmifyStudio.util.ArrayList;
 
 public interface XmlContentInterface {
 
@@ -11,7 +12,7 @@ public interface XmlContentInterface {
 
     boolean deleteContent(String id);
 
-    List<Content> getAllContents();
+    ArrayList<Content> getAllContents(); 
 
     Optional<Content> getContentById(String id);
 }

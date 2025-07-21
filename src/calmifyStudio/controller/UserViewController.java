@@ -6,16 +6,19 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import calmifyStudio.model.Content;
-import calmifyStudio.model.XmlContentImplement;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import java.util.Optional;
+
+import calmifyStudio.model.Content;
+import calmifyStudio.model.XmlContentImplement;
+import calmifyStudio.util.ArrayList;
 import javafx.scene.web.WebView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Button;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -48,14 +51,15 @@ public class UserViewController {
 
     private void loadAndDisplayContents() {
         contentDisplayPane.getChildren().clear();
-        List<Content> contents = contentService.getAllContents();
+        ArrayList<Content> contents = (ArrayList<Content>) contentService.getAllContents();
 
         if (contents.isEmpty()) {
             statusLabel.setText("Belum ada konten relaksasi yang tersedia.");
             return;
         }
 
-        for (Content content : contents) {
+        for (int i = 0; i < contents.size(); i++) {
+            Content content = contents.get(i);
             VBox contentCard = createContentCard(content);
             contentDisplayPane.getChildren().add(contentCard);
         }
@@ -156,8 +160,8 @@ public class UserViewController {
     private void handleCloseWebView() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Konfirmasi Tutup Konten");
-        alert.setHeaderText(null);
-        alert.setContentText("Apakah Anda yakin ingin menutup tampilan konten ini?");
+        alert.setHeaderText("Anda akan menutup tampilan konten.");
+        alert.setContentText("Apakah Anda yakin ingin menutup konten ini?");
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {

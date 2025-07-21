@@ -1,3 +1,14 @@
+/* AKUN PENGGUNA UMUM 
+ * username: rifki
+ * password: 111111
+ * 
+ * AKUN PENGGUNA PSIKOLOG
+ * username: joeSaputra
+ * password: joe123
+ */
+
+
+
 package app;
 
 import javafx.application.Application;

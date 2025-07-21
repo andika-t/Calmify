@@ -1,6 +1,7 @@
 package home.controller;
 
 import authenticator.model.User;
+import dashboard.controller.DashboardPenggunaController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,10 +24,9 @@ import util.SceneSwitcher;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
 public class MainHomeController implements Initializable {
 
@@ -101,8 +101,9 @@ public class MainHomeController implements Initializable {
     @FXML
     public void handleHome(ActionEvent event) {
         mainPane.setLeft(panelNavigasiKiri);
-        mainPane.setRight(panelKanan);
-        mainPane.setCenter(null);
+        mainPane.setRight(null);
+        // mainPane.setCenter(null);
+        loadDashboardView();
     }
 
     @FXML
@@ -149,7 +150,6 @@ public class MainHomeController implements Initializable {
         } else {
             fxmlPath = "/selfCare/view/SCPsychologistView.fxml";
         }
-
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Pane scene = loader.load();
@@ -158,13 +158,11 @@ public class MainHomeController implements Initializable {
                 controller.setData(currentUser);
             } else {
                 SCPsychologistViewController controller = loader.getController();
-                controller.initialize();
             }
             mainPane.setCenter(scene);
 
         } catch (IOException e) {
             e.printStackTrace();
-            // Gunakan helper method yang sudah ada untuk menampilkan error
             showAlert(Alert.AlertType.ERROR, "Gagal Memuat", "Tidak dapat memuat halaman: " + fxmlPath);
         }
     }
@@ -232,11 +230,23 @@ public class MainHomeController implements Initializable {
             System.err.println("Error: currentUser belum diatur. Tidak bisa refresh UI.");
             return;
         }
-        List<Answer> userAnswers = answerModel.getAnswers().stream()
-                .filter(answer -> currentUser.getUsername().equals(answer.getUsername()))
-                .collect(Collectors.toList());
 
-        int totalPoin = userAnswers.stream().mapToInt(ans -> ans.getSkorMood() + ans.getSkorKualitas()).sum();
+        ArrayList<Answer> allAnswers = answerModel.getAnswers();
+        ArrayList<Answer> userAnswers = new ArrayList<>();
+
+        for (int i = 0; i < allAnswers.size(); i++) {
+            Answer answer = (Answer) allAnswers.get(i);
+            if (currentUser.getUsername().equals(answer.getUsername())) {
+                userAnswers.add(answer);
+            }
+        }
+
+        int totalPoin = 0;
+        for (int i = 0; i < userAnswers.size(); i++) {
+            Answer ans = (Answer) userAnswers.get(i);
+            totalPoin += ans.getSkorMood() + ans.getSkorKualitas();
+        }
+
         labelPoint.setText(totalPoin + " Poin");
     }
 
@@ -248,18 +258,19 @@ public class MainHomeController implements Initializable {
         alert.showAndWait();
     }
 
-    private void loadSelfCareView() {
+    private void loadDashboardView() {
         if (currentUser == null)
             return;
         String fxmlPath = "Pengguna Umum".equalsIgnoreCase(currentUser.getUserType())
-                ? "/selfCare/view/SCUserView.fxml"
-                : "/selfCare/view/SCPsychologistView.fxml";
+                ? "/dashboard/view/UserDashboardView.fxml"
+                : "/dashboard/view/UserDashboardView.fxml";
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Node view = loader.load();
             if ("Pengguna Umum".equalsIgnoreCase(currentUser.getUserType())) {
-                SCUserViewController controller = loader.getController();
-                controller.setData(currentUser);
+                DashboardPenggunaController controller = loader.getController();
+                controller.setData(mainPane, currentUser, this);
+                mainPane.setCenter(view);
             }
             mainPane.setCenter(view);
         } catch (IOException e) {
