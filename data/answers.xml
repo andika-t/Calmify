@@ -1,1 +1,48 @@
-<?xml version="1.0" ?><answers><answer><username>akunUmum</username><id>akunUmum_20250721171758</id><waktuTes>2025-07-18 17:17:58</waktuTes><interpretasi>Tinggi</interpretasi><shareData>false</shareData><skorMood>100</skorMood><skorKualitas>0</skorKualitas></answer><answer><username>akunUmum</username><id>akunUmum_20250721171840</id><waktuTes>2025-07-19 17:18:40</waktuTes><interpretasi>Tinggi</interpretasi><shareData>false</shareData><skorMood>70</skorMood><skorKualitas>0</skorKualitas></answer><answer><username>akunUmum</username><id>akunUmum_20250721171903</id><waktuTes>2025-07-20 17:19:03</waktuTes><interpretasi>Tinggi</interpretasi><shareData>false</shareData><skorMood>100</skorMood><skorKualitas>0</skorKualitas></answer><answer><username>akunUmum</username><id>akunUmum_20250721171925</id><waktuTes>2025-07-21 17:19:25</waktuTes><interpretasi>Sedang</interpretasi><shareData>false</shareData><skorMood>30</skorMood><skorKualitas>0</skorKualitas></answer></answers>
+<?xml version="1.0" ?>
+<answers>
+    <answer>
+        <username>rifki</username>
+        <id>akunUmum_20250721171758</id>
+        <waktuTes>2025-07-18 17:17:58</waktuTes>
+        <interpretasi>Tinggi</interpretasi>
+        <shareData>false</shareData>
+        <skorMood>100</skorMood>
+        <skorKualitas>0</skorKualitas>
+    </answer>
+    <answer>
+        <username>rifki</username>
+        <id>akunUmum_20250721171840</id>
+        <waktuTes>2025-07-19 17:18:40</waktuTes>
+        <interpretasi>Tinggi</interpretasi>
+        <shareData>false</shareData>
+        <skorMood>70</skorMood>
+        <skorKualitas>0</skorKualitas>
+    </answer>
+    <answer>
+        <username>rifki</username>
+        <id>akunUmum_20250721171903</id>
+        <waktuTes>2025-07-20 17:19:03</waktuTes>
+        <interpretasi>Tinggi</interpretasi>
+        <shareData>false</shareData>
+        <skorMood>100</skorMood>
+        <skorKualitas>0</skorKualitas>
+    </answer>
+    <answer>
+        <username>rifki</username>
+        <id>akunUmum_20250721171925</id>
+        <waktuTes>2025-07-21 17:19:25</waktuTes>
+        <interpretasi>Sedang</interpretasi>
+        <shareData>false</shareData>
+        <skorMood>30</skorMood>
+        <skorKualitas>0</skorKualitas>
+    </answer>
+    <answer>
+        <username>rifki</username>
+        <id>rifki_20250721212923</id>
+        <waktuTes>2025-07-17 21:29:23</waktuTes>
+        <interpretasi>Tinggi</interpretasi>
+        <shareData>false</shareData>
+        <skorMood>80</skorMood>
+        <skorKualitas>0</skorKualitas>
+    </answer>
+</answers>

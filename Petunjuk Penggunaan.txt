@@ -1,0 +1,17 @@
+====== PETUNJUK PENGGUNAAN CALMIFY ======
+
+1. Pastikan anda menggunakan JDK 9.4
+2. Buka terminal dan masuk ke direktori Jar, contoh (cd path/to/folder)
+3. Jalankan perintah ( java -jar CALMIFY.jar )
+4. Anda bisa login menggunakan akun berikut 
+	- AKUN PENGGUNA UMUM 
+		username: rifki
+		password: 111111
+	- AKUN PENGGUNA PSIKOLOG
+		username: joeSaputra
+		password: joe123
+  atau anda dapat membuat akun sendiri
+5. Nikmati berbagai fitur yang tersedia untuk anda
+
+=============== SELESAI ==================
+
