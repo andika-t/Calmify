@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" 
+     fx:controller="controller.SettingsController" spacing="20" styleClass="root" alignment="CENTER">
+    
+    <Label text="Pengaturan Aplikasi" styleClass="title-label" />
+    
+    <VBox spacing="15" styleClass="settings-box">
+        <Label text="Preferensi Umum" styleClass="section-label" />
+        
+        <CheckBox fx:id="autoSaveCheckbox" text="Simpan hasil tes secara otomatis" />
+        <CheckBox fx:id="allowSharingCheckbox" text="Izinkan berbagi data anonim dengan profesional" />
+        
+        <Label text="Tema Aplikasi:" />
+        <ComboBox fx:id="themeComboBox" />
+    </VBox>
+    
+    <HBox spacing="20" alignment="CENTER">
+        <Button text="Simpan Perubahan" onAction="#handleSave" styleClass="primary-button" />
+        <Button text="Kembali" onAction="#handleBack" />
+    </HBox>
+</VBox>

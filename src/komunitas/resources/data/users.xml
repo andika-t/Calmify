@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<users>
+  <user>
+    <id>USR-1</id>
+    <username>admin</username>
+    <password>admin123</password>
+    <email>admin@example.com</email>
+    <birthDate>2025-01-01</birthDate>
+  </user>
+  <user>
+    <id>USR-2</id>
+    <username>user1</username>
+    <password>pass123</password>
+    <email>user1@example.com</email>
+    <birthDate>2024-01-01</birthDate>
+  </user>
+  <user>
+    <id>71605d40-7068-43ee-b5f8-d01ffa317941</id>
+    <username>admin1</username>
+    <password>123</password>
+    <email/>
+    <birthDate/>
+  </user>
+</users>

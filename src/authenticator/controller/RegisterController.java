@@ -3,16 +3,20 @@ package authenticator.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import app.Main;
 import authenticator.model.User;
 import authenticator.services.UserManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import util.SceneSwitcher;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 public class RegisterController implements Initializable {
 
@@ -39,7 +43,6 @@ public class RegisterController implements Initializable {
     private Button buttonCreateAcc;
 
     private String selectedUserType;
-    private SceneSwitcher pindahScene;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -118,8 +121,14 @@ public class RegisterController implements Initializable {
     }
 
     private void goToLogin() {
-        pindahScene = new SceneSwitcher();
-        pindahScene.switchScene("/authenticator/view/LoginView");
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/authenticator/view/loginView.fxml"));
+            Pane root = loader.load();
+            Scene scene = new Scene(root);
+            Main.getMainStage().setScene(scene);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void showAlert(Alert.AlertType alertType, String title, String message) {

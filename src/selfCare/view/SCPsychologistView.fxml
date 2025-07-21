@@ -11,7 +11,8 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?> <StackPane prefHeight="660.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="selfCare.controller.SCPsychologistViewController">
+
+<StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="660.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="selfCare.controller.SCPsychologistViewController">
     <children>
         <VBox spacing="10.0" style="-fx-padding: 20;">
             <children>

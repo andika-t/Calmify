@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
 
-<StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="calmifyStudio.controller.UserViewController">
+<StackPane maxWidth="1.7976931348623157E308" minHeight="-Infinity" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="calmifyStudio.controller.UserViewController">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightgray; -fx-background-radius: 10;">
          <StackPane.margin>

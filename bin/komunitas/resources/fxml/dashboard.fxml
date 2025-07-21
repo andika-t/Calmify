@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" 
+     fx:controller="controller.DashboardController" spacing="20" styleClass="root">
+    
+    <Label fx:id="welcomeLabel" styleClass="welcome-label" />
+    
+    <VBox spacing="10" styleClass="dashboard-box">
+        <Label text="Status Terkini:" styleClass="section-label" />
+        <Label fx:id="lastTestLabel" />
+        <Label fx:id="stressLevelLabel" styleClass="stress-level" />
+    </VBox>
+    
+    <HBox spacing="20" alignment="CENTER">
+        <Button text="Mulai Tes Baru" onAction="#handleStartTest" styleClass="action-button" />
+        <Button text="Lihat Riwayat" onAction="#handleViewHistory" styleClass="action-button" />
+        <Button text="Pengaturan" onAction="#handleSettings" styleClass="action-button" />
+        <Button text="Logout" onAction="#handleLogout" styleClass="logout-button" />
+    </HBox>
+</VBox>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<stressTests>
+  <stressTest>
+    <id>RES-1752985938141</id>
+    <userId>71605d40-7068-43ee-b5f8-d01ffa317941</userId>
+    <score>35</score>
+    <level>Sangat Tinggi</level>
+    <testDate/>
+    <shareWithProfessionals>true</shareWithProfessionals>
+  </stressTest>
+  <stressTest>
+    <id>RES-1752986136411</id>
+    <userId>71605d40-7068-43ee-b5f8-d01ffa317941</userId>
+    <score>45</score>
+    <level>Sangat Tinggi</level>
+    <testDate>2025-07-20T11:35:36.416908500</testDate>
+    <shareWithProfessionals>false</shareWithProfessionals>
+  </stressTest>
+</stressTests>

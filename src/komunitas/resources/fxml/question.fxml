@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" 
+     fx:controller="controller.QuestionController" spacing="20" styleClass="root">
+    
+    <!-- Tambahkan label ini -->
+    <Label fx:id="questionNumberLabel" styleClass="question-number" />
+    
+    <Label fx:id="questionTextLabel" styleClass="question-text" wrapText="true" />
+    
+    <VBox spacing="10" styleClass="options-box">
+        <RadioButton fx:id="option1" text="1" />
+        <RadioButton fx:id="option2" text="2" />
+        <RadioButton fx:id="option3" text="3" />
+        <RadioButton fx:id="option4" text="4" />
+        <RadioButton fx:id="option5" text="5" />
+    </VBox>
+    
+    <CheckBox fx:id="shareCheckbox" text="Izinkan berbagi data hasil tes ini dengan profesional (anonim)" />
+    
+    <HBox spacing="20" alignment="CENTER">
+        <Button fx:id="prevButton" text="Sebelumnya" onAction="#handlePrev" />
+        <Button fx:id="nextButton" text="Berikutnya" onAction="#handleNext" />
+    </HBox>
+</VBox>

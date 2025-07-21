@@ -80,9 +80,7 @@ public class DashboardPenggunaController implements Initializable {
         if (this.currentUser != null) {
             labelFullname.setText(currentUser.getFullName());
             labelPoint.setText(String.valueOf(currentUser.getTotalPoints()));
-            populateDashboardCharts(); // Panggil ini setelah currentUser diatur
-            // Inisialisasi listener untuk CheckBox setelah FXML dimuat dan currentUser
-            // tersedia
+            populateDashboardCharts();
             setupChartFilterListeners();
         } else {
             labelFullname.setText("Pengguna Tamu");
@@ -208,8 +206,6 @@ public class DashboardPenggunaController implements Initializable {
 
     private void loadStudioContent() {
         try {
-            // Path relatif dari root resource atau dari class controller
-            // Pastikan path ini benar sesuai struktur proyek Anda
             URL studioContentUrl = getClass().getResource("/calmifyStudio/view/UserView.fxml");
             if (studioContentUrl == null) {
                 System.err.println("StudioContent.fxml not found! Check path.");
@@ -222,6 +218,4 @@ public class DashboardPenggunaController implements Initializable {
             e.printStackTrace();
         }
     }
-
-    // Metode lain yang mungkin Anda miliki, seperti untuk tombol bell dan chat
 }

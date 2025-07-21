@@ -102,8 +102,10 @@ public class LoginController implements Initializable {
 
     private void goToRegiter() {
         try {
-            SceneSwitcher switcher = new SceneSwitcher();
-            switcher.switchScene("/authenticator/view/RegisterView");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/authenticator/view/registerView.fxml"));
+            Pane root = loader.load();
+            Stage stage = (Stage) buttonLogin.getScene().getWindow();
+            stage.getScene().setRoot(root);
         } catch (Exception e) {
             e.printStackTrace();
         }

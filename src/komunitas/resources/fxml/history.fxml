@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" 
+     fx:controller="controller.HistoryController" spacing="20" styleClass="root">
+
+    <Label text="Riwayat Tes Stres" styleClass="title-label" />
+    
+    <TableView fx:id="historyTable">
+        <columns>
+            <TableColumn fx:id="dateColumn" text="Tanggal" />
+            <TableColumn fx:id="scoreColumn" text="Skor" />
+            <TableColumn fx:id="levelColumn" text="Tingkat Stres" />
+        </columns>
+    </TableView>
+    
+    <HBox spacing="20" alignment="CENTER">
+        <Button text="Hapus" onAction="#handleDelete" styleClass="danger-button" />
+        <Button text="Kembali" onAction="#handleBack" />
+    </HBox>
+</VBox>

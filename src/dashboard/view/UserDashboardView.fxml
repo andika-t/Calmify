@@ -17,9 +17,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="980.0" styleClass="transparent-background" stylesheets="@../../resources/css/Style.css" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dashboard.controller.DashboardPenggunaController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="980.0" styleClass="transparent-background" stylesheets="@../../resources/css/Style.css" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dashboard.controller.DashboardPenggunaController">
    <children>
-      <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 10;">
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" style="-fx-background-radius: 10;">
          <top>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" spacing="20.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10;" BorderPane.alignment="CENTER">
                <children>

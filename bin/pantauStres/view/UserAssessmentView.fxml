@@ -30,7 +30,6 @@
             </VBox>
          </children>
          <styleClass>
-            <String fx:value="main-background-img" />
             <String fx:value="background-radius-large" />
             <String fx:value="main-background-gradient" />
          </styleClass>

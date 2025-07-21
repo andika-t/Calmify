@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" 
+     fx:controller="controller.ResultController" spacing="20" styleClass="root" alignment="CENTER">
+    
+    <Label text="Hasil Tes Stres Anda" styleClass="title-label" />
+    
+    <GridPane hgap="10" vgap="10" alignment="CENTER">
+        <columnConstraints>
+            <ColumnConstraints halignment="RIGHT" />
+            <ColumnConstraints halignment="LEFT" />
+        </columnConstraints>
+        
+        <Label text="Skor:" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+        <Label fx:id="scoreLabel" GridPane.rowIndex="0" GridPane.columnIndex="1" styleClass="result-value" />
+        
+        <Label text="Tingkat Stres:" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+        <Label fx:id="levelLabel" GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="result-value" />
+        
+        <Label text="Tanggal Tes:" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+        <Label fx:id="dateLabel" GridPane.rowIndex="2" GridPane.columnIndex="1" styleClass="result-value" />
+    </GridPane>
+    
+    <VBox spacing="10" styleClass="recommendation-box">
+        <Label text="Rekomendasi:" styleClass="section-label" />
+        <Label fx:id="recommendationLabel" wrapText="true" maxWidth="400" />
+    </VBox>
+    
+    <HBox spacing="20" alignment="CENTER">
+        <Button text="Simpan Hasil" onAction="#handleSave" styleClass="primary-button" />
+        <Button text="Kembali ke Dashboard" onAction="#handleBackToDashboard" />
+    </HBox>
+</VBox>

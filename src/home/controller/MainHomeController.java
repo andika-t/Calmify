@@ -2,11 +2,13 @@ package home.controller;
 
 import authenticator.model.User;
 import dashboard.controller.DashboardPenggunaController;
+import dashboard.controller.PsikologDashboardController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
@@ -20,13 +22,14 @@ import pantauStres.services.AnswerModel;
 import profile.controller.MainSettingController;
 import selfCare.controller.SCPsychologistViewController;
 import selfCare.controller.SCUserViewController;
-import util.SceneSwitcher;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
+
+import app.Main;
 
 public class MainHomeController implements Initializable {
 
@@ -102,7 +105,6 @@ public class MainHomeController implements Initializable {
     public void handleHome(ActionEvent event) {
         mainPane.setLeft(panelNavigasiKiri);
         mainPane.setRight(null);
-        // mainPane.setCenter(null);
         loadDashboardView();
     }
 
@@ -208,7 +210,10 @@ public class MainHomeController implements Initializable {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
             try {
-                new SceneSwitcher().switchScene("/authenticator/view/LoginView");
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/authenticator/view/loginView.fxml"));
+                Pane root = loader.load();
+                Scene scene = new Scene(root);
+                Main.getMainStage().setScene(scene);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -261,21 +266,29 @@ public class MainHomeController implements Initializable {
     private void loadDashboardView() {
         if (currentUser == null)
             return;
-        String fxmlPath = "Pengguna Umum".equalsIgnoreCase(currentUser.getUserType())
-                ? "/dashboard/view/UserDashboardView.fxml"
-                : "/dashboard/view/UserDashboardView.fxml";
+        String fxmlPath;
+        boolean isUserView = "Pengguna Umum".equalsIgnoreCase(currentUser.getUserType());
+
+        if (isUserView) {
+            fxmlPath = "/dashboard/view/UserDashboardView.fxml";
+        } else {
+            fxmlPath = "/dashboard/view/PsikologDashboard.fxml";
+        }
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-            Node view = loader.load();
-            if ("Pengguna Umum".equalsIgnoreCase(currentUser.getUserType())) {
+            Pane scene = loader.load();
+            if (isUserView) {
                 DashboardPenggunaController controller = loader.getController();
                 controller.setData(mainPane, currentUser, this);
-                mainPane.setCenter(view);
+            } else {
+                PsikologDashboardController controller = loader.getController();
+                controller.setData(mainPane, currentUser, this);
             }
-            mainPane.setCenter(view);
+            mainPane.setCenter(scene);
+
         } catch (IOException e) {
             e.printStackTrace();
-            showAlert(Alert.AlertType.ERROR, "Gagal Memuat", "Tidak dapat menemukan file: " + fxmlPath);
+            showAlert(Alert.AlertType.ERROR, "Gagal Memuat", "Tidak dapat memuat halaman: " + fxmlPath);
         }
     }
 

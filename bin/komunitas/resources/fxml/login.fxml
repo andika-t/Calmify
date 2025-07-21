@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/8" 
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="controller.LoginController"
+      spacing="10" 
+      alignment="CENTER"
+      styleClass="root-pane">
+      
+    <!-- Konten form login -->
+    <Label text="Login Form" styleClass="title-label"/>
+    <TextField fx:id="usernameField" promptText="Username"/>
+    <PasswordField fx:id="passwordField" promptText="Password"/>
+    <Label fx:id="errorLabel" styleClass="error-label" visible="false"/>
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Login" fx:id="loginButton" onAction="#handleLogin" defaultButton="true"/>
+        <Button text="Register" fx:id="registerButton" onAction="#handleRegister"/>
+    </HBox>
+</VBox>
